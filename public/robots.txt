@@ -15,4 +15,4 @@ User-agent: *
 Allow: /
 Disallow: /api/
 
-Sitemap: https://canberrapropertypartners.com.au/sitemap.xml
+Sitemap: https://canberra-property-partner.vercel.app/sitemap.xml

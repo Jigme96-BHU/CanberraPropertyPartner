@@ -37,9 +37,9 @@ export default function StructuredData() {
     "name": "Canberra Property Partners",
     "alternateName": "CPP",
     "description": "Canberra's most personal real estate service. Award-winning property management, sales and rentals across the ACT.",
-    "url": "https://canberrapropertypartners.com.au",
-    "logo": "https://www.canberrapropertypartners.com.au/hubfs/raw_assets/public/2022-Site/assets/images/CPP.svg",
-    "image": "https://www.canberrapropertypartners.com.au/hubfs/raw_assets/public/2022-Site/assets/images/CPP.svg",
+    "url": "https://canberra-property-partner.vercel.app",
+    "logo": "https://canberra-property-partner.vercel.app/images/logo-dark.svg",
+    "image": "https://canberra-property-partner.vercel.app/images/logo-dark.svg",
     "telephone": "+61261030843",
     "email": "sales@canberrapropertypartners.com.au",
 
@@ -155,12 +155,12 @@ export default function StructuredData() {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "Canberra Property Partners",
-    "url": "https://canberrapropertypartners.com.au",
+    "url": "https://canberra-property-partner.vercel.app",
     "potentialAction": {
       "@type": "SearchAction",
       "target": {
         "@type": "EntryPoint",
-        "urlTemplate": "https://canberrapropertypartners.com.au/properties?search={search_term_string}"
+        "urlTemplate": "https://canberra-property-partner.vercel.app/properties?search={search_term_string}"
       },
       "query-input": "required name=search_term_string"
     }
@@ -174,12 +174,12 @@ export default function StructuredData() {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home",       "item": "https://canberrapropertypartners.com.au" },
-      { "@type": "ListItem", "position": 2, "name": "Properties", "item": "https://canberrapropertypartners.com.au/properties" },
-      { "@type": "ListItem", "position": 3, "name": "Rental",     "item": "https://canberrapropertypartners.com.au/rental" },
-      { "@type": "ListItem", "position": 4, "name": "Sales",      "item": "https://canberrapropertypartners.com.au/sales" },
-      { "@type": "ListItem", "position": 5, "name": "About",      "item": "https://canberrapropertypartners.com.au/about" },
-      { "@type": "ListItem", "position": 6, "name": "Contact",    "item": "https://canberrapropertypartners.com.au/contact" },
+      { "@type": "ListItem", "position": 1, "name": "Home",       "item": "https://canberra-property-partner.vercel.app" },
+      { "@type": "ListItem", "position": 2, "name": "Properties", "item": "https://canberra-property-partner.vercel.app/properties" },
+      { "@type": "ListItem", "position": 3, "name": "Rental",     "item": "https://canberra-property-partner.vercel.app/rental" },
+      { "@type": "ListItem", "position": 4, "name": "Sales",      "item": "https://canberra-property-partner.vercel.app/sales" },
+      { "@type": "ListItem", "position": 5, "name": "About",      "item": "https://canberra-property-partner.vercel.app/about" },
+      { "@type": "ListItem", "position": 6, "name": "Contact",    "item": "https://canberra-property-partner.vercel.app/contact" },
     ]
   };
 

@@ -25,7 +25,7 @@ import Head from 'next/head';
 
 // These are the DEFAULT values — used when a page doesn't pass its own
 const SITE_NAME    = 'Canberra Property Partners';
-const SITE_URL     = 'https://canberrapropertypartners.com.au';
+const SITE_URL     = 'https://canberra-property-partner.vercel.app';
 const DEFAULT_DESC = 'Canberra\'s award-winning real estate agency. Expert property management, sales and rentals across the ACT. REIA Innovation Award winners 2021 & 2022.';
 const DEFAULT_IMG  = '/og-image.jpg'; // We'll create this in public/
 const PHONE        = '+61261030843';

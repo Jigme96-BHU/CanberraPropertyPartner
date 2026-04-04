@@ -15,14 +15,14 @@
  *
  * AFTER SETUP:
  * Go to Google Search Console → Sitemaps → submit:
- * https://canberrapropertypartners.com.au/sitemap.xml
+ * https://canberra-property-partner.vercel.app/sitemap.xml
  * Google will then crawl and index every page within days.
  */
 
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
   // The live domain — CHANGE THIS when client connects their real domain
-  siteUrl: process.env.SITE_URL || 'https://canberrapropertypartners.com.au',
+  siteUrl: process.env.SITE_URL || 'https://canberra-property-partner.vercel.app',
 
   // Auto-generate robots.txt (see below for what that is)
   generateRobotsTxt: true,
@@ -101,7 +101,7 @@ module.exports = {
     ],
     // Additional sitemap references in robots.txt
     additionalSitemaps: [
-      'https://canberrapropertypartners.com.au/sitemap.xml',
+      'https://canberra-property-partner.vercel.app/sitemap.xml',
     ],
   },
 };
