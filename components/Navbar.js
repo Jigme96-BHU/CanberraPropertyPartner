@@ -12,6 +12,7 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', fn);
   }, []);
 
+  
   const links = [
     { href: '/',           label: 'Home' },
     { href: '/properties', label: 'Properties' },
