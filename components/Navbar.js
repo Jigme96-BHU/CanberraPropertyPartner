@@ -12,7 +12,7 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', fn);
   }, []);
 
-  
+
   const links = [
     { href: '/',           label: 'Home' },
     { href: '/properties', label: 'Properties' },
@@ -37,7 +37,7 @@ export default function Navbar() {
           {/* Logo */}
           <Link href="/" style={{ display:'flex', alignItems:'center' }}>
             <img src={ASSETS.logoLight} alt="Canberra Property Partners"
-              style={{ height: scrolled ? '36px' : '44px', width:'auto', transition:'height 0.3s', filter:'brightness(10)' }} />
+              style={{ height: scrolled ? '28px' : '34px', width:'auto', transition:'height 0.3s', filter:'brightness(10)' }} />
           </Link>
 
           {/* Desktop links */}
