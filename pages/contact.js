@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Head from 'next/head';
+import SEO from '../components/SEO';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
@@ -27,10 +27,11 @@ export default function Contact() {
 
   return (
     <>
-      <Head>
-        <title>Contact — Canberra Property Partners</title>
-        <meta name="description" content="Book a free property appraisal or get in touch with the CPP team. We respond within 2 business hours." />
-      </Head>
+      <SEO
+        title="Contact Us - Free Property Appraisal Canberra | CPP"
+        description="Book a free, no-obligation property appraisal in Canberra. Call 02 6103 0843 or email sales@canberrapropertypartners.com.au. Mitchell ACT 2911."
+        url="/contact"
+      />
       <Navbar />
 
       <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', minHeight:'100vh' }} className="contact-layout">

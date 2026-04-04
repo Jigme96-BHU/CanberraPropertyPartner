@@ -36,7 +36,7 @@ export default function Navbar() {
           {/* Logo */}
           <Link href="/" style={{ display:'flex', alignItems:'center' }}>
             <img src={ASSETS.logoLight} alt="Canberra Property Partners"
-              style={{ height: scrolled ? '18px' : '28px', width:'auto', transition:'height 0.3s', filter:'brightness(10)' }} />
+              style={{ height: scrolled ? '36px' : '44px', width:'auto', transition:'height 0.3s', filter:'brightness(10)' }} />
           </Link>
 
           {/* Desktop links */}

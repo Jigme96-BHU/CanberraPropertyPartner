@@ -1,5 +1,5 @@
-import Head from 'next/head';
 import Link from 'next/link';
+import SEO from '../components/SEO';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { ASSETS, stats } from '../data';
@@ -7,10 +7,11 @@ import { ASSETS, stats } from '../data';
 export default function About() {
   return (
     <>
-      <Head>
-        <title>About Us — Canberra Property Partners</title>
-        <meta name="description" content="Meet Brett Russell and the CPP team. REIA Innovation Award winners building Canberra's most personal real estate service since 2017." />
-      </Head>
+      <SEO
+        title="About Us - Brett Russell and the CPP Team | Canberra Property Partners"
+        description="Meet Brett Russell and the CPP team. REIA Innovation Award winners building Canberra most personal real estate service since 2017."
+        url="/about"
+      />
       <Navbar />
 
       {/* ── HERO ── */}

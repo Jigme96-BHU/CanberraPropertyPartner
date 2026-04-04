@@ -1,5 +1,5 @@
-import Head from 'next/head';
 import Link from 'next/link';
+import SEO from '../../components/SEO';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import Navbar from '../../components/Navbar';
@@ -37,9 +37,19 @@ export default function PropertyDetail() {
 
   return (
     <>
-      <Head>
-        <title>{p.address}, {p.suburb} — CPP</title>
-      </Head>
+      {/* 
+        DYNAMIC SEO — the title and description change per property.
+        WHY: Google indexes each property page individually.
+        A search for "4 bedroom house for rent Gungahlin" should
+        find THIS specific property page, not just the listings page.
+        So each property gets its own unique SEO tags using its own data.
+      */}
+      <SEO
+        title={`${p.address}, ${p.suburb} - ${STATUS_LABEL[p.status]} | CPP`}
+        description={`${p.type} ${STATUS_LABEL[p.status].toLowerCase()} in ${p.suburb}. ${p.beds} bed, ${p.baths} bath, ${p.cars} car. ${p.price}. ${p.desc.slice(0,80)}`}
+        image={p.image}
+        url={`/properties/${p.id}`}
+      />
       <Navbar />
 
       {/* Full-bleed image hero */}

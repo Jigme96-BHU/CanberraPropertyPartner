@@ -1,5 +1,5 @@
-import Head from 'next/head';
 import Link from 'next/link';
+import SEO from '../components/SEO';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { ASSETS, salesSteps } from '../data';
@@ -7,10 +7,11 @@ import { ASSETS, salesSteps } from '../data';
 export default function Sales() {
   return (
     <>
-      <Head>
-        <title>Sales Process — Canberra Property Partners</title>
-        <meta name="description" content="Selling your Canberra investment property? CPP's full-circle approach means unmatched expertise whether tenanted or vacant." />
-      </Head>
+      <SEO
+        title="Sell Your Property Canberra | Real Estate Sales ACT | CPP"
+        description="Selling your Canberra investment property? CPP offers expert property sales advice, free appraisals, and a full-circle approach for tenanted or vacant properties."
+        url="/sales"
+      />
       <Navbar />
 
       {/* ── HERO ── */}

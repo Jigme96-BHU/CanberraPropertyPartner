@@ -1,22 +1,27 @@
-import Head from 'next/head';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import PropertyCard from '../components/PropertyCard';
+import SEO from '../components/SEO';
 import { ASSETS, properties, testimonials, stats } from '../data';
 
 export default function Home() {
-  const [activeTestimonial, setActiveTestimonial] = useState(null);
+  const [activeTestimonial, setActiveTestimonial] = useState(0);
   const featured = properties.filter(p => p.status !== 'leased').slice(0, 3);
 
+  useEffect(() => {
+    const t = setInterval(() => setActiveTestimonial(i => (i + 1) % testimonials.length), 5000);
+    return () => clearInterval(t);
+  }, []);
 
   return (
     <>
-      <Head>
-        <title>Canberra Property Partners — More Care. Less Hype.</title>
-        <meta name="description" content="Canberra's award-winning real estate agency. World-first digital tools, genuinely personal service. Selling, buying and managing properties across the ACT." />
-      </Head>
+      <SEO
+        title="Property Management and Real Estate Canberra ACT"
+        description="Canberra award-winning real estate agency. Expert property management, sales and rentals across the ACT. REIA Innovation Award winners. Call 02 6103 0843."
+        url="/"
+      />
       <Navbar />
 
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━ HERO ━━━━━━━━━━━━━━━━━━━━━━━━ */}
@@ -35,7 +40,7 @@ export default function Home() {
         </video>
 
         {/* Gradient overlays */}
-        <div style={{ position:'absolute', inset:0, background:'linear-gradient(135deg, rgba(10,10,10,0) 0%, rgba(10,10,10,0) 60%, rgba(10,10,10,0) 100%)' }} />
+        <div style={{ position:'absolute', inset:0, background:'linear-gradient(135deg, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.4) 60%, rgba(10,10,10,0.7) 100%)' }} />
 
         {/* Decorative gold line */}
         <div style={{
@@ -252,31 +257,17 @@ export default function Home() {
                   transform: i === activeTestimonial ? 'scale(1)' : 'scale(0.98)',
                   opacity: i === activeTestimonial ? 1 : 0.4,
                   cursor:'pointer',
-                }}
-                  onClick={() => setActiveTestimonial(i)}
-                  onMouseEnter={e => {
-                    e.currentTarget.style.background = '#0A0A0A';
-                    e.currentTarget.style.opacity = '1';
-                    e.currentTarget.querySelector('.t-quote').style.color = '#fff';
-                    e.currentTarget.querySelector('.t-author').style.color = '#C9A84C';
-                  }}
-                  onMouseLeave={e => {
-                    e.currentTarget.style.background = i === activeTestimonial ? '#0A0A0A' : '#fff';
-                    e.currentTarget.style.opacity = i === activeTestimonial ? '1' : '0.4';
-                    e.currentTarget.querySelector('.t-quote').style.color = i === activeTestimonial ? '#fff' : '#0A0A0A';
-                    e.currentTarget.querySelector('.t-author').style.color = i === activeTestimonial ? '#C9A84C' : 'rgba(10,10,10,0.4)';
-                  }}
-                >
+                }} onClick={() => setActiveTestimonial(i)}>
                   <div style={{ display:'flex', gap:'2px', marginBottom:'24px' }}>
                     {[1,2,3,4,5].map(s => <span key={s} style={{ color:'#C9A84C', fontSize:'14px' }}>★</span>)}
                   </div>
-                  <p className="t-quote" style={{
+                  <p style={{
                     fontSize:'20px', fontFamily:'Playfair Display, serif', fontStyle:'italic',
                     lineHeight:1.65,
                     color: i === activeTestimonial ? '#fff' : '#0A0A0A',
                     marginBottom:'28px',
                   }}>"{t.text}"</p>
-                  <p className="t-author" style={{ fontSize:'13px', fontWeight:600, letterSpacing:'0.08em', color: i === activeTestimonial ? '#C9A84C' : 'rgba(10,10,10,0.4)' }}>
+                  <p style={{ fontSize:'13px', fontWeight:600, letterSpacing:'0.08em', color: i === activeTestimonial ? '#C9A84C' : 'rgba(10,10,10,0.4)' }}>
                     — {t.name}
                   </p>
                 </div>

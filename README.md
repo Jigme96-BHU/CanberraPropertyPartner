@@ -1,93 +1,92 @@
-# Canberra Property Partners — v2.0
+# Canberra Property Partners — v2.0 + SEO
 
-A complete ground-up redesign of the CPP website. Dark luxury editorial aesthetic built with Next.js 14.
-
-## Design Direction
-
-**Aesthetic:** Dark luxury editorial — think high-end architectural magazine meets modern real estate portal.
-
-**Fonts:**
-- Display: Playfair Display (serif, elegant, authoritative)
-- Body: Outfit (clean, modern, legible)
-
-**Colour Palette:**
-- Ink: `#0A0A0A` — near-black backgrounds, text
-- Paper: `#F8F5F0` — warm off-white sections
-- Gold: `#C9A84C` — brand accent throughout
-- Sage: `#7A8C7E` — secondary text
-
----
-
-## Pages
-
-| Page | Route | Highlights |
-|------|--------|------------|
-| Homepage | `/` | Real CPP video hero, marquee stats, interactive testimonials |
-| Properties | `/properties` | Live filter tabs, real-time search |
-| Property Detail | `/properties/[id]` | Full-bleed image hero, sticky enquiry form |
-| About | `/about` | Real Brett Russell photo, stats bar |
-| Awards | `/awards` | Real award photos + badges, interactive testimonial carousel |
-| Rental | `/rental` | Real CPP service icons, infographic, stats |
-| Sales | `/sales` | Dramatic hover-animated step rows with real icons |
-| Contact | `/contact` | Dramatic full-split dark layout with gold-focus form |
-| 404 | `/404` | Giant ghost number, on-brand |
-
----
+Complete website rebuild with full SEO implementation.
 
 ## Quick Start
 
 ```bash
-# 1. Install
 npm install
-
-# 2. Run development server
 npm run dev
-
-# 3. Open browser
-open http://localhost:3000
+# Open http://localhost:3000
 ```
 
-## Build for Production
+## Production Build
 
 ```bash
 npm run build
+# Automatically generates sitemap.xml + robots.txt
 npm start
 ```
 
 ---
 
-## Real CPP Assets Used
+## What Was Added for SEO
 
-All assets are pulled directly from the live CPP HubSpot CDN:
+### 1. SEO Component (components/SEO.js)
+Reusable component injecting title, meta description, Open Graph
+and Twitter Card tags into every page head.
 
-| Asset | Source |
-|-------|--------|
-| Logo (light/dark) | `/hubfs/raw_assets/public/2022-Site/assets/images/` |
-| Hero video (homepage) | `/hubfs/CPP_office_C_v2 wipes.mp4` |
-| Awards video | `/hubfs/2022File/Video/test trim_loop.mp4` |
-| Brett Russell photo | `/hs-fs/hubfs/2022File/images/image-png.png` |
-| Award photos (2021, 2022) | `/hubfs/2022File/` |
-| Award badges (REIA, LAF) | `/hubfs/Excellence2021.svg`, `/hubfs/2021.svg` etc. |
-| Service icons (×12) | `/hubfs/2022File/Box/` |
-| Sales step icons (×4) | `/hubfs/advise.svg`, `/hubfs/communicate.svg` etc. |
-| Property management infographic | `/hubfs/raw_assets/.../Infographic1.svg` |
+Each page has unique keyword-targeted tags:
+- Homepage  → "Property management Canberra ACT"
+- Rental    → "Property management Canberra ACT"
+- Sales     → "Sell property Canberra"
+- Contact   → "Free property appraisal Canberra"
+- Suburbs   → "Property management [SuburbName]"
 
-### To self-host all assets (recommended before go-live):
+### 2. Structured Data (components/StructuredData.js)
+Three JSON-LD schemas loaded on every page via _app.js:
+- RealEstateAgent (business name, address, phone, hours, ratings)
+- WebSite (enables Google sitelinks search box)
+- BreadcrumbList (shows breadcrumb path in search results)
 
-```bash
-chmod +x download-assets.sh && ./download-assets.sh
-```
+Verify at: https://search.google.com/test/rich-results
+
+### 3. Suburb Pages (pages/suburbs/[suburb].js)
+One SEO page per suburb — targets long-tail keywords like
+"property management Gungahlin" or "rental manager Watson ACT".
+Built with getStaticPaths + getStaticProps (static HTML at build time).
+
+Routes: /suburbs/gungahlin, /suburbs/oconnor, /suburbs/watson,
+        /suburbs/nicholls, /suburbs/mitchell
+
+### 4. Sitemap + robots.txt (next-sitemap.config.js)
+Auto-generated after every npm run build.
+Submit sitemap to Google Search Console after deploying.
+
+### 5. Canonical URLs
+Every page has canonical link tag to prevent duplicate content penalties.
 
 ---
 
-## Next Steps for Client Handover
+## After Deploying — Action Checklist
 
-1. **IRE API** — Connect Inspect Real Estate API for live listings (`GET /v1/listings?key=&accountNames=`)
-2. **Form emails** — Wire contact/enquiry forms to Resend or Formspree
-3. **Google Reviews** — Embed live reviews via Google Places API
-4. **Analytics** — Add Vercel Analytics or GA4
-5. **Deploy** — Push to GitHub → connect to Vercel (one click)
+1. Go to search.google.com/search-console
+   → Add domain, verify ownership
+   → Submit sitemap URL
+
+2. Go to business.google.com
+   → Claim CPP Google Business Profile
+   → Fill in ALL fields (hours, photos, services)
+   → This is the #1 local SEO action
+
+3. Ask happy clients to leave Google reviews
+   → Update aggregateRating in StructuredData.js to match
+
+4. Submit to directory sites:
+   → ratemyagent.com.au
+   → realestate.com.au (agent profile)
+   → domain.com.au (agent profile)
+   → yellowpages.com.au
 
 ---
 
-Built for Canberra Property Partners · 2025
+## Top Keywords to Target
+
+| Keyword | Priority |
+|---------|----------|
+| property management canberra | Must win |
+| rental management ACT | Must win |
+| property management gungahlin | Quick win |
+| property manager oconnor | Quick win |
+| sell investment property canberra | Mid term |
+| free property appraisal canberra | Quick win |

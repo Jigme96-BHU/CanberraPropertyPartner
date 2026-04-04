@@ -1,5 +1,5 @@
-import Head from 'next/head';
 import Link from 'next/link';
+import SEO from '../components/SEO';
 import { useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -10,10 +10,11 @@ export default function Awards() {
 
   return (
     <>
-      <Head>
-        <title>Awards & Testimonials — Canberra Property Partners</title>
-        <meta name="description" content="REIA Innovation Award winners 2021 & 2022. See what Canberra clients say about CPP." />
-      </Head>
+      <SEO
+        title="Awards and Testimonials | Canberra Property Partners"
+        description="REIACT Innovation Award winners 2021 and 2022. Read what Canberra landlords, sellers and buyers say about CPP property management."
+        url="/awards"
+      />
       <Navbar />
 
       {/* ── HERO with real awards video ── */}

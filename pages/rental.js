@@ -1,5 +1,5 @@
-import Head from 'next/head';
 import Link from 'next/link';
+import SEO from '../components/SEO';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { ASSETS, services } from '../data';
@@ -7,10 +7,11 @@ import { ASSETS, services } from '../data';
 export default function Rental() {
   return (
     <>
-      <Head>
-        <title>Rental Management — Canberra Property Partners</title>
-        <meta name="description" content="Concierge-style property management across the ACT. Tenant vetting, maintenance, rent collection, 3D condition reports and more." />
-      </Head>
+      <SEO
+        title="Property Management Canberra ACT | Canberra Property Partners"
+        description="Expert rental property management across Canberra and the ACT. Tenant vetting, maintenance, 3D condition reports, rent collection. Free appraisal."
+        url="/rental"
+      />
       <Navbar />
 
       {/* ── HERO ── */}
@@ -19,7 +20,7 @@ export default function Rental() {
         <div style={{ position:'absolute', inset:0, background:'linear-gradient(135deg, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.5) 100%)' }} />
         <div style={{ position:'absolute', left:0, top:0, bottom:0, width:'4px', background:'linear-gradient(to bottom, transparent, #C9A84C 20%, #C9A84C 80%, transparent)' }} />
 
-        <div className="container hero-inner" style={{ position:'relative', zIndex:2, display:'grid', gridTemplateColumns:'1fr 1fr', gap:'80px', alignItems:'center' }}>
+        <div className="container" style={{ position:'relative', zIndex:2, display:'grid', gridTemplateColumns:'1fr 1fr', gap:'80px', alignItems:'center' }} className="hero-inner">
           <div>
             <p className="eyebrow" style={{ marginBottom:'20px' }}>Our Services</p>
             <h1 style={{ fontSize:'clamp(48px,6vw,80px)', fontFamily:'Playfair Display,serif', color:'#fff', lineHeight:1.0, fontWeight:400, marginBottom:'28px' }}>
@@ -145,7 +146,7 @@ export default function Rental() {
       {/* ── SELL PROMPT ── */}
       <section style={{ padding:'120px 0', background:'#0A0A0A', position:'relative', overflow:'hidden' }}>
         <div style={{ position:'absolute', inset:0, backgroundImage:'radial-gradient(ellipse at 80% 50%, rgba(201,168,76,0.06) 0%, transparent 60%)' }} />
-        <div className="container sell-grid" style={{ position:'relative', zIndex:2, display:'grid', gridTemplateColumns:'1fr 1fr', gap:'80px', alignItems:'center' }}>
+        <div className="container" style={{ position:'relative', zIndex:2, display:'grid', gridTemplateColumns:'1fr 1fr', gap:'80px', alignItems:'center' }} className="sell-grid">
           <div>
             <p className="eyebrow" style={{ marginBottom:'20px' }}>Full-Circle Service</p>
             <h2 style={{ fontSize:'clamp(34px,4vw,52px)', color:'#fff', lineHeight:1.1, marginBottom:'24px' }}>

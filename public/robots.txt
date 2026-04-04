@@ -1,0 +1,18 @@
+# robots.txt
+# ─────────────────────────────────────────────────────────────
+# WHY THIS FILE:
+# Every search engine bot reads this before crawling your site.
+# It's the instructions page for bots.
+#
+# User-agent: * = applies to ALL bots
+# Allow: / = permission to crawl everything from the root
+# Sitemap: = tells bots where to find your sitemap
+#
+# NOTE: next-sitemap auto-generates this after "npm run build"
+# This file is just a fallback during development.
+
+User-agent: *
+Allow: /
+Disallow: /api/
+
+Sitemap: https://canberrapropertypartners.com.au/sitemap.xml

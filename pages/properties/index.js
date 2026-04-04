@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import Head from 'next/head';
+import SEO from '../../components/SEO';
 import { useRouter } from 'next/router';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
@@ -30,10 +30,11 @@ export default function Properties() {
 
   return (
     <>
-      <Head>
-        <title>Properties — Canberra Property Partners</title>
-        <meta name="description" content="Browse available rentals and properties for sale across Canberra and the ACT." />
-      </Head>
+      <SEO
+        title="Properties For Rent and For Sale Canberra ACT | CPP"
+        description="Browse available rental properties and homes for sale across Canberra and the ACT. Gungahlin, O Connor, Watson, Nicholls and more suburbs."
+        url="/properties"
+      />
       <Navbar />
 
       {/* Page header */}
