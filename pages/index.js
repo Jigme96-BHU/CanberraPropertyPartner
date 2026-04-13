@@ -4,11 +4,18 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import PropertyCard from '../components/PropertyCard';
 import SEO from '../components/SEO';
-import { ASSETS, properties, testimonials, stats } from '../data';
+import { ASSETS, properties as mockProperties, testimonials, stats } from '../data';
+import { fetchREAXML } from '../lib/hetzner';
+import { parseREAXML } from '../lib/parseListings';
 
-export default function Home() {
+export default function Home({ properties }) {
   const [activeTestimonial, setActiveTestimonial] = useState(0);
-  const featured = properties.filter(p => p.status !== 'leased').slice(0, 3);
+
+  const featured = (() => {
+    const active = properties.filter(p => p.status !== 'leased');
+    const pinned = active.filter(p => p.featured);
+    return pinned.length >= 3 ? pinned.slice(0, 3) : [...pinned, ...active.filter(p => !p.featured)].slice(0, 3);
+  })();
 
   useEffect(() => {
     const t = setInterval(() => setActiveTestimonial(i => (i + 1) % testimonials.length), 5000);
@@ -310,4 +317,21 @@ export default function Home() {
       `}</style>
     </>
   );
+}
+
+export async function getStaticProps() {
+  try {
+    const xml = await fetchREAXML();
+    const liveListings = xml ? await parseREAXML(xml) : [];
+
+    return {
+      props: { properties: liveListings.length > 0 ? liveListings : mockProperties },
+      revalidate: 300,
+    };
+  } catch {
+    return {
+      props: { properties: mockProperties },
+      revalidate: 300,
+    };
+  }
 }

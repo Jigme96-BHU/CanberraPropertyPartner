@@ -10,8 +10,10 @@
   },
   "dependencies": {
     "next": "14.2.3",
+    "next-sitemap": "^4.2.3",
     "react": "^18",
     "react-dom": "^18",
-    "next-sitemap": "^4.2.3"
+    "ssh2-sftp-client": "^12.1.1",
+    "xml2js": "^0.6.2"
   }
 }

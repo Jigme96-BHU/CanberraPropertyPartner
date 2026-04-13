@@ -34,11 +34,20 @@ export const ASSETS = {
 };
 
 // ── Mock property listings ───────────────────────────────────────
+// NOTE: ireID is the uniqueID from Reapit's REAXML feed.
+// This is what gets passed to the Book Inspection and Apply Now buttons.
+// Currently using the real IRE IDs provided by Reapit for testing:
+//   - IRE5931787 = G17-17 Summerfield Close, DENMAN PROSPECT (rental)
+//   - IRE5890924 = 11 Winton Place, Holder (sale)
+// When REAXML via FTP is connected, every property will have its real ireID
+// automatically from the XML feed — these placeholder ones won't be needed.
 export const properties = [
   {
     id: 1, status: 'rent', price: '$620 /wk',
     address: '14 Rosewood Circuit', suburb: 'Gungahlin ACT 2912',
     beds: 4, baths: 2, cars: 2, type: 'House', featured: true,
+    // Real IRE ID from Reapit (rental test listing)
+    ireID: 'IRE5931787',
     image: 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&q=80',
     desc: 'Spacious family home in the heart of Gungahlin with modern finishes throughout and a large entertaining area.',
   },
@@ -46,6 +55,7 @@ export const properties = [
     id: 2, status: 'rent', price: '$480 /wk',
     address: '7/32 Allara Street', suburb: 'City ACT 2601',
     beds: 2, baths: 1, cars: 1, type: 'Apartment', featured: false,
+    ireID: 'IRE5931787', // using same test ID until real feed is connected
     image: 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800&q=80',
     desc: 'Stylish inner-city apartment with stunning views over the city skyline and premium building amenities.',
   },
@@ -53,6 +63,8 @@ export const properties = [
     id: 3, status: 'sale', price: '$1,150,000',
     address: '22 Wattle Street', suburb: "O'Connor ACT 2602",
     beds: 4, baths: 2, cars: 2, type: 'House', featured: true,
+    // Real IRE ID from Reapit (sale test listing)
+    ireID: 'IRE5890924',
     image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80',
     desc: "Classic O'Connor character home on a generous 780sqm block with original features and a north-facing garden.",
   },
@@ -60,6 +72,7 @@ export const properties = [
     id: 4, status: 'rent', price: '$550 /wk',
     address: '3 Brigalow Street', suburb: 'Watson ACT 2602',
     beds: 3, baths: 1, cars: 1, type: 'House', featured: false,
+    ireID: 'IRE5931787',
     image: 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800&q=80',
     desc: 'Charming Watson cottage with mature gardens, original hardwood floors and a sun-filled rear deck.',
   },
@@ -67,6 +80,7 @@ export const properties = [
     id: 5, status: 'sale', price: '$895,000',
     address: '15 Pindari Crescent', suburb: 'Nicholls ACT 2913',
     beds: 4, baths: 2, cars: 2, type: 'House', featured: false,
+    ireID: 'IRE5890924',
     image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&q=80',
     desc: 'Beautifully presented family home in sought-after Nicholls, moments from Gungahlin Town Centre.',
   },
@@ -74,6 +88,7 @@ export const properties = [
     id: 6, status: 'leased', price: '$590 /wk',
     address: '12 Hibberson Street', suburb: 'Gungahlin ACT 2912',
     beds: 3, baths: 2, cars: 1, type: 'Townhouse', featured: false,
+    ireID: 'IRE5931787',
     image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80',
     desc: 'Modern townhouse in the Gungahlin town centre precinct, close to all amenities and transport.',
   },
