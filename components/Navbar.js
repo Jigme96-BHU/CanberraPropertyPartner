@@ -69,7 +69,7 @@ export default function Navbar() {
           </div>
 
           {/* Hamburger */}
-          <button className="hamburger" onClick={() => setOpen(!open)} style={{
+          <button className="hamburger" onClick={() => setOpen(!open)} aria-label={open ? 'Close navigation menu' : 'Open navigation menu'} aria-expanded={open} style={{
             display:'none', background:'none', border:'none',
             flexDirection:'column', gap:'5px', padding:'4px',
           }}>

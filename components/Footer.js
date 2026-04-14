@@ -19,8 +19,12 @@ export default function Footer() {
               Canberra's most personal real estate service. Award-winning technology, genuine human care.
             </p>
             <div style={{ display:'flex', gap:'12px', marginTop:'28px' }}>
-              {['Facebook','Instagram','LinkedIn'].map(s => (
-                <a key={s} href="#" style={{
+              {[
+                { label:'Facebook',  href:'https://www.facebook.com/canberrapropertypartners' },
+                { label:'Instagram', href:'https://www.instagram.com/canberrapropertypartners' },
+                { label:'LinkedIn',  href:'https://www.linkedin.com/company/canberra-property-partners' },
+              ].map(s => (
+                <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} style={{
                   width:'36px', height:'36px',
                   border:'1px solid rgba(255,255,255,0.15)',
                   borderRadius:'50%',
@@ -30,7 +34,7 @@ export default function Footer() {
                 }}
                   onMouseEnter={e => { e.currentTarget.style.borderColor='#C9A84C'; e.currentTarget.style.color='#C9A84C'; }}
                   onMouseLeave={e => { e.currentTarget.style.borderColor='rgba(255,255,255,0.15)'; e.currentTarget.style.color='rgba(255,255,255,0.5)'; }}
-                >{s[0]}</a>
+                >{s.label[0]}</a>
               ))}
             </div>
           </div>

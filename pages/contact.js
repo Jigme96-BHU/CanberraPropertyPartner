@@ -13,10 +13,37 @@ const iBase = {
   transition:'border-color 0.2s',
 };
 
+const EMPTY_FORM = { name:'', email:'', phone:'', service:'appraisal', message:'', website:'' };
+
 export default function Contact() {
-  const [form, setForm] = useState({ name:'', email:'', phone:'', service:'appraisal', message:'' });
-  const [sent, setSent] = useState(false);
+  const [form,     setForm]     = useState(EMPTY_FORM);
+  const [status,   setStatus]   = useState('idle'); // 'idle' | 'sending' | 'success' | 'error'
+  const [errorMsg, setErrorMsg] = useState('');
+
   const F = (k) => ({ value:form[k], onChange:e => setForm({...form,[k]:e.target.value}) });
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus('sending');
+    setErrorMsg('');
+    try {
+      const res = await fetch('/api/contact', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify(form),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setErrorMsg(data.error || 'Something went wrong. Please try again.');
+        setStatus('error');
+      } else {
+        setStatus('success');
+      }
+    } catch {
+      setErrorMsg('Network error. Please check your connection and try again.');
+      setStatus('error');
+    }
+  };
 
   const contactDetails = [
     { label:'Office', value:'2/18 Winchcombe Court\nMitchell ACT 2911', icon:'📍' },
@@ -89,18 +116,32 @@ export default function Contact() {
           <h2 style={{ fontFamily:'Playfair Display,serif', fontSize:'36px', color:'#fff', marginBottom:'8px', fontWeight:400 }}>Book a free appraisal</h2>
           <p style={{ fontSize:'14px', color:'rgba(255,255,255,0.35)', marginBottom:'48px' }}>No obligation. No pressure. Just honest advice.</p>
 
-          {sent ? (
+          {status === 'success' ? (
             <div style={{ textAlign:'center', padding:'60px 40px' }}>
               <div style={{ width:'72px', height:'72px', borderRadius:'50%', background:'#C9A84C', display:'flex', alignItems:'center', justifyContent:'center', margin:'0 auto 28px', fontSize:'28px', color:'#0A0A0A' }}>✓</div>
               <h3 style={{ fontFamily:'Playfair Display,serif', fontSize:'32px', color:'#fff', marginBottom:'12px' }}>
                 Thank you, {form.name.split(' ')[0] || 'there'}!
               </h3>
-              <p style={{ fontSize:'16px', color:'rgba(255,255,255,0.4)', lineHeight:1.75 }}>
-                We've received your enquiry and will be in touch within 2 business hours.
+              <p style={{ fontSize:'16px', color:'rgba(255,255,255,0.4)', lineHeight:1.75, marginBottom:'32px' }}>
+                We've received your enquiry and will be in touch within one business day.
               </p>
+              <button onClick={() => { setForm(EMPTY_FORM); setStatus('idle'); }} style={{
+                padding:'14px 32px', background:'transparent',
+                border:'1px solid rgba(255,255,255,0.2)', borderRadius:'8px',
+                color:'rgba(255,255,255,0.6)', fontFamily:'Outfit,sans-serif',
+                fontSize:'13px', cursor:'pointer', transition:'all 0.2s',
+              }}
+                onMouseEnter={e => { e.currentTarget.style.borderColor='#C9A84C'; e.currentTarget.style.color='#C9A84C'; }}
+                onMouseLeave={e => { e.currentTarget.style.borderColor='rgba(255,255,255,0.2)'; e.currentTarget.style.color='rgba(255,255,255,0.6)'; }}
+              >Send another message</button>
             </div>
           ) : (
-            <form onSubmit={e => { e.preventDefault(); setSent(true); }} style={{ display:'flex', flexDirection:'column', gap:'16px' }}>
+            <form onSubmit={handleSubmit} style={{ display:'flex', flexDirection:'column', gap:'16px' }}>
+
+              {/* Honeypot — hidden from real users, catches bots */}
+              <input type="text" {...F('website')} tabIndex={-1} aria-hidden="true"
+                style={{ position:'absolute', left:'-9999px', width:'1px', height:'1px', opacity:0 }} />
+
               <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'16px' }}>
                 <div>
                   <label style={{ display:'block', fontSize:'11px', fontWeight:600, letterSpacing:'0.12em', color:'rgba(255,255,255,0.35)', marginBottom:'8px' }}>FULL NAME *</label>
@@ -143,17 +184,25 @@ export default function Contact() {
                   onBlur={e => e.target.style.borderColor='rgba(255,255,255,0.1)'} />
               </div>
 
-              <button type="submit" style={{
+              {status === 'error' && (
+                <p style={{ fontSize:'13px', color:'#FF6B6B', background:'rgba(255,107,107,0.1)', border:'1px solid rgba(255,107,107,0.25)', borderRadius:'6px', padding:'12px 16px', margin:0 }}>
+                  {errorMsg}
+                </p>
+              )}
+
+              <button type="submit" disabled={status === 'sending'} style={{
                 marginTop:'8px', padding:'18px',
-                background:'#C9A84C', color:'#0A0A0A',
+                background: status === 'sending' ? 'rgba(201,168,76,0.5)' : '#C9A84C',
+                color:'#0A0A0A',
                 border:'none', borderRadius:'8px',
                 fontFamily:'Outfit,sans-serif', fontSize:'14px', fontWeight:700,
-                letterSpacing:'0.1em', cursor:'pointer',
+                letterSpacing:'0.1em',
+                cursor: status === 'sending' ? 'default' : 'pointer',
                 transition:'all 0.25s',
               }}
-                onMouseEnter={e => { e.currentTarget.style.background='#E8C97A'; e.currentTarget.style.transform='scale(1.02)'; }}
-                onMouseLeave={e => { e.currentTarget.style.background='#C9A84C'; e.currentTarget.style.transform='scale(1)'; }}
-              >SEND ENQUIRY →</button>
+                onMouseEnter={e => { if (status !== 'sending') { e.currentTarget.style.background='#E8C97A'; e.currentTarget.style.transform='scale(1.02)'; }}}
+                onMouseLeave={e => { e.currentTarget.style.background = status === 'sending' ? 'rgba(201,168,76,0.5)' : '#C9A84C'; e.currentTarget.style.transform='scale(1)'; }}
+              >{status === 'sending' ? 'Sending...' : 'SEND ENQUIRY →'}</button>
 
               <p style={{ fontSize:'12px', color:'rgba(255,255,255,0.25)', textAlign:'center', marginTop:'8px' }}>
                 Or call us directly: <a href="tel:0261030843" style={{ color:'#C9A84C' }}>02 6103 0843</a>

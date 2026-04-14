@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 const STATUS = { rent:'For Rent', sale:'For Sale', leased:'Leased' };
 const STATUS_COLOR = { rent:'#C9A84C', sale:'#0A0A0A', leased:'#7A8C7E' };
@@ -18,9 +19,10 @@ export default function PropertyCard({ p }) {
         onMouseLeave={e => { e.currentTarget.style.transform='none'; e.currentTarget.style.boxShadow='0 2px 16px rgba(0,0,0,0.06)'; e.currentTarget.querySelector('.card-img').style.transform='scale(1)'; }}
       >
         {/* Image */}
-        <div style={{ position:'relative', paddingTop:'62%', overflow:'hidden', background:'#eee' }}>
-          <img className="card-img" src={p.image} alt={p.address}
-            style={{ position:'absolute', inset:0, width:'100%', height:'100%', objectFit:'cover', transition:'transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94)' }} />
+        <div style={{ position:'relative', paddingTop:'62%', overflow:'hidden', background:'#E8E4DF' }}>
+          <Image className="card-img" src={p.image} alt={p.address} fill
+            sizes="(max-width: 768px) 100vw, 33vw"
+            style={{ objectFit:'cover', transition:'transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94)' }} />
 
           {/* Status pill */}
           <div style={{

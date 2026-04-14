@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Navbar from '../../components/Navbar';
@@ -261,6 +262,20 @@ export default function PropertyDetail({ properties }) {
     setBusy(false);
   };
 
+  if (!p && router.isReady) {
+    return (
+      <>
+        <Navbar />
+        <div style={{ minHeight:'100vh', background:'#0A0A0A', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', gap:'16px' }}>
+          <p style={{ fontFamily:'Playfair Display,serif', fontSize:'32px', color:'#fff' }}>Property not found</p>
+          <p style={{ color:'rgba(255,255,255,0.4)', fontSize:'15px' }}>This listing may have been removed or is no longer available.</p>
+          <Link href="/properties" style={{ color:'#C9A84C', fontSize:'14px', marginTop:'8px' }}>← Back to all properties</Link>
+        </div>
+        <Footer />
+      </>
+    );
+  }
+
   if (!p) {
     return (
       <>
@@ -320,12 +335,14 @@ export default function PropertyDetail({ properties }) {
               onTransitionEnd={onTransitionEnd}
             >
               {cloned.map((src, i) => (
-                <div key={i} style={{ flex:`0 0 ${slotW}px`, height:'380px', overflow:'hidden', flexShrink:0 }}>
-                  <img
+                <div key={i} style={{ position:'relative', flex:`0 0 ${slotW}px`, height:'380px', overflow:'hidden', flexShrink:0, background:'#E8E4DF' }}>
+                  <Image
                     src={src}
                     alt={`${p.address} — photo ${i + 1}`}
-                    loading={i <= CLONES + 1 ? 'eager' : 'lazy'}
-                    style={{ width:'100%', height:'100%', objectFit:'cover', display:'block' }}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    priority={i <= CLONES + 2}
+                    style={{ objectFit:'cover' }}
                   />
                 </div>
               ))}
