@@ -169,7 +169,7 @@ export default function Sales() {
           </p>
           <div style={{ display:'flex', gap:'16px', justifyContent:'center', flexWrap:'wrap' }}>
             <Link href="/contact" className="btn-primary" style={{ fontSize:'15px', padding:'18px 48px' }}>Book Free Appraisal →</Link>
-            <a href="tel:0261030843" className="btn-ghost-white" style={{ fontSize:'15px', padding:'18px 48px' }}>Call 02 6103 0843</a>
+            <a href="tel:0409882375" className="btn-ghost-white" style={{ fontSize:'15px', padding:'18px 48px' }}>Call 0409 882 375</a>
           </div>
         </div>
       </section>

@@ -37,7 +37,7 @@ export default async function handler(req, res) {
     // ── Email to CPP team ──────────────────────────────────────
     await resend.emails.send({
       from:    'CPP Website <onboarding@resend.dev>',
-      to:      'gmetharchen96@gmail.com',
+      to:      'cpp@email.propertyme.com',
       replyTo: email,
       subject: `New Enquiry from ${name} — ${serviceLabel}`,
       html: `
@@ -91,7 +91,7 @@ export default async function handler(req, res) {
               We've received your enquiry and one of our team will be in touch within <strong>one business day</strong>.
             </p>
             <p style="font-size:15px;color:#666;line-height:1.7;margin:0 0 32px;">
-              In the meantime, if you need to speak with us urgently you can call us directly on <a href="tel:0261030843" style="color:#C9A84C;font-weight:600;">02 6103 0843</a>.
+              In the meantime, if you need to speak with us urgently you can call us directly on <a href="tel:0409882375" style="color:#C9A84C;font-weight:600;">0409 882 375</a>.
             </p>
             <a href="https://canberrapropertypartners.com.au/properties"
               style="display:inline-block;padding:16px 36px;background:#0A0A0A;color:#fff;text-decoration:none;border-radius:6px;font-size:14px;font-weight:600;letter-spacing:0.06em;">
@@ -100,7 +100,7 @@ export default async function handler(req, res) {
           </div>
           <div style="background:#0A0A0A;padding:24px 40px;text-align:center;">
             <p style="color:rgba(255,255,255,0.4);font-size:12px;margin:0 0 4px;">Canberra Property Partners</p>
-            <p style="color:rgba(255,255,255,0.25);font-size:12px;margin:0;">2/18 Winchcombe Court, Mitchell ACT 2911</p>
+            <p style="color:rgba(255,255,255,0.25);font-size:12px;margin:0;">10/12 Cheney Place, Mitchell ACT 2911</p>
           </div>
         </div>
       `,

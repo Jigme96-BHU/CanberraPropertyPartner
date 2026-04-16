@@ -35,7 +35,7 @@ export default function SuburbsIndex() {
     <>
       <SEO
         title="Property Management Canberra Suburbs | CPP"
-        description="Expert property management across Canberra suburbs. Gungahlin, O'Connor, Watson, Nicholls, Mitchell and more. Free appraisals. Call 02 6103 0843."
+        description="Expert property management across Canberra suburbs. Gungahlin, O'Connor, Watson, Nicholls, Mitchell and more. Free appraisals. Call 0409 882 375."
         url="/suburbs"
       />
       <Navbar />

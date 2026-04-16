@@ -46,9 +46,9 @@ export default function Contact() {
   };
 
   const contactDetails = [
-    { label:'Office', value:'2/18 Winchcombe Court\nMitchell ACT 2911', icon:'📍' },
-    { label:'Phone',  value:'02 6103 0843', href:'tel:0261030843', icon:'📞' },
-    { label:'Email',  value:'sales@canberrapropertypartners.com.au', href:'mailto:sales@canberrapropertypartners.com.au', icon:'✉️' },
+    { label:'Office', value:'10/12 Cheney Place\nMitchell ACT 2911', icon:'📍' },
+    { label:'Phone',  value:'0409 882 375', href:'tel:0409882375', icon:'📞' },
+    { label:'Email',  value:'cpp@email.propertyme.com', href:'mailto:cpp@email.propertyme.com', icon:'✉️' },
     { label:'Hours',  value:'Mon–Fri  8:30am–5:30pm\nSat  9:00am–1:00pm', icon:'🕐' },
   ];
 
@@ -56,7 +56,7 @@ export default function Contact() {
     <>
       <SEO
         title="Contact Us - Free Property Appraisal Canberra | CPP"
-        description="Book a free, no-obligation property appraisal in Canberra. Call 02 6103 0843 or email sales@canberrapropertypartners.com.au. Mitchell ACT 2911."
+        description="Book a free, no-obligation property appraisal in Canberra. Call 0409 882 375 or email cpp@email.propertyme.com. Mitchell ACT 2911."
         url="/contact"
       />
       <Navbar />
@@ -100,8 +100,8 @@ export default function Contact() {
             <div style={{ marginTop:'48px', padding:'24px 28px', background:'rgba(255,255,255,0.04)', border:'1px solid rgba(255,255,255,0.08)', borderRadius:'12px', display:'flex', alignItems:'center', gap:'16px' }}>
               <span style={{ fontSize:'24px' }}>🗺️</span>
               <div>
-                <p style={{ fontSize:'13px', color:'rgba(255,255,255,0.4)', marginBottom:'4px' }}>2/18 Winchcombe Court, Mitchell ACT 2911</p>
-                <a href="https://maps.google.com/?q=2/18+Winchcombe+Court+Mitchell+ACT+2911" target="_blank" rel="noopener noreferrer"
+                <p style={{ fontSize:'13px', color:'rgba(255,255,255,0.4)', marginBottom:'4px' }}>10/12 Cheney Place, Mitchell ACT 2911</p>
+                <a href="https://maps.google.com/?q=10/12+Cheney+Place+Mitchell+ACT+2911" target="_blank" rel="noopener noreferrer"
                   style={{ fontSize:'13px', fontWeight:600, color:'#C9A84C', letterSpacing:'0.06em', transition:'opacity 0.2s' }}
                   onMouseEnter={e => e.currentTarget.style.opacity='0.7'}
                   onMouseLeave={e => e.currentTarget.style.opacity='1'}
@@ -205,7 +205,7 @@ export default function Contact() {
               >{status === 'sending' ? 'Sending...' : 'SEND ENQUIRY →'}</button>
 
               <p style={{ fontSize:'12px', color:'rgba(255,255,255,0.25)', textAlign:'center', marginTop:'8px' }}>
-                Or call us directly: <a href="tel:0261030843" style={{ color:'#C9A84C' }}>02 6103 0843</a>
+                Or call us directly: <a href="tel:0409882375" style={{ color:'#C9A84C' }}>0409 882 375</a>
               </p>
             </form>
           )}

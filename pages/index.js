@@ -26,7 +26,7 @@ export default function Home({ properties }) {
     <>
       <SEO
         title="Property Management and Real Estate Canberra ACT"
-        description="Canberra award-winning real estate agency. Expert property management, sales and rentals across the ACT. REIA Innovation Award winners. Call 02 6103 0843."
+        description="Canberra award-winning real estate agency. Expert property management, sales and rentals across the ACT. REIA Innovation Award winners. Call 0409 882 375."
         url="/"
       />
       <Navbar />
@@ -301,8 +301,8 @@ export default function Home({ properties }) {
             <Link href="/contact" className="btn-primary" style={{ fontSize:'15px', padding:'18px 44px' }}>
               Book Free Appraisal →
             </Link>
-            <a href="tel:0261030843" className="btn-ghost-white" style={{ fontSize:'15px', padding:'18px 44px' }}>
-              02 6103 0843
+            <a href="tel:0409882375" className="btn-ghost-white" style={{ fontSize:'15px', padding:'18px 44px' }}>
+              0409 882 375
             </a>
           </div>
         </div>

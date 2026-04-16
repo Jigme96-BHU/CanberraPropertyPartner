@@ -104,11 +104,11 @@ export default function About() {
                 In 2017, convinced the sector was still missing truly premium customer service, Brett co-founded CPP. Today his focus on helping vendors present properties in tip-top shape has seen him set multiple suburb sales records.
               </p>
               <div style={{ display:'flex', gap:'12px', flexWrap:'wrap' }}>
-                <a href="tel:0261030843" style={{ padding:'12px 24px', background:'#C9A84C', color:'#0A0A0A', fontSize:'13px', fontWeight:600, letterSpacing:'0.06em', borderRadius:'100px', transition:'background 0.2s' }}
+                <a href="tel:0409882375" style={{ padding:'12px 24px', background:'#C9A84C', color:'#0A0A0A', fontSize:'13px', fontWeight:600, letterSpacing:'0.06em', borderRadius:'100px', transition:'background 0.2s' }}
                   onMouseEnter={e => e.currentTarget.style.background='#E8C97A'}
                   onMouseLeave={e => e.currentTarget.style.background='#C9A84C'}
-                >02 6103 0843</a>
-                <a href="mailto:sales@canberrapropertypartners.com.au" style={{ padding:'12px 24px', border:'1px solid rgba(255,255,255,0.2)', color:'rgba(255,255,255,0.7)', fontSize:'13px', fontWeight:500, letterSpacing:'0.06em', borderRadius:'100px', transition:'all 0.2s' }}
+                >0409 882 375</a>
+                <a href="mailto:cpp@email.propertyme.com" style={{ padding:'12px 24px', border:'1px solid rgba(255,255,255,0.2)', color:'rgba(255,255,255,0.7)', fontSize:'13px', fontWeight:500, letterSpacing:'0.06em', borderRadius:'100px', transition:'all 0.2s' }}
                   onMouseEnter={e => { e.currentTarget.style.borderColor='#fff'; e.currentTarget.style.color='#fff'; }}
                   onMouseLeave={e => { e.currentTarget.style.borderColor='rgba(255,255,255,0.2)'; e.currentTarget.style.color='rgba(255,255,255,0.7)'; }}
                 >Email Brett</a>

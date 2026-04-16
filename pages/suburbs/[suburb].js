@@ -220,8 +220,8 @@ export default function SuburbPage({ suburb }) {
                 <p style={{ fontSize:'14px', color:'rgba(255,255,255,0.45)', lineHeight:1.7, marginBottom:'20px' }}>
                   Deep local knowledge of {suburb.name}'s rental market, tenant pool and property values.
                 </p>
-                <a href="tel:0261030843" style={{ fontSize:'13px', fontWeight:600, color:'#C9A84C', letterSpacing:'0.06em' }}>
-                  Call 02 6103 0843 →
+                <a href="tel:0409882375" style={{ fontSize:'13px', fontWeight:600, color:'#C9A84C', letterSpacing:'0.06em' }}>
+                  Call 0409 882 375 →
                 </a>
               </div>
             </div>
@@ -256,7 +256,7 @@ export default function SuburbPage({ suburb }) {
           </p>
           <div style={{ display:'flex', gap:'16px', justifyContent:'center', flexWrap:'wrap' }}>
             <Link href="/contact" className="btn-primary">Free {suburb.name} Appraisal →</Link>
-            <a href="tel:0261030843" className="btn-ghost-white">02 6103 0843</a>
+            <a href="tel:0409882375" className="btn-ghost-white">0409 882 375</a>
           </div>
         </div>
       </section>

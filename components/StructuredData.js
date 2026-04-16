@@ -40,8 +40,8 @@ export default function StructuredData() {
     "url": "https://canberra-property-partner.vercel.app",
     "logo": "https://canberra-property-partner.vercel.app/images/logo-dark.svg",
     "image": "https://canberra-property-partner.vercel.app/images/logo-dark.svg",
-    "telephone": "+61261030843",
-    "email": "sales@canberrapropertypartners.com.au",
+    "telephone": "+61409882375",
+    "email": "cpp@email.propertyme.com",
 
     // ── Address ────────────────────────────────────────────────
     // WHY: Google uses this for local search ("near me" searches)
@@ -49,7 +49,7 @@ export default function StructuredData() {
     // IMPORTANT: This must match your Google Business Profile exactly.
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "2/18 Winchcombe Court",
+      "streetAddress": "10/12 Cheney Place",
       "addressLocality": "Mitchell",
       "addressRegion": "ACT",
       "postalCode": "2911",
@@ -141,8 +141,8 @@ export default function StructuredData() {
     // WHY: Connects your website to your social profiles in Google's
     // knowledge graph. Update with real URLs.
     "sameAs": [
-      "https://www.facebook.com/canberrapropertypartners",
-      "https://www.instagram.com/canberrapropertypartners",
+      "https://www.facebook.com/CanberraPropertyPartners",
+      "https://www.instagram.com/canberra_property_partners",
       "https://www.linkedin.com/company/canberra-property-partners"
     ]
   };

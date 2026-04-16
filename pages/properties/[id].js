@@ -544,7 +544,7 @@ export default function PropertyDetail({ properties }) {
                 <p style={{ fontSize:'11px', fontWeight:600, letterSpacing:'0.1em', color:'rgba(10,10,10,0.35)', marginBottom:'16px' }}>LISTED BY</p>
                 <p style={{ fontFamily:'Playfair Display,serif', fontSize:'18px', marginBottom:'4px' }}>Canberra Property Partners</p>
                 <p style={{ fontSize:'13px', color:'rgba(10,10,10,0.4)', marginBottom:'20px' }}>Licensed Real Estate Agent ACT</p>
-                <a href="tel:0261030843" style={{
+                <a href="tel:0409882375" style={{
                   display:'block', padding:'12px', textAlign:'center',
                   border:'1px solid rgba(10,10,10,0.15)', borderRadius:'8px',
                   fontSize:'13px', fontWeight:600, color:'#0A0A0A',
@@ -553,7 +553,7 @@ export default function PropertyDetail({ properties }) {
                   onMouseEnter={e => { e.currentTarget.style.background='#0A0A0A'; e.currentTarget.style.color='#fff'; }}
                   onMouseLeave={e => { e.currentTarget.style.background='transparent'; e.currentTarget.style.color='#0A0A0A'; }}
                 >
-                  02 6103 0843
+                  0409 882 375
                 </a>
               </div>
 

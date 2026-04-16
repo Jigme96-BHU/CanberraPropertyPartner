@@ -20,8 +20,8 @@ export default function Footer() {
             </p>
             <div style={{ display:'flex', gap:'12px', marginTop:'28px' }}>
               {[
-                { label:'Facebook',  href:'https://www.facebook.com/canberrapropertypartners' },
-                { label:'Instagram', href:'https://www.instagram.com/canberrapropertypartners' },
+                { label:'Facebook',  href:'https://www.facebook.com/CanberraPropertyPartners' },
+                { label:'Instagram', href:'https://www.instagram.com/canberra_property_partners' },
                 { label:'LinkedIn',  href:'https://www.linkedin.com/company/canberra-property-partners' },
               ].map(s => (
                 <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} style={{
@@ -52,8 +52,8 @@ export default function Footer() {
               {href:'/awards', label:'Awards'},
             ]},
             { title:'Contact', links:[
-              {href:'tel:0261030843', label:'02 6103 0843'},
-              {href:'mailto:sales@canberrapropertypartners.com.au', label:'Email Us'},
+              {href:'tel:0409882375', label:'0409 882 375'},
+              {href:'mailto:cpp@email.propertyme.com', label:'Email Us'},
               {href:'/contact', label:'Book Appraisal'},
             ]},
           ].map(col => (
@@ -73,7 +73,7 @@ export default function Footer() {
           <p style={{ fontSize:'12px', color:'rgba(255,255,255,0.25)' }}>
             © {new Date().getFullYear()} Canberra Property Partners · Licensed Real Estate Agent ACT
           </p>
-          <p style={{ fontSize:'12px', color:'rgba(255,255,255,0.2)' }}>2/18 Winchcombe Court, Mitchell ACT 2911</p>
+          <p style={{ fontSize:'12px', color:'rgba(255,255,255,0.2)' }}>10/12 Cheney Place, Mitchell ACT 2911</p>
         </div>
       </div>
       <style>{`@media(max-width:768px){.footer-grid{grid-template-columns:1fr 1fr!important;}}`}</style>
