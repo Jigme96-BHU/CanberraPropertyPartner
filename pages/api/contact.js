@@ -37,7 +37,7 @@ export default async function handler(req, res) {
     // ── Email to CPP team ──────────────────────────────────────
     await resend.emails.send({
       from:    'CPP Website <onboarding@resend.dev>',
-      to:      'cpp@email.propertyme.com',
+      to:      'gmetharchen96@gmail.com',
       replyTo: email,
       subject: `New Enquiry from ${name} — ${serviceLabel}`,
       html: `
