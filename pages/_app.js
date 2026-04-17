@@ -18,6 +18,7 @@
 
 import '../styles/globals.css';
 import StructuredData from '../components/StructuredData';
+import { Analytics } from '@vercel/analytics/next';
 
 export default function App({ Component, pageProps }) {
   return (
@@ -36,6 +37,7 @@ export default function App({ Component, pageProps }) {
         This is how Next.js renders the right page for each URL.
       */}
       <Component {...pageProps} />
+      <Analytics />
     </>
   );
 }
