@@ -40,13 +40,13 @@ export default function Home({ properties }) {
         <video autoPlay muted loop playsInline style={{
           position:'absolute', inset:0,
           width:'100%', height:'100%', objectFit:'cover',
-          opacity:0.4,
+          opacity:0.8,
         }}>
           <source src={ASSETS.videoHero} type="video/mp4" />
         </video>
 
         {/* Gradient overlays */}
-        <div style={{ position:'absolute', inset:0, background:'linear-gradient(135deg, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.4) 60%, rgba(10,10,10,0.7) 100%)' }} />
+        <div style={{ position:'absolute', inset:0, background:'linear-gradient(135deg, rgba(10,10,10,0.65) 0%, rgba(10,10,10,0.15) 60%, rgba(10,10,10,0.4) 100%)' }} />
 
         {/* Decorative gold line */}
         <div style={{

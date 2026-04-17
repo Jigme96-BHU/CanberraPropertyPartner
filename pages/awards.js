@@ -19,10 +19,10 @@ export default function Awards() {
 
       {/* ── HERO with real awards video ── */}
       <section style={{ position:'relative', height:'75vh', minHeight:'560px', display:'flex', alignItems:'flex-end', background:'#0A0A0A', overflow:'hidden' }}>
-        <video autoPlay muted loop playsInline style={{ position:'absolute', inset:0, width:'100%', height:'100%', objectFit:'cover', opacity:0.35 }}>
+        <video autoPlay muted loop playsInline style={{ position:'absolute', inset:0, width:'100%', height:'100%', objectFit:'cover', opacity:0.75 }}>
           <source src={ASSETS.videoAwards} type="video/mp4" />
         </video>
-        <div style={{ position:'absolute', inset:0, background:'linear-gradient(to top, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.3) 60%, transparent 100%)' }} />
+        <div style={{ position:'absolute', inset:0, background:'linear-gradient(to top, rgba(10,10,10,0.75) 0%, rgba(10,10,10,0.15) 60%, transparent 100%)' }} />
         <div style={{ position:'absolute', left:0, top:0, bottom:0, width:'4px', background:'linear-gradient(to bottom, transparent, #C9A84C 20%, #C9A84C 80%, transparent)' }} />
         <div className="container" style={{ position:'relative', zIndex:2, paddingBottom:'88px' }}>
           <p className="eyebrow" style={{ marginBottom:'20px' }}>Recognition</p>
