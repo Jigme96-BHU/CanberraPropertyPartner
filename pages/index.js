@@ -5,8 +5,7 @@ import Footer from '../components/Footer';
 import PropertyCard from '../components/PropertyCard';
 import SEO from '../components/SEO';
 import { ASSETS, properties as mockProperties, testimonials, stats } from '../data';
-import { fetchREAXML } from '../lib/hetzner';
-import { parseREAXML } from '../lib/parseListings';
+import { getListings } from '../lib/hetzner';
 
 export default function Home({ properties }) {
   const [activeTestimonial, setActiveTestimonial] = useState(0);
@@ -320,18 +319,9 @@ export default function Home({ properties }) {
 }
 
 export async function getStaticProps() {
-  try {
-    const xml = await fetchREAXML();
-    const liveListings = xml ? await parseREAXML(xml) : [];
-
-    return {
-      props: { properties: liveListings.length > 0 ? liveListings : mockProperties },
-      revalidate: 300,
-    };
-  } catch {
-    return {
-      props: { properties: mockProperties },
-      revalidate: 300,
-    };
-  }
+  const liveListings = await getListings();
+  return {
+    props: { properties: liveListings.length > 0 ? liveListings : mockProperties },
+    revalidate: 300,
+  };
 }

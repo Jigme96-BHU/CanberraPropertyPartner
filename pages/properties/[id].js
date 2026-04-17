@@ -5,8 +5,7 @@ import Link from 'next/link';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import SEO from '../../components/SEO';
-import { fetchREAXML } from '../../lib/hetzner';
-import { parseREAXML } from '../../lib/parseListings';
+import { getListings } from '../../lib/hetzner';
 import { properties as mockProperties } from '../../data';
 
 const STATUS_LABEL = { rent: 'For Rent', sale: 'For Sale', leased: 'Leased' };
@@ -576,34 +575,31 @@ export default function PropertyDetail({ properties }) {
   );
 }
 
-export async function getStaticPaths() {
-  try {
-    const xml = await fetchREAXML();
-    const liveListings = xml ? await parseREAXML(xml) : [];
-    const paths = liveListings.length > 0
-      ? liveListings.map(p => ({ params: { id: String(p.id) } }))
-      : mockProperties.map(p => ({ params: { id: String(p.id) } }));
-    return { paths, fallback: false };
-  } catch {
-    return {
-      paths: mockProperties.map(p => ({ params: { id: String(p.id) } })),
-      fallback: false,
-    };
-  }
+// Module-level cache — shared across getStaticPaths + all getStaticProps calls
+// during a single build, so Hetzner is only contacted once.
+let _buildTimeListings = null;
+
+async function getBuildTimeListings() {
+  if (_buildTimeListings) return _buildTimeListings;
+  const listings = await getListings();
+  _buildTimeListings = listings.length > 0 ? listings : mockProperties;
+  return _buildTimeListings;
 }
 
-export async function getStaticProps() {
-  try {
-    const xml = await fetchREAXML();
-    const liveListings = xml ? await parseREAXML(xml) : [];
-    return {
-      props: { properties: liveListings.length > 0 ? liveListings : mockProperties },
-      revalidate: 300,
-    };
-  } catch {
-    return {
-      props: { properties: mockProperties },
-      revalidate: 300,
-    };
-  }
+export async function getStaticPaths() {
+  const listings = await getBuildTimeListings();
+  const paths = listings.map(p => ({ params: { id: String(p.id) } }));
+  // 'blocking' — new listings added after a build get their page generated
+  // on first visit instead of showing 404.
+  return { paths, fallback: 'blocking' };
+}
+
+export async function getStaticProps({ params }) {
+  const listings = await getBuildTimeListings();
+  const property = listings.find(p => String(p.id) === String(params.id)) || null;
+  if (!property) return { notFound: true };
+  return {
+    props: { properties: listings },
+    revalidate: 300,
+  };
 }

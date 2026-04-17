@@ -3,8 +3,7 @@ import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import SEO from '../../components/SEO';
 import PropertyCard from '../../components/PropertyCard';
-import { fetchREAXML } from '../../lib/hetzner';
-import { parseREAXML } from '../../lib/parseListings';
+import { getListings } from '../../lib/hetzner';
 import { properties as mockProperties } from '../../data';
 
 export default function Properties({ properties }) {
@@ -107,20 +106,9 @@ export default function Properties({ properties }) {
  * Falls back to mock data if Hetzner has no file yet.
  */
 export async function getStaticProps() {
-  try {
-    const xml = await fetchREAXML();
-    const liveListings = xml ? await parseREAXML(xml) : [];
-
-    return {
-      props: { properties: liveListings.length > 0 ? liveListings : mockProperties },
-      revalidate: 300,
-    };
-
-  } catch (error) {
-    console.error('getStaticProps error:', error.message);
-    return {
-      props: { properties: mockProperties },
-      revalidate: 300,
-    };
-  }
+  const liveListings = await getListings();
+  return {
+    props: { properties: liveListings.length > 0 ? liveListings : mockProperties },
+    revalidate: 300,
+  };
 }
