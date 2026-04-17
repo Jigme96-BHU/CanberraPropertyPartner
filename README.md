@@ -1,11 +1,32 @@
-# Canberra Property Partners — v2.0 + SEO
+# Canberra Property Partners — Website
 
-Complete website rebuild with full SEO implementation.
+Marketing and listings website for Canberra Property Partners.
+
+**Live site:** [canberrapropertypartners.com.au](https://canberrapropertypartners.com.au)
+
+## Tech Stack
+
+| | |
+|---|---|
+| Framework | Next.js 14 |
+| React | 18 |
+| Deployment | Vercel |
+| Email (contact form) | Resend |
+| Listing data | Reapit → Hetzner SFTP → REAXML |
+| Analytics | Vercel Analytics |
+| Sitemap | next-sitemap (auto on build) |
+| Images | sharp |
+
+## Prerequisites
+
+- Node.js 18+
+- npm
 
 ## Quick Start
 
 ```bash
 npm install
+cp .env.example .env.local   # fill in real values (see Environment Variables)
 npm run dev
 # Open http://localhost:3000
 ```
@@ -14,82 +35,59 @@ npm run dev
 
 ```bash
 npm run build
-# Automatically generates sitemap.xml + robots.txt
 npm start
 ```
 
 ---
 
-## What Was Added for SEO
+## Project Structure
 
-### 1. SEO Component (components/SEO.js)
-Reusable component injecting title, meta description, Open Graph
-and Twitter Card tags into every page head.
+```
+pages/
+  index.js          # Homepage
+  rental.js         # Property management / rentals
+  sales.js          # Property sales
+  contact.js        # Contact + appraisal request
+  about.js          # About the team
+  awards.js         # Awards and recognition
+  properties/       # Individual property listings
+  suburbs/          # Suburb-specific landing pages
 
-Each page has unique keyword-targeted tags:
-- Homepage  → "Property management Canberra ACT"
-- Rental    → "Property management Canberra ACT"
-- Sales     → "Sell property Canberra"
-- Contact   → "Free property appraisal Canberra"
-- Suburbs   → "Property management [SuburbName]"
+components/
+  Navbar.js         # Site-wide navigation
+  Footer.js         # Site-wide footer
+  PropertyCard.js   # Listing card used on properties pages
+  SEO.js            # Per-page meta tags (title, description, OG)
+  StructuredData.js # JSON-LD schemas for search engines
+```
 
-### 2. Structured Data (components/StructuredData.js)
-Three JSON-LD schemas loaded on every page via _app.js:
-- RealEstateAgent (business name, address, phone, hours, ratings)
-- WebSite (enables Google sitelinks search box)
-- BreadcrumbList (shows breadcrumb path in search results)
+## How It Works
 
-Verify at: https://search.google.com/test/rich-results
+**Framework:** Next.js with static generation where possible. Suburb pages (`/suburbs/[suburb].js`) are pre-rendered at build time via `getStaticPaths` + `getStaticProps`, so they load as static HTML.
 
-### 3. Suburb Pages (pages/suburbs/[suburb].js)
-One SEO page per suburb — targets long-tail keywords like
-"property management Gungahlin" or "rental manager Watson ACT".
-Built with getStaticPaths + getStaticProps (static HTML at build time).
+**Listings:** Property listings live under `/pages/properties/`. Each listing is a standalone page. The `PropertyCard` component renders the preview card used in listing grids.
 
-Routes: /suburbs/gungahlin, /suburbs/oconnor, /suburbs/watson,
-        /suburbs/nicholls, /suburbs/mitchell
+**Navigation:** `Navbar.js` and `Footer.js` are loaded globally through `_app.js`, so they appear on every page without being imported per-file.
 
-### 4. Sitemap + robots.txt (next-sitemap.config.js)
-Auto-generated after every npm run build.
-Submit sitemap to Google Search Console after deploying.
+**Analytics:** Vercel Analytics is wired in via `_app.js` to track page views in the Vercel dashboard.
 
-### 5. Canonical URLs
-Every page has canonical link tag to prevent duplicate content penalties.
+**Sitemap:** Auto-generated on every `npm run build` via `next-sitemap.config.js`. Output files are `sitemap.xml` and `robots.txt` in the public directory.
 
----
+## Environment Variables
 
-## After Deploying — Action Checklist
+Copy `.env.example` to `.env.local` and fill in the values. For production, add the same variables in Vercel → Project → Settings → Environment Variables.
 
-1. Go to search.google.com/search-console
-   → Add domain, verify ownership
-   → Submit sitemap URL
+| Variable | Description |
+|---|---|
+| `HETZNER_HOST` | Hetzner Storage Box hostname (Reapit drops REAXML files here via SFTP) |
+| `HETZNER_USERNAME` | Hetzner SFTP username |
+| `HETZNER_PASSWORD` | Hetzner SFTP password |
+| `RESEND_API_KEY` | Resend API key — used by the contact form to send emails |
 
-2. Go to business.google.com
-   → Claim CPP Google Business Profile
-   → Fill in ALL fields (hours, photos, services)
-   → This is the #1 local SEO action
+## Deployment
 
-3. Ask happy clients to leave Google reviews
-   → Update aggregateRating in StructuredData.js to match
-
-4. Submit to directory sites:
-   → ratemyagent.com.au
-   → realestate.com.au (agent profile)
-   → domain.com.au (agent profile)
-   → yellowpages.com.au
+The site is deployed on Vercel. Pushing to `master` triggers an automatic production deployment. Environment variables must be set in the Vercel dashboard before deploying.
 
 ---
-
-## Top Keywords to Target
-
-| Keyword | Priority |
-|---------|----------|
-| property management canberra | Must win |
-| rental management ACT | Must win |
-| property management gungahlin | Quick win |
-| property manager oconnor | Quick win |
-| sell investment property canberra | Mid term |
-| free property appraisal canberra | Quick win |
-
 
 CanberraPropertyPartners@26
