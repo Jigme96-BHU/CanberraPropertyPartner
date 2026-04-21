@@ -62,10 +62,16 @@ export default function About() {
                 <a href="mailto:brett@canberrapropertypartners.com.au" style={{ fontSize: '14px', color: 'rgba(10,10,10,0.5)', textDecoration: 'none' }}>brett@canberrapropertypartners.com.au</a>
               </div>
               <p style={{ fontSize: '16px', color: 'rgba(10,10,10,0.65)', lineHeight: 1.9, marginBottom: '20px' }}>
-                We&apos;re grateful for the chance to assess your property, with an objective to identify the optimal rental price based on current market conditions. At Canberra Property Partners, we take pride in offering exceptional property management services with a strong focus on personalised care, advanced technology, and seamless communication.
+                With over eight years leading Canberra Property Partners, Brett Russell is a trusted figure in Canberra&apos;s real estate market. His exceptional market knowledge, personalised approach, and commitment to client success have guided many buyers, sellers, and investors through their journeys.
+              </p>
+              <p style={{ fontSize: '16px', color: 'rgba(10,10,10,0.65)', lineHeight: 1.9, marginBottom: '20px' }}>
+                As the owner of Canberra Property Partners, Brett combines a keen understanding of local trends with a passion for client success. His expertise covers residential, commercial, and investment properties, ensuring every transaction is precise and careful.
+              </p>
+              <p style={{ fontSize: '16px', color: 'rgba(10,10,10,0.65)', lineHeight: 1.9, marginBottom: '20px' }}>
+                Brett&apos;s service dedication goes beyond deals. He fosters lasting relationships, offers expert advice, and tailors strategies to each client&apos;s needs. Whether handling negotiations or providing market insights, his professionalism and integrity are evident in every interaction. Outside of work, Brett enjoys exploring Canberra, supporting local initiatives, and spending time with his family.
               </p>
               <p style={{ fontSize: '16px', color: 'rgba(10,10,10,0.65)', lineHeight: 1.9, marginBottom: '40px' }}>
-                Our team collaborates to ensure consistent service, utilising industry-leading tools like 3D scanning, online booking systems, and PropertyMe to boost efficiency and transparency. Our competitive fee structure and innovative approach have earned us multiple industry awards, including recognition for innovation by the Real Estate Institute of Australia.
+                With Brett Russell and Canberra Property Partners, you&apos;re not just getting a real estate expert — you&apos;re gaining a partner committed to your success.
               </p>
               <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
                 <a href="tel:0409882375"
