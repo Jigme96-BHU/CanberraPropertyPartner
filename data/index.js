@@ -5,7 +5,7 @@ export const ASSETS = {
   logoFooter:  '/images/logo-footer.png',
   videoHero:   '/videos/hero-home.mp4',
   videoAwards: '/videos/hero-awards.mp4',
-  brett:       '/images/brett.png',
+  brett:       '/images/brett.jpeg',
   reia2021:    '/awards/reiact-2021.jpeg',
   reia2022:    '/awards/reia-2022.jpeg',
   reiaBadge:   '/awards/reia-badge.png',
