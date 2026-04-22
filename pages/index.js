@@ -206,7 +206,7 @@ export default function Home({ properties }) {
             {/* Right: big number + image stack */}
             <div style={{ position:'relative' }}>
               <div style={{ position:'relative', borderRadius:'8px', overflow:'hidden' }}>
-                <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=800&q=85" alt="CPP service"
+                <img src="/images/prop.jpeg" alt="CPP service"
                   style={{ width:'100%', aspectRatio:'4/5', objectFit:'cover' }} />
                 {/* Overlay card */}
                 <div style={{
