@@ -22,8 +22,8 @@ export default function Properties({ properties }) {
       p.status === activeTab;
 
     const matchSearch = !search ||
-      p.address.toLowerCase().includes(search.toLowerCase()) ||
-      p.suburb.toLowerCase().includes(search.toLowerCase());
+      (p.address ?? '').toLowerCase().includes(search.toLowerCase()) ||
+      (p.suburb ?? '').toLowerCase().includes(search.toLowerCase());
 
     // Sold & Leased tab: only show properties from the last 6 months
     const matchDate = activeTab !== 'leased' || (() => {

@@ -291,8 +291,8 @@ export default function PropertyDetail({ properties }) {
   return (
     <>
       <SEO
-        title={`${p.address}, ${p.suburb} — ${STATUS_LABEL[p.status]}`}
-        description={`${p.type} ${STATUS_LABEL[p.status]?.toLowerCase()} in ${p.suburb}. ${p.beds} bed, ${p.baths} bath, ${p.cars} car. ${p.price}.`}
+        title={`${p.address ?? ''}, ${p.suburb ?? ''} — ${STATUS_LABEL[p.status] ?? p.status ?? ''}`}
+        description={`${p.type ?? ''} ${STATUS_LABEL[p.status]?.toLowerCase() ?? ''} in ${p.suburb ?? ''}. ${p.beds ?? ''} bed, ${p.baths ?? ''} bath, ${p.cars ?? ''} car. ${p.price ?? ''}.`}
         image={allImages[0]}
         url={`/properties/${p.id}`}
       />
