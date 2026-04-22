@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://canberra-property-partner.vercel.app
+
+# Sitemaps
+Sitemap: https://canberra-property-partner.vercel.app/sitemap.xml
