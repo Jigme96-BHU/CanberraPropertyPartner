@@ -405,7 +405,7 @@ export default function PropertyDetail({ properties }) {
                 padding:'4px 14px', borderRadius:'100px', fontSize:'11px', fontWeight:600,
                 letterSpacing:'0.1em', background: isRental ? '#C9A84C' : '#0A0A0A', color:'#fff',
               }}>
-                {STATUS_LABEL[p.status].toUpperCase()}
+                {(STATUS_LABEL[p.status] ?? p.status ?? '').toUpperCase()}
               </span>
               <span style={{ fontSize:'13px', color:'rgba(10,10,10,0.4)' }}>{p.type}</span>
             </div>
