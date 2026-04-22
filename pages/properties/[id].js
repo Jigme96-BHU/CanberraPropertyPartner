@@ -5,10 +5,9 @@ import Link from 'next/link';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import SEO from '../../components/SEO';
-import { getListings } from '../../lib/hetzner';
 import { properties as mockProperties } from '../../data';
 
-const STATUS_LABEL = { rent: 'For Rent', sale: 'For Sale', leased: 'Leased' };
+const STATUS_LABEL = { rent: 'For Rent', sale: 'For Sale', leased: 'Leased', sold: 'Sold' };
 const AGENT_ID = 'CanberraPP';
 
 function buildBookingURL(p) {
@@ -575,31 +574,15 @@ export default function PropertyDetail({ properties }) {
   );
 }
 
-// Module-level cache — shared across getStaticPaths + all getStaticProps calls
-// during a single build, so Hetzner is only contacted once.
-let _buildTimeListings = null;
-
-async function getBuildTimeListings() {
-  if (_buildTimeListings) return _buildTimeListings;
-  const listings = await getListings();
-  _buildTimeListings = listings.length > 0 ? listings : mockProperties;
-  return _buildTimeListings;
-}
-
 export async function getStaticPaths() {
-  const listings = await getBuildTimeListings();
-  const paths = listings.map(p => ({ params: { id: String(p.id) } }));
-  // 'blocking' — new listings added after a build get their page generated
-  // on first visit instead of showing 404.
+  const paths = mockProperties.map(p => ({ params: { id: String(p.id) } }));
+  // 'blocking' — unknown IDs (e.g. from Hetzner feed) are generated on first visit
   return { paths, fallback: 'blocking' };
 }
 
 export async function getStaticProps({ params }) {
-  const listings = await getBuildTimeListings();
-  const property = listings.find(p => String(p.id) === String(params.id)) || null;
-  if (!property) return { notFound: true };
   return {
-    props: { properties: listings },
+    props: { properties: mockProperties },
     revalidate: 300,
   };
 }
