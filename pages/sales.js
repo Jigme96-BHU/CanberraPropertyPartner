@@ -156,6 +156,159 @@ export default function Sales() {
         <style>{`@media(max-width:768px){.step-row{grid-template-columns:1fr!important;padding:36px 28px!important;}}`}</style>
       </section>
 
+      {/* ── SELLING METHODS ── */}
+      <section style={{ padding:'120px 0', background:'#0A0A0A', position:'relative', overflow:'hidden' }}>
+        <div style={{ position:'absolute', inset:0, backgroundImage:'radial-gradient(ellipse at 30% 50%, rgba(201,168,76,0.05) 0%, transparent 55%)' }} />
+        <div className="container" style={{ position:'relative', zIndex:2 }}>
+          <p className="eyebrow" style={{ textAlign:'center', marginBottom:'16px' }}>How We Sell</p>
+          <h2 style={{ fontSize:'clamp(34px,4vw,52px)', color:'#fff', textAlign:'center', lineHeight:1.1, marginBottom:'16px' }}>
+            Choose Your <em style={{ color:'#C9A84C', fontStyle:'italic', fontFamily:'Playfair Display,serif' }}>Sales Method</em>
+          </h2>
+          <p style={{ fontSize:'16px', color:'rgba(255,255,255,0.45)', textAlign:'center', maxWidth:'560px', margin:'0 auto 72px', lineHeight:1.8 }}>
+            We'll advise the right approach for your property and the current market — then execute it flawlessly.
+          </p>
+
+          <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'24px' }} className="methods-grid">
+            {/* Private Treaty */}
+            <div style={{ background:'rgba(255,255,255,0.03)', border:'1px solid rgba(255,255,255,0.08)', borderRadius:'16px', padding:'52px 44px' }}>
+              <div style={{ display:'flex', alignItems:'center', gap:'16px', marginBottom:'20px' }}>
+                <div style={{ width:'48px', height:'48px', borderRadius:'50%', background:'rgba(201,168,76,0.12)', display:'flex', alignItems:'center', justifyContent:'center', fontSize:'20px' }}>◈</div>
+                <h3 style={{ fontFamily:'Playfair Display,serif', fontSize:'26px', color:'#fff', fontWeight:400 }}>Private Treaty</h3>
+              </div>
+              <p style={{ fontSize:'15px', color:'rgba(255,255,255,0.5)', lineHeight:1.85, marginBottom:'36px' }}>
+                Offers flexibility in negotiations, allowing you to set favourable terms and maintain control over the sale. Ideal in a steady market, giving buyers time to consider offers without auction pressure.
+              </p>
+              <div style={{ display:'flex', flexDirection:'column', gap:'16px' }}>
+                {[
+                  { t:'Control Over the Process', d:'Set the sale price and negotiate directly with buyers for a comfortable, informed outcome.' },
+                  { t:'Flexible Negotiation', d:'Personalised terms including conditional offers — finance, or subject to sale — broadening your buyer pool.' },
+                  { t:'Confidentiality', d:'A discreet process with details shared only with genuinely interested parties.' },
+                  { t:'More Time to Decide', d:'Evaluate offers carefully without the pressure of a looming auction date.' },
+                  { t:'Higher Price Potential', d:'Setting an asking price higher initially gives room to achieve strong results in a competitive market.' },
+                ].map((b, i) => (
+                  <div key={i} style={{ display:'flex', gap:'14px', alignItems:'flex-start' }}>
+                    <div style={{ width:'6px', height:'6px', borderRadius:'50%', background:'#C9A84C', marginTop:'8px', flexShrink:0 }} />
+                    <div>
+                      <p style={{ fontSize:'14px', fontWeight:600, color:'#fff', marginBottom:'3px' }}>{b.t}</p>
+                      <p style={{ fontSize:'13px', color:'rgba(255,255,255,0.4)', lineHeight:1.65 }}>{b.d}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Auction */}
+            <div style={{ background:'rgba(201,168,76,0.06)', border:'1px solid rgba(201,168,76,0.2)', borderRadius:'16px', padding:'52px 44px' }}>
+              <div style={{ display:'flex', alignItems:'center', gap:'16px', marginBottom:'20px' }}>
+                <div style={{ width:'48px', height:'48px', borderRadius:'50%', background:'rgba(201,168,76,0.15)', display:'flex', alignItems:'center', justifyContent:'center', fontSize:'20px' }}>◉</div>
+                <h3 style={{ fontFamily:'Playfair Display,serif', fontSize:'26px', color:'#fff', fontWeight:400 }}>Auction</h3>
+              </div>
+              <p style={{ fontSize:'15px', color:'rgba(255,255,255,0.5)', lineHeight:1.85, marginBottom:'36px' }}>
+                Creates a competitive environment that can drive up the sale price. Ideal in a hot market with strong buyer interest — the urgency of auction day often results in bids exceeding expectations.
+              </p>
+              <div style={{ display:'flex', flexDirection:'column', gap:'16px' }}>
+                {[
+                  { t:'Competitive Bidding', d:'Buyers compete directly, driving the price higher and often exceeding the vendor\'s expectations.' },
+                  { t:'Fast Sales Process', d:'A fixed auction date creates urgency, reducing time on market and delivering a decisive outcome.' },
+                  { t:'Transparent Selling', d:'All bids are visible in real-time, building trust and encouraging more confident participation.' },
+                  { t:'No Ceiling Price', d:'Unlike private treaty, there is no cap — strong demand can push results well beyond expectations.' },
+                  { t:'Pre-Qualified Buyers', d:'Registered bidders are serious and capable, significantly reducing the risk of a sale falling through.' },
+                ].map((b, i) => (
+                  <div key={i} style={{ display:'flex', gap:'14px', alignItems:'flex-start' }}>
+                    <div style={{ width:'6px', height:'6px', borderRadius:'50%', background:'#C9A84C', marginTop:'8px', flexShrink:0 }} />
+                    <div>
+                      <p style={{ fontSize:'14px', fontWeight:600, color:'#fff', marginBottom:'3px' }}>{b.t}</p>
+                      <p style={{ fontSize:'13px', color:'rgba(255,255,255,0.4)', lineHeight:1.65 }}>{b.d}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+        <style>{`@media(max-width:900px){.methods-grid{grid-template-columns:1fr!important;}}`}</style>
+      </section>
+
+      {/* ── PROPERTY STAGING ── */}
+      <section style={{ padding:'120px 0', background:'#F8F5F0' }}>
+        <div className="container">
+          <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'100px', alignItems:'center' }} className="staging-grid">
+            <div>
+              <p className="eyebrow" style={{ marginBottom:'16px' }}>Presentation Matters</p>
+              <h2 style={{ fontSize:'clamp(32px,3.5vw,48px)', lineHeight:1.1, marginBottom:'28px' }}>
+                Property<br />
+                <em style={{ fontStyle:'italic', fontFamily:'Playfair Display,serif', color:'rgba(10,10,10,0.4)' }}>Staging</em>
+              </h2>
+              <p style={{ fontSize:'16px', color:'rgba(10,10,10,0.6)', lineHeight:1.9, marginBottom:'40px' }}>
+                First impressions are everything. Staging highlights your home's strengths, creates an emotional connection with buyers, and consistently results in quicker sales at higher prices. In a competitive market, a well-staged home doesn't just stand out — it commands attention.
+              </p>
+              <Link href="/contact" className="btn-primary">Discuss Your Campaign →</Link>
+            </div>
+            <div style={{ display:'flex', flexDirection:'column', gap:'0' }}>
+              {[
+                { n:'01', t:'Higher Sale Price',      d:'Staged homes consistently attract stronger offers through a compelling first impression.' },
+                { n:'02', t:'Faster Sale',             d:'Well-presented properties spend significantly less time on the market.' },
+                { n:'03', t:'Emotional Connection',    d:'Buyers visualise themselves living in the space, increasing desire and perceived value.' },
+                { n:'04', t:'Highlight Key Features',  d:'Staging draws the eye to your home\'s best assets while subtly minimising any weaknesses.' },
+                { n:'05', t:'Better Listing Photos',   d:'Professional staging makes online listings stand out, driving more inspections.' },
+              ].map((item, i) => (
+                <div key={i} style={{
+                  display:'flex', gap:'24px',
+                  padding:'24px 0',
+                  borderBottom: i < 4 ? '1px solid rgba(10,10,10,0.07)' : 'none',
+                }}>
+                  <span style={{ fontSize:'11px', fontWeight:700, color:'#C9A84C', letterSpacing:'0.1em', minWidth:'24px', paddingTop:'3px' }}>{item.n}</span>
+                  <div>
+                    <p style={{ fontSize:'15px', fontWeight:600, color:'#0A0A0A', marginBottom:'4px' }}>{item.t}</p>
+                    <p style={{ fontSize:'13px', color:'rgba(10,10,10,0.5)', lineHeight:1.7 }}>{item.d}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        <style>{`@media(max-width:900px){.staging-grid{grid-template-columns:1fr!important;gap:56px!important;}}`}</style>
+      </section>
+
+      {/* ── GUARANTEE OF SERVICE ── */}
+      <section style={{ padding:'120px 0', background:'#fff' }}>
+        <div className="container" style={{ maxWidth:'900px', margin:'0 auto' }}>
+          <p className="eyebrow" style={{ textAlign:'center', marginBottom:'16px' }}>Our Commitment</p>
+          <h2 style={{ fontSize:'clamp(32px,3.5vw,48px)', textAlign:'center', lineHeight:1.1, marginBottom:'16px' }}>
+            Guarantee of Service
+          </h2>
+          <p style={{ fontSize:'16px', color:'rgba(10,10,10,0.5)', textAlign:'center', maxWidth:'520px', margin:'0 auto 64px', lineHeight:1.8 }}>
+            When you list with CPP, you can count on every one of these commitments — no exceptions.
+          </p>
+          <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'16px' }} className="guarantee-grid">
+            {[
+              'Contact all existing buyers whose criteria match your property',
+              'Present every offer from prospective buyers promptly',
+              'Professional photo shoot across all media avenues',
+              'Call or SMS you within 24 hours after each open inspection',
+              'Install a signboard on your property',
+              'Provide weekly detailed written reports',
+              'List on realestate.com.au, domain.com.au and our own website',
+              'Submit all offers and assist in every negotiation',
+              'Provide regular progress reports including comments, feedback and offers',
+              'Follow through all pre-settlement activities as required by law',
+            ].map((item, i) => (
+              <div key={i} style={{
+                display:'flex', gap:'16px', alignItems:'flex-start',
+                padding:'20px 24px',
+                background:'#F8F5F0',
+                borderRadius:'10px',
+                border:'1px solid rgba(10,10,10,0.05)',
+              }}>
+                <div style={{ width:'28px', height:'28px', borderRadius:'50%', background:'#C9A84C', display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0, fontSize:'13px', fontWeight:700, color:'#0A0A0A' }}>✓</div>
+                <p style={{ fontSize:'14px', color:'rgba(10,10,10,0.7)', lineHeight:1.7, paddingTop:'3px' }}>{item}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+        <style>{`@media(max-width:768px){.guarantee-grid{grid-template-columns:1fr!important;}}`}</style>
+      </section>
+
       {/* ── CTA ── */}
       <section style={{ padding:'120px 0', background:'#0A0A0A', textAlign:'center', position:'relative', overflow:'hidden' }}>
         <div style={{ position:'absolute', inset:0, backgroundImage:'radial-gradient(ellipse at 50% 50%, rgba(201,168,76,0.07) 0%, transparent 60%)' }} />

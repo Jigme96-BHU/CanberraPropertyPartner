@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import SEO from '../components/SEO';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -86,13 +87,98 @@ export default function About() {
                 >Email</a>
               </div>
             </div>
-            <div style={{ borderRadius: '12px', overflow: 'hidden', boxShadow: '0 24px 64px rgba(0,0,0,0.14)' }}>
-              <img src={ASSETS.brett} alt="Brett Russell, Director & Principal"
-                style={{ width: '100%', aspectRatio: '4/5', objectFit: 'cover', objectPosition: 'top', display: 'block' }} />
+            <div style={{ position: 'relative', borderRadius: '12px', overflow: 'hidden', boxShadow: '0 24px 64px rgba(0,0,0,0.14)', aspectRatio: '3/4' }}>
+              <Image src={ASSETS.brett} alt="Brett Russell, Director & Principal"
+                fill sizes="(max-width:900px) 100vw, 50vw" priority
+                style={{ objectFit: 'cover', objectPosition: 'top' }} />
             </div>
           </div>
         </div>
         <style>{`@media(max-width:900px){.brett-bio-grid{grid-template-columns:1fr!important;gap:48px!important;} .brett-bio-grid>div:first-child{order:2;} .brett-bio-grid>div:last-child{order:1;}}`}</style>
+      </section>
+
+      {/* ── MEET THE TEAM ── */}
+      <section style={{ padding: '120px 0', background: '#0A0A0A', position: 'relative', overflow: 'hidden' }}>
+        <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(ellipse at 60% 40%, rgba(201,168,76,0.06) 0%, transparent 60%)' }} />
+        <div className="container" style={{ position: 'relative', zIndex: 2 }}>
+
+          {/* Heading + split layout */}
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '80px', alignItems: 'center', marginBottom: '72px' }} className="team-intro-grid">
+            <div>
+              <p className="eyebrow" style={{ marginBottom: '16px' }}>The People Behind CPP</p>
+              <h2 style={{ fontSize: 'clamp(34px,4vw,52px)', color: '#fff', lineHeight: 1.1, marginBottom: '32px' }}>
+                Meet the <em style={{ color: '#C9A84C', fontStyle: 'italic', fontFamily: 'Playfair Display,serif' }}>Team</em>
+              </h2>
+              <p style={{ fontSize: '16px', color: 'rgba(255,255,255,0.5)', lineHeight: 1.9, marginBottom: '20px' }}>
+                At Canberra Property Partners, we're more than just a team — we're a community of professionals united by a shared passion for delivering exceptional property management services. Each member brings a unique set of skills and a commitment to excellence, ensuring that every property we manage receives the care and attention it truly deserves.
+              </p>
+              <p style={{ fontSize: '16px', color: 'rgba(255,255,255,0.5)', lineHeight: 1.9, marginBottom: '20px' }}>
+                Our collective expertise in property management, coupled with a deep understanding of the local Canberra market, enables us to provide a level of service that truly stands out. With Brett's leadership and serving as the primary point of contact, we've built a culture focused on adding that personal touch — something we felt was missing in the real estate sector.
+              </p>
+              <p style={{ fontSize: '16px', color: 'rgba(255,255,255,0.5)', lineHeight: 1.9 }}>
+                Since our inception in 2017, it's been our mission to ensure that every property not only looks its best but is also managed with the utmost efficiency and care. At CPP, we're not just managing properties — we're raising the standard of property management, together as a team.
+              </p>
+            </div>
+            {/* Team photo */}
+            <div style={{ position: 'relative', borderRadius: '12px', overflow: 'hidden' }}>
+              <img
+                src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=900&q=85"
+                alt="Canberra Property Partners team"
+                style={{ width: '100%', aspectRatio: '4/5', objectFit: 'cover', display: 'block' }}
+              />
+              <div style={{
+                position: 'absolute', bottom: 0, left: 0, right: 0,
+                background: 'linear-gradient(to top, rgba(10,10,10,0.7) 0%, transparent 60%)',
+                padding: '32px 28px',
+              }}>
+                <p style={{ fontSize: '13px', fontWeight: 600, letterSpacing: '0.12em', color: '#C9A84C' }}>CANBERRA PROPERTY PARTNERS</p>
+                <p style={{ fontSize: '15px', color: 'rgba(255,255,255,0.8)', marginTop: '4px' }}>Your dedicated local team</p>
+              </div>
+            </div>
+          </div>
+          <style>{`@media(max-width:900px){.team-intro-grid{grid-template-columns:1fr!important;}}`}</style>
+
+          {/* Team cards */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '20px' }}>
+            {[
+              { name: 'Mel',      role: 'Maintenance Specialist' },
+              { name: 'Amy',      role: 'Senior Property Manager' },
+              { name: 'Mark',     role: 'Head of Property Management' },
+              { name: 'Kyra',     role: 'Trust Account Specialist' },
+              { name: 'Courtney', role: 'Operations Manager' },
+            ].map((member, i) => (
+              <div key={i} style={{
+                background: 'rgba(255,255,255,0.03)',
+                border: '1px solid rgba(201,168,76,0.15)',
+                borderRadius: '12px',
+                padding: '40px 24px',
+                textAlign: 'center',
+                transition: 'transform 0.3s, border-color 0.3s, background 0.3s',
+              }}
+                onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-6px)'; e.currentTarget.style.borderColor = 'rgba(201,168,76,0.5)'; e.currentTarget.style.background = 'rgba(201,168,76,0.06)'; }}
+                onMouseLeave={e => { e.currentTarget.style.transform = 'none'; e.currentTarget.style.borderColor = 'rgba(201,168,76,0.15)'; e.currentTarget.style.background = 'rgba(255,255,255,0.03)'; }}
+              >
+                {/* Avatar with initials */}
+                <div style={{
+                  width: '80px', height: '80px', borderRadius: '50%',
+                  background: 'linear-gradient(135deg, #C9A84C, #e8c97a)',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  margin: '0 auto 24px',
+                  fontSize: '28px', fontFamily: 'Playfair Display,serif',
+                  color: '#0A0A0A', fontWeight: 600,
+                }}>
+                  {member.name[0]}
+                </div>
+                <h3 style={{ fontSize: '20px', fontFamily: 'Playfair Display,serif', color: '#fff', marginBottom: '8px', fontWeight: 400 }}>
+                  {member.name}
+                </h3>
+                <p style={{ fontSize: '12px', color: '#C9A84C', fontWeight: 600, letterSpacing: '0.1em', lineHeight: 1.5 }}>
+                  {member.role.toUpperCase()}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
       </section>
 
       {/* ── AWARDS ── */}
