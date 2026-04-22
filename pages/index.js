@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -37,7 +38,7 @@ export default function Home({ properties }) {
         display:'flex', alignItems:'center', overflow:'hidden',
       }}>
         {/* Real CPP office video */}
-        <video autoPlay muted loop playsInline style={{
+        <video autoPlay muted loop playsInline preload="none" style={{
           position:'absolute', inset:0,
           width:'100%', height:'100%', objectFit:'cover',
           opacity:0.8,
@@ -206,8 +207,9 @@ export default function Home({ properties }) {
             {/* Right: big number + image stack */}
             <div style={{ position:'relative' }}>
               <div style={{ position:'relative', borderRadius:'8px', overflow:'hidden' }}>
-                <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=800&q=85" alt="CPP service"
-                  style={{ width:'100%', aspectRatio:'4/5', objectFit:'cover' }} />
+                <Image src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=800&q=85" alt="CPP service"
+                  fill sizes="(max-width:900px) 100vw, 50vw"
+                  style={{ objectFit:'cover' }} />
                 {/* Overlay card */}
                 <div style={{
                   position:'absolute', bottom:'32px', left:'-40px',

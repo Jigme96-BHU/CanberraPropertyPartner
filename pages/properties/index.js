@@ -10,12 +10,29 @@ export default function Properties({ properties }) {
   const [activeTab, setActiveTab] = useState('all');
   const [search,    setSearch]    = useState('');
 
+  const sixMonthsAgo = new Date();
+  sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
+
   const filtered = properties.filter(p => {
-    const matchTab    = activeTab === 'all' || p.status === activeTab;
+    const isSoldLeased = p.status === 'sold' || p.status === 'leased';
+
+    const matchTab =
+      activeTab === 'all'    ? !isSoldLeased :
+      activeTab === 'leased' ? isSoldLeased  :
+      p.status === activeTab;
+
     const matchSearch = !search ||
       p.address.toLowerCase().includes(search.toLowerCase()) ||
       p.suburb.toLowerCase().includes(search.toLowerCase());
-    return matchTab && matchSearch;
+
+    // Sold & Leased tab: only show properties from the last 6 months
+    const matchDate = activeTab !== 'leased' || (() => {
+      if (!p.available) return false;
+      const d = new Date(p.available);
+      return !isNaN(d.getTime()) && d >= sixMonthsAgo;
+    })();
+
+    return matchTab && matchSearch && matchDate;
   });
 
   const tabs = [
@@ -68,14 +85,32 @@ export default function Properties({ properties }) {
       {/* ── LISTINGS ── */}
       <section style={{ padding:'60px 0 100px', background:'#F8F5F0' }}>
         <div className="container">
+          {activeTab === 'leased' && (
+            <div style={{
+              background:'#0A0A0A', borderRadius:'12px', padding:'28px 36px',
+              marginBottom:'40px', display:'flex', gap:'24px', alignItems:'center',
+              borderLeft:'4px solid #C9A84C',
+            }}>
+              <div>
+                <p style={{ fontSize:'13px', fontWeight:600, letterSpacing:'0.1em', color:'#C9A84C', marginBottom:'6px' }}>RECENT RESULTS</p>
+                <p style={{ fontSize:'15px', color:'rgba(255,255,255,0.75)', lineHeight:1.7 }}>
+                  These are properties we have successfully sold and leased in the last 6 months — a testament to our market expertise and the trust our clients place in us.
+                </p>
+              </div>
+            </div>
+          )}
           <p style={{ fontSize:'13px', color:'rgba(10,10,10,0.4)', marginBottom:'32px' }}>
-            {filtered.length} {filtered.length === 1 ? 'property' : 'properties'} available
+            {filtered.length} {filtered.length === 1 ? 'property' : 'properties'} {activeTab === 'leased' ? 'sold or leased in the last 6 months' : 'available'}
           </p>
 
           {filtered.length === 0 ? (
             <div style={{ textAlign:'center', padding:'80px 0' }}>
               <p style={{ fontFamily:'Playfair Display,serif', fontSize:'24px', marginBottom:'12px' }}>No properties found</p>
-              <p style={{ fontSize:'15px', color:'rgba(10,10,10,0.4)' }}>Try adjusting your search or filter.</p>
+              <p style={{ fontSize:'15px', color:'rgba(10,10,10,0.4)' }}>
+                {activeTab === 'leased'
+                  ? 'No sold or leased properties in the last 6 months match your search.'
+                  : 'Try adjusting your search or filter.'}
+              </p>
             </div>
           ) : (
             <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(320px,1fr))', gap:'24px' }}>

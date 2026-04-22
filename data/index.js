@@ -84,13 +84,91 @@ export const properties = [
     image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&q=80',
     desc: 'Beautifully presented family home in sought-after Nicholls, moments from Gungahlin Town Centre.',
   },
+  // ── Leased (real properties from REAXML feed) ─────────────────
   {
-    id: 6, status: 'leased', price: '$590 /wk',
-    address: '12 Hibberson Street', suburb: 'Gungahlin ACT 2912',
-    beds: 3, baths: 2, cars: 1, type: 'Townhouse', featured: false,
-    ireID: 'IRE5931787',
+    id: 6, status: 'leased', price: '$680 /wk',
+    address: '6 Elia Ware Crescent', suburb: 'Bonner ACT 2914',
+    beds: 3, baths: 2, cars: 2, type: 'House', featured: false, ireID: 'IRE1964032',
+    image: 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800&q=80',
+    desc: 'Stunning family home in Bonner with large open-plan living, alfresco entertaining area, solar panels and alarm system.',
+  },
+  {
+    id: 7, status: 'leased', price: '$1,300 /wk',
+    address: '30 Chipp Street', suburb: 'Coombs ACT 2611',
+    beds: 5, baths: 3, cars: 2, type: 'House', featured: false, ireID: 'IRE1973499',
+    image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80',
+    desc: 'Expansive executive family home in Coombs with premium finishes, multiple living areas and a large entertainer\'s yard.',
+  },
+  {
+    id: 8, status: 'leased', price: '$780 /wk',
+    address: '76 Bellhouse Crescent', suburb: 'Moncrieff ACT 2914',
+    beds: 4, baths: 2, cars: 2, type: 'House', featured: false, ireID: 'IRE2169582',
+    image: 'https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=800&q=80',
+    desc: 'Generous family home in Moncrieff with four bedrooms, double garage and easy access to schools and Gungahlin Town Centre.',
+  },
+  {
+    id: 9, status: 'leased', price: '$850 /wk',
+    address: '2 Finn Street', suburb: "O'Connor ACT 2602",
+    beds: 3, baths: 1, cars: 2, type: 'House', featured: false, ireID: 'IRE1995787',
+    image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&q=80',
+    desc: "Classic O'Connor character home with original period features, mature gardens and a sought-after inner-north location.",
+  },
+  {
+    id: 10, status: 'leased', price: '$1,100 /wk',
+    address: '48 Printers Way', suburb: 'Kingston ACT 2604',
+    beds: 3, baths: 2, cars: 2, type: 'Townhouse', featured: false, ireID: 'IRE4791701',
     image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80',
-    desc: 'Modern townhouse in the Gungahlin town centre precinct, close to all amenities and transport.',
+    desc: 'Premium Kingston townhouse walking distance to the foreshore, cafes and restaurants. High-end finishes throughout.',
+  },
+  {
+    id: 11, status: 'leased', price: '$760 /wk',
+    address: '94 Summerville Crescent', suburb: 'Florey ACT 2615',
+    beds: 4, baths: 2, cars: 2, type: 'House', featured: false, ireID: 'IRE4776419',
+    image: 'https://images.unsplash.com/photo-1560185893-a55cbc8c57e8?w=800&q=80',
+    desc: 'Well-presented family home in Florey on a large block with established gardens, dual living and ample parking.',
+  },
+  // ── Sold (real properties from REAXML feed) ───────────────────
+  {
+    id: 12, status: 'sold', price: '$995,000',
+    address: '14 Carmody Street', suburb: 'Casey ACT 2913',
+    beds: 4, baths: 2, cars: 2, type: 'House', featured: false, ireID: 'IRE4043411',
+    image: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80',
+    desc: 'Beautifully presented family home in Casey with four bedrooms, open-plan living and premium inclusions throughout.',
+  },
+  {
+    id: 13, status: 'sold', price: '$1,199,000',
+    address: '41 Pokana Circuit', suburb: 'Kaleen ACT 2617',
+    beds: 5, baths: 2, cars: 4, type: 'House', featured: false, ireID: 'IRE3839934',
+    image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80',
+    desc: 'Impressive executive home on a corner block in Kaleen with five bedrooms, multiple living areas and four-car garage.',
+  },
+  {
+    id: 14, status: 'sold', price: '$899,000',
+    address: '11 McGlinn Place', suburb: 'Gowrie ACT 2904',
+    beds: 3, baths: 2, cars: 2, type: 'House', featured: false, ireID: 'IRE3748491',
+    image: 'https://images.unsplash.com/photo-1572120360610-d971b9d7767c?w=800&q=80',
+    desc: 'Immaculate family home in quiet Gowrie cul-de-sac with modern kitchen, alfresco entertaining and double garage.',
+  },
+  {
+    id: 15, status: 'sold', price: '$1,029,000',
+    address: '50 Louisa Briggs Circuit', suburb: 'Bonner ACT 2914',
+    beds: 4, baths: 2, cars: 2, type: 'House', featured: false, ireID: 'IRE4584495',
+    image: 'https://images.unsplash.com/photo-1583608205776-bfd35f0d9f83?w=800&q=80',
+    desc: 'Stunning Bonner family home sold above reserve — spacious open-plan design, quality finishes and landscaped gardens.',
+  },
+  {
+    id: 16, status: 'sold', price: '$749,000',
+    address: '128/217 Northbourne Avenue', suburb: 'Turner ACT 2612',
+    beds: 3, baths: 3, cars: 2, type: 'Apartment', featured: false, ireID: 'IRE3633570',
+    image: 'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800&q=80',
+    desc: 'Generous 3-bedroom apartment in the sought-after Turner precinct with dual bathrooms and secure parking for two.',
+  },
+  {
+    id: 17, status: 'sold', price: '$819,000',
+    address: '66 Plimsoll Drive', suburb: 'Casey ACT 2913',
+    beds: 4, baths: 2, cars: 2, type: 'Townhouse', featured: false, ireID: 'IRE5327390',
+    image: 'https://images.unsplash.com/photo-1559628233-100c798642b7?w=800&q=80',
+    desc: 'Contemporary 4-bedroom townhouse in Casey sold at auction — modern finishes, great light and low-maintenance courtyard.',
   },
 ];
 
@@ -107,9 +185,9 @@ export const testimonials = [
 // ── Stats ────────────────────────────────────────────────────────
 export const stats = [
   { value: '98%',  label: 'Occupancy rate' },
-  { value: '14',   label: 'Days avg. to lease' },
-  { value: '84+',  label: 'Properties sold' },
-  { value: '$42k', label: 'Avg. above asking price' },
+  { value: '200+', label: 'Properties leased' },
+  { value: '50+',  label: 'Properties sold' },
+  { value: '71',   label: 'Suburbs covered' },
 ];
 
 // ── Awards ───────────────────────────────────────────────────────

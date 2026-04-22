@@ -19,7 +19,7 @@ export default function Awards() {
 
       {/* ── HERO with real awards video ── */}
       <section style={{ position:'relative', height:'75vh', minHeight:'560px', display:'flex', alignItems:'flex-end', background:'#0A0A0A', overflow:'hidden' }}>
-        <video autoPlay muted loop playsInline style={{ position:'absolute', inset:0, width:'100%', height:'100%', objectFit:'cover', opacity:0.75 }}>
+        <video autoPlay muted loop playsInline preload="none" style={{ position:'absolute', inset:0, width:'100%', height:'100%', objectFit:'cover', opacity:0.75 }}>
           <source src={ASSETS.videoAwards} type="video/mp4" />
         </video>
         <div style={{ position:'absolute', inset:0, background:'linear-gradient(to top, rgba(10,10,10,0.75) 0%, rgba(10,10,10,0.15) 60%, transparent 100%)' }} />

@@ -114,14 +114,16 @@ async function main() {
     let count = 0;
 
     normalise(pl.rental).forEach(item => {
-      if (item.status !== 'current') return;
-      const l = parseListing(item, 'rent');
+      const status = item.status === 'leased' ? 'leased' : item.status === 'current' ? 'rent' : null;
+      if (!status) return;
+      const l = parseListing(item, status);
       if (l?.ireID) { master[l.ireID] = l; count++; }
     });
 
     normalise(pl.residential).forEach(item => {
-      if (item.status !== 'current') return;
-      const l = parseListing(item, 'sale');
+      const status = item.status === 'sold' ? 'sold' : item.status === 'current' ? 'sale' : null;
+      if (!status) return;
+      const l = parseListing(item, status);
       if (l?.ireID) { master[l.ireID] = l; count++; }
     });
 

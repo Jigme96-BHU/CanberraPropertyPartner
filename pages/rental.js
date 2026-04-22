@@ -38,10 +38,10 @@ export default function Rental() {
           {/* Quick stats */}
           <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'2px' }}>
             {[
-              { v:'98%',  l:'Occupancy rate',      icon:'◈' },
-              { v:'14d',  l:'Avg. days to lease',  icon:'◉' },
-              { v:'3D',   l:'Property walkthroughs', icon:'◎' },
-              { v:'24/7', l:'Online owner portal',  icon:'◇' },
+              { v:'98%',  l:'Occupancy rate',       icon:'◈' },
+              { v:'200+', l:'Properties leased',    icon:'◉' },
+              { v:'71',   l:'Suburbs covered',      icon:'◎' },
+              { v:'2017', l:'Est. in Canberra',     icon:'◇' },
             ].map((s, i) => (
               <div key={i} style={{
                 padding:'36px 28px',
@@ -74,6 +74,82 @@ export default function Rental() {
           </div>
         </div>
         <style>{`@media(max-width:768px){.pillars{grid-template-columns:1fr!important;}}`}</style>
+      </section>
+
+      {/* ── TECHNOLOGY ── */}
+      <section style={{ padding:'120px 0', background:'#fff' }}>
+        <div className="container">
+          <div style={{ display:'grid', gridTemplateColumns:'1fr 2fr', gap:'100px', alignItems:'start' }} className="tech-grid">
+
+            {/* Left: sticky label */}
+            <div style={{ position:'sticky', top:'120px' }}>
+              <p className="eyebrow" style={{ marginBottom:'16px' }}>Built for You</p>
+              <h2 style={{ fontSize:'clamp(34px,4vw,52px)', lineHeight:1.1, marginBottom:'24px' }}>
+                Our<br />
+                <em style={{ fontStyle:'italic', fontFamily:'Playfair Display,serif', color:'#C9A84C' }}>Technology</em>
+              </h2>
+              <p style={{ fontSize:'15px', color:'rgba(10,10,10,0.5)', lineHeight:1.85 }}>
+                World-first digital tools that cut the admin — freeing our team to focus entirely on you.
+              </p>
+            </div>
+
+            {/* Right: timeline items */}
+            <div style={{ position:'relative' }}>
+              {/* Vertical line */}
+              <div style={{
+                position:'absolute', left:0, top:'16px', bottom:'16px', width:'1px',
+                background:'linear-gradient(to bottom, #C9A84C, rgba(201,168,76,0.1))',
+              }} />
+
+              {[
+                {
+                  title: 'Online Booking System',
+                  desc: 'Allows prospective tenants to book inspections 24/7, accommodating over 40% of tenants who prefer after-hours scheduling. This system ensures higher visibility and accessibility for your property.',
+                },
+                {
+                  title: 'PropertyMe Portal',
+                  desc: 'Offers on-demand access for landlords and tenants, facilitating seamless communication and access to important information — enhancing the management experience around the clock.',
+                },
+                {
+                  title: '3D Scanning Technology',
+                  desc: 'Used for Ingoing Condition Reports, providing a detailed and interactive view of your property. Sets a new standard in property documentation and gives your marketing campaign an immediate edge.',
+                },
+                {
+                  title: 'Advanced Maintenance Systems',
+                  desc: 'Keeps you informed at every step — from lease renewals to property upkeep — ensuring your investment is well-maintained and your returns are maximised.',
+                },
+              ].map((item, i) => (
+                <div key={i} style={{
+                  paddingLeft:'48px',
+                  paddingBottom: i < 3 ? '56px' : '0',
+                  position:'relative',
+                }}>
+                  {/* Circle on the line */}
+                  <div style={{
+                    position:'absolute', left:'-8px', top:'10px',
+                    width:'17px', height:'17px', borderRadius:'50%',
+                    background:'#fff', border:'2px solid #C9A84C',
+                  }} />
+
+                  <div style={{
+                    background:'#F8F5F0',
+                    borderRadius:'12px',
+                    padding:'32px 36px',
+                    border:'1px solid rgba(10,10,10,0.05)',
+                    transition:'transform 0.3s, box-shadow 0.3s',
+                  }}
+                    onMouseEnter={e => { e.currentTarget.style.transform='translateX(6px)'; e.currentTarget.style.boxShadow='0 12px 40px rgba(0,0,0,0.08)'; }}
+                    onMouseLeave={e => { e.currentTarget.style.transform='none'; e.currentTarget.style.boxShadow='none'; }}
+                  >
+                    <h3 style={{ fontFamily:'Playfair Display,serif', fontSize:'22px', color:'#0A0A0A', marginBottom:'12px', fontWeight:400 }}>{item.title}</h3>
+                    <p style={{ fontSize:'14px', color:'rgba(10,10,10,0.55)', lineHeight:1.85 }}>{item.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        <style>{`@media(max-width:900px){.tech-grid{grid-template-columns:1fr!important;} .tech-grid>div:first-child{position:static!important;}}`}</style>
       </section>
 
       {/* ── SERVICES GRID with real CPP icons ── */}
@@ -221,10 +297,10 @@ export default function Rental() {
           </div>
           <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'12px' }}>
             {[
-              { n:'84+', l:'Properties sold' },
-              { n:'$42k', l:'Avg. above asking' },
-              { n:'100%', l:'Client retention' },
-              { n:'2017', l:'Founded in Canberra' },
+              { n:'50+',  l:'Properties sold' },
+              { n:'200+', l:'Properties leased' },
+              { n:'71',   l:'Suburbs covered' },
+              { n:'2017', l:'Est. in Canberra' },
             ].map((s, i) => (
               <div key={i} style={{ padding:'32px 24px', background:'rgba(255,255,255,0.04)', border:'1px solid rgba(255,255,255,0.07)', borderRadius:'8px' }}>
                 <div style={{ fontFamily:'Playfair Display,serif', fontSize:'40px', color:'#C9A84C', lineHeight:1, marginBottom:'8px' }}>{s.n}</div>
