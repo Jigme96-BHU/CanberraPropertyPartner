@@ -118,7 +118,7 @@ export default function Home({ properties }) {
         <div style={{ display:'inline-flex', gap:'0', animation:'marquee 20s linear infinite' }}>
           {Array.from({length: 6}).map((_, i) => (
             <span key={i} style={{ fontSize:'12px', fontWeight:600, letterSpacing:'0.16em', color:'#0A0A0A', padding:'0 40px' }}>
-              REIA INNOVATION WINNER 2021 & 2022 &nbsp;&nbsp;·&nbsp;&nbsp; 98% OCCUPANCY RATE &nbsp;&nbsp;·&nbsp;&nbsp; 14 DAY AVERAGE TO LEASE &nbsp;&nbsp;·&nbsp;&nbsp; $42K AVG. ABOVE ASKING
+              REIA INNOVATION WINNER 2022 &nbsp;&nbsp;·&nbsp;&nbsp; 98% OCCUPANCY RATE &nbsp;&nbsp;·&nbsp;&nbsp; 200+ PROPERTIES LEASED &nbsp;&nbsp;·&nbsp;&nbsp; 50+ PROPERTIES SOLD &nbsp;&nbsp;·&nbsp;&nbsp; 71 SUBURBS COVERED &nbsp;&nbsp;·&nbsp;&nbsp; EST. 2017
             </span>
           ))}
         </div>
