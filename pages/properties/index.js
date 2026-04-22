@@ -26,9 +26,11 @@ export default function Properties({ properties }) {
       (p.suburb ?? '').toLowerCase().includes(search.toLowerCase());
 
     // Sold & Leased tab: only show properties from the last 6 months
+    // Uses available date first, falls back to lastUpdated (Hetzner field)
     const matchDate = activeTab !== 'leased' || (() => {
-      if (!p.available) return false;
-      const d = new Date(p.available);
+      const dateStr = p.available || p.lastUpdated;
+      if (!dateStr) return true;
+      const d = new Date(dateStr);
       return !isNaN(d.getTime()) && d >= sixMonthsAgo;
     })();
 
