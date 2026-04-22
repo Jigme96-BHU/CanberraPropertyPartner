@@ -107,9 +107,9 @@ export const testimonials = [
 // ── Stats ────────────────────────────────────────────────────────
 export const stats = [
   { value: '98%',  label: 'Occupancy rate' },
-  { value: '14',   label: 'Days avg. to lease' },
-  { value: '84+',  label: 'Properties sold' },
-  { value: '$42k', label: 'Avg. above asking price' },
+  { value: '50+',   label: 'Properties sold' },
+  { value: '200+',  label: 'Properties leased' },
+  { value: '71', label: 'Suburb covered' },
 ];
 
 // ── Awards ───────────────────────────────────────────────────────
