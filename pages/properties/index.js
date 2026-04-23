@@ -11,7 +11,10 @@ export default function Properties({ properties }) {
   const [search,    setSearch]    = useState('');
 
   const filtered = properties.filter(p => {
-    const matchTab    = activeTab === 'all' || p.status === activeTab;
+    const matchTab    =
+      (activeTab === 'all'    ? (p.status === 'rent' || p.status === 'sale') :
+       activeTab === 'leased' ? (p.status === 'leased' || p.status === 'sold') :
+       p.status === activeTab);
     const matchSearch = !search ||
       p.address.toLowerCase().includes(search.toLowerCase()) ||
       p.suburb.toLowerCase().includes(search.toLowerCase());
