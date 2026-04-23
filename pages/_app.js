@@ -39,11 +39,17 @@ export default function App({ Component, pageProps }) {
       */}
       <Component {...pageProps} />
       <Analytics />
-      <Script
-        src="https://script.reheroes.ai/chat-bundle.js"
-        data-rh-id="2075"
-        strategy="afterInteractive"
-      />
+      <Script id="reheroes-widget" strategy="afterInteractive" dangerouslySetInnerHTML={{
+        __html: `
+          window.addEventListener("load", function(w, d, s) {
+            var f = d.getElementsByTagName(s)[1],
+                j = d.createElement(s);
+            j.setAttribute("rh-data-id", "2075");
+            j.src = "https://script.reheroes.ai/chat-bundle.js";
+            f.parentNode.insertBefore(j, f);
+          }(window, document, "script"));
+        `
+      }} />
     </>
   );
 }
