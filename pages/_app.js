@@ -19,7 +19,6 @@
 import '../styles/globals.css';
 import StructuredData from '../components/StructuredData';
 import { Analytics } from '@vercel/analytics/next';
-import Script from 'next/script';
 
 export default function App({ Component, pageProps }) {
   return (
@@ -39,17 +38,6 @@ export default function App({ Component, pageProps }) {
       */}
       <Component {...pageProps} />
       <Analytics />
-      <Script id="reheroes-widget" strategy="afterInteractive" dangerouslySetInnerHTML={{
-        __html: `
-          window.addEventListener("load", function(w, d, s) {
-            var f = d.getElementsByTagName(s)[1],
-                j = d.createElement(s);
-            j.setAttribute("rh-data-id", "2075");
-            j.src = "https://script.reheroes.ai/chat-bundle.js";
-            f.parentNode.insertBefore(j, f);
-          }(window, document, "script"));
-        `
-      }} />
     </>
   );
 }

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Script from 'next/script';
 import SEO from '../components/SEO';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -322,6 +323,17 @@ export default function Rental() {
       </section>
 
       <Footer />
+      <Script id="reheroes-widget" strategy="afterInteractive" dangerouslySetInnerHTML={{
+        __html: `
+          window.addEventListener("load", function(w, d, s) {
+            var f = d.getElementsByTagName(s)[1],
+                j = d.createElement(s);
+            j.setAttribute("rh-data-id", "2075");
+            j.src = "https://script.reheroes.ai/chat-bundle.js";
+            f.parentNode.insertBefore(j, f);
+          }(window, document, "script"));
+        `
+      }} />
     </>
   );
 }
