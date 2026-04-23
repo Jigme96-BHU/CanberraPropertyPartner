@@ -1,11 +1,23 @@
 import Link from 'next/link';
-import Script from 'next/script';
+import { useEffect } from 'react';
 import SEO from '../components/SEO';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { ASSETS, services } from '../data';
 
 export default function Rental() {
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.setAttribute('rh-data-id', '2075');
+    script.src = 'https://script.reheroes.ai/chat-bundle.js';
+    document.body.appendChild(script);
+
+    return () => {
+      document.querySelector('script[rh-data-id="2075"]')?.remove();
+      document.querySelectorAll('[id^="rh"],[class^="rh-"],iframe[src*="reheroes"]').forEach(el => el.remove());
+    };
+  }, []);
+
   return (
     <>
       <SEO
@@ -323,17 +335,6 @@ export default function Rental() {
       </section>
 
       <Footer />
-      <Script id="reheroes-widget" strategy="afterInteractive" dangerouslySetInnerHTML={{
-        __html: `
-          window.addEventListener("load", function(w, d, s) {
-            var f = d.getElementsByTagName(s)[1],
-                j = d.createElement(s);
-            j.setAttribute("rh-data-id", "2075");
-            j.src = "https://script.reheroes.ai/chat-bundle.js";
-            f.parentNode.insertBefore(j, f);
-          }(window, document, "script"));
-        `
-      }} />
     </>
   );
 }
