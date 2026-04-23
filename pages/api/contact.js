@@ -91,7 +91,7 @@ export default async function handler(req, res) {
               We've received your enquiry and one of our team will be in touch within <strong>one business day</strong>.
             </p>
             <p style="font-size:15px;color:#666;line-height:1.7;margin:0 0 32px;">
-              In the meantime, if you need to speak with us urgently you can call us directly on <a href="tel:0409882375" style="color:#C9A84C;font-weight:600;">0409 882 375</a>.
+              In the meantime, if you need to speak with us urgently you can call us directly on <a href="tel:0409882375" style="color:#C9A84C;font-weight:600;">0409 882 375</a> or email <a href="mailto:brett@canberrapropertypartners.com.au" style="color:#C9A84C;font-weight:600;">brett@canberrapropertypartners.com.au</a>.
             </p>
             <a href="https://canberrapropertypartners.com.au/properties"
               style="display:inline-block;padding:16px 36px;background:#0A0A0A;color:#fff;text-decoration:none;border-radius:6px;font-size:14px;font-weight:600;letter-spacing:0.06em;">
