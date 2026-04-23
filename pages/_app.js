@@ -19,6 +19,7 @@
 import '../styles/globals.css';
 import StructuredData from '../components/StructuredData';
 import { Analytics } from '@vercel/analytics/next';
+import Script from 'next/script';
 
 export default function App({ Component, pageProps }) {
   return (
@@ -38,6 +39,11 @@ export default function App({ Component, pageProps }) {
       */}
       <Component {...pageProps} />
       <Analytics />
+      <Script
+        src="https://script.reheroes.ai/chat-bundle.js"
+        data-rh-id="2075"
+        strategy="afterInteractive"
+      />
     </>
   );
 }

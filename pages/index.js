@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import PropertyCard from '../components/PropertyCard';
@@ -8,18 +7,11 @@ import { ASSETS, properties as mockProperties, testimonials, stats } from '../da
 import { getListings } from '../lib/hetzner';
 
 export default function Home({ properties }) {
-  const [activeTestimonial, setActiveTestimonial] = useState(0);
-
   const featured = (() => {
     const active = properties.filter(p => p.status === 'rent' || p.status === 'sale');
     const pinned = active.filter(p => p.featured);
     return pinned.length >= 3 ? pinned.slice(0, 3) : [...pinned, ...active.filter(p => !p.featured)].slice(0, 3);
   })();
-
-  useEffect(() => {
-    const t = setInterval(() => setActiveTestimonial(i => (i + 1) % testimonials.length), 5000);
-    return () => clearInterval(t);
-  }, []);
 
   return (
     <>
@@ -208,63 +200,67 @@ export default function Home({ properties }) {
         </div>
       </section>
 
-      {/* ━━━━━━━━━━━━━━━━━━━━━━━━ TESTIMONIALS — CINEMATIC ━━━━━━━━ */}
-      <section style={{ background:'#F8F5F0', padding:'120px 0', overflow:'hidden' }}>
+      {/* ━━━━━━━━━━━━━━━━━━━━━━━━ TESTIMONIALS — STICKY SCROLL ━━━━━━ */}
+      <section style={{ background:'#F8F5F0', padding:'120px 0' }}>
         <div className="container">
           <div style={{ display:'grid', gridTemplateColumns:'1fr 2fr', gap:'80px', alignItems:'start' }} className="test-grid">
-            <div style={{ position:'sticky', top:'120px' }}>
+
+            {/* Left: sticky label */}
+            <div className="test-grid-label" style={{ position:'sticky', top:'120px' }}>
               <p className="eyebrow" style={{ marginBottom:'16px' }}>Client Stories</p>
               <h2 style={{ fontSize:'clamp(32px,3.5vw,48px)', lineHeight:1.1, marginBottom:'32px' }}>
                 What our<br />clients say
               </h2>
-              <div style={{ display:'flex', gap:'8px' }}>
-                {testimonials.map((_, i) => (
-                  <button key={i} onClick={() => setActiveTestimonial(i)} style={{
-                    width: i === activeTestimonial ? '28px' : '8px',
-                    height:'8px', borderRadius:'4px',
-                    background: i === activeTestimonial ? '#C9A84C' : 'rgba(10,10,10,0.15)',
-                    border:'none', transition:'all 0.35s',
-                  }} />
-                ))}
-              </div>
-              <div style={{ marginTop:'40px' }}>
-                <Link href="/awards" style={{ fontSize:'14px', fontWeight:500, display:'flex', alignItems:'center', gap:'8px', color:'#0A0A0A', borderBottom:'1px solid rgba(10,10,10,0.2)', paddingBottom:'4px', width:'fit-content' }}>
-                  See all testimonials <span>→</span>
-                </Link>
-              </div>
+              <Link href="/awards" style={{ fontSize:'14px', fontWeight:500, display:'flex', alignItems:'center', gap:'8px', color:'#0A0A0A', borderBottom:'1px solid rgba(10,10,10,0.2)', paddingBottom:'4px', width:'fit-content' }}>
+                See all testimonials <span>→</span>
+              </Link>
             </div>
 
-            <div>
+            {/* Right: stacked cards that scroll past the sticky label */}
+            <div style={{ position:'relative' }}>
+              {/* Vertical gold line */}
+              <div style={{
+                position:'absolute', left:0, top:'16px', bottom:'16px', width:'1px',
+                background:'linear-gradient(to bottom, #C9A84C, rgba(201,168,76,0.1))',
+              }} />
               {testimonials.map((t, i) => (
                 <div key={i} style={{
-                  padding:'48px',
-                  background: i === activeTestimonial ? '#0A0A0A' : '#fff',
-                  borderRadius:'8px',
-                  marginBottom:'16px',
-                  border:'1px solid rgba(10,10,10,0.06)',
-                  transition:'all 0.5s cubic-bezier(0.25,0.46,0.45,0.94)',
-                  transform: i === activeTestimonial ? 'scale(1)' : 'scale(0.98)',
-                  opacity: i === activeTestimonial ? 1 : 0.4,
-                  cursor:'pointer',
-                }} onClick={() => setActiveTestimonial(i)}>
-                  <div style={{ display:'flex', gap:'2px', marginBottom:'24px' }}>
-                    {[1,2,3,4,5].map(s => <span key={s} style={{ color:'#C9A84C', fontSize:'14px' }}>★</span>)}
+                  paddingLeft:'48px',
+                  paddingBottom: i < testimonials.length - 1 ? '32px' : '0',
+                  position:'relative',
+                }}>
+                  {/* Circle on the line */}
+                  <div style={{
+                    position:'absolute', left:'-8px', top:'16px',
+                    width:'17px', height:'17px', borderRadius:'50%',
+                    background:'#F8F5F0', border:'2px solid #C9A84C',
+                  }} />
+                  <div style={{
+                    background:'#fff',
+                    borderRadius:'12px',
+                    padding:'36px 40px',
+                    border:'1px solid rgba(10,10,10,0.06)',
+                    transition:'transform 0.3s, box-shadow 0.3s',
+                  }}
+                    onMouseEnter={e => { e.currentTarget.style.transform='translateX(6px)'; e.currentTarget.style.boxShadow='0 12px 40px rgba(0,0,0,0.08)'; }}
+                    onMouseLeave={e => { e.currentTarget.style.transform='none'; e.currentTarget.style.boxShadow='none'; }}
+                  >
+                    <div style={{ display:'flex', gap:'2px', marginBottom:'20px' }}>
+                      {[1,2,3,4,5].map(s => <span key={s} style={{ color:'#C9A84C', fontSize:'14px' }}>★</span>)}
+                    </div>
+                    <p style={{ fontSize:'19px', fontFamily:'Playfair Display, serif', fontStyle:'italic', lineHeight:1.65, color:'#0A0A0A', marginBottom:'24px' }}>
+                      "{t.text}"
+                    </p>
+                    <p style={{ fontSize:'13px', fontWeight:600, letterSpacing:'0.08em', color:'rgba(10,10,10,0.4)' }}>
+                      — {t.name}
+                    </p>
                   </div>
-                  <p style={{
-                    fontSize:'20px', fontFamily:'Playfair Display, serif', fontStyle:'italic',
-                    lineHeight:1.65,
-                    color: i === activeTestimonial ? '#fff' : '#0A0A0A',
-                    marginBottom:'28px',
-                  }}>"{t.text}"</p>
-                  <p style={{ fontSize:'13px', fontWeight:600, letterSpacing:'0.08em', color: i === activeTestimonial ? '#C9A84C' : 'rgba(10,10,10,0.4)' }}>
-                    — {t.name}
-                  </p>
                 </div>
               ))}
             </div>
           </div>
         </div>
-        <style>{`@media(max-width:900px){.test-grid{grid-template-columns:1fr!important;}}`}</style>
+        <style>{`@media(max-width:900px){.test-grid{grid-template-columns:1fr!important;} .test-grid-label{position:static!important;}}`}</style>
       </section>
 
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━ CTA FULLSCREEN ━━━━━━━━━━━━━━━━━ */}
