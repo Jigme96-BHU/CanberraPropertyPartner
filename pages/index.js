@@ -11,7 +11,7 @@ export default function Home({ properties }) {
   const [activeTestimonial, setActiveTestimonial] = useState(0);
 
   const featured = (() => {
-    const active = properties.filter(p => p.status !== 'leased');
+    const active = properties.filter(p => p.status === 'rent' || p.status === 'sale');
     const pinned = active.filter(p => p.featured);
     return pinned.length >= 3 ? pinned.slice(0, 3) : [...pinned, ...active.filter(p => !p.featured)].slice(0, 3);
   })();
@@ -156,73 +156,56 @@ export default function Home({ properties }) {
         </div>
       </section>
 
-      {/* ━━━━━━━━━━━━━━━━━━━━━━━━ WHY CPP — SPLIT EDITORIAL ━━━━━━ */}
-      <section style={{ background:'#0A0A0A', padding:'120px 0', position:'relative', overflow:'hidden' }}>
-        {/* Background texture */}
-        <div style={{ position:'absolute', inset:0, backgroundImage:'radial-gradient(circle at 70% 50%, rgba(201,168,76,0.06) 0%, transparent 60%)' }} />
+      {/* ━━━━━━━━━━━━━━━━━━━━━━━━ WHY CPP — FULL BLEED ━━━━━━━━━━━━ */}
+      <section style={{ position:'relative', padding:'160px 0', background:'#0A0A0A', overflow:'hidden' }}>
+        {/* prop.jpeg stretched full bleed */}
+        <div style={{ position:'absolute', inset:0, backgroundImage:'url(/images/prop.jpeg)', backgroundSize:'cover', backgroundPosition:'center' }} />
+        {/* Dark overlay for readability */}
+        <div style={{ position:'absolute', inset:0, background:'linear-gradient(135deg, rgba(10,10,10,0.88) 0%, rgba(10,10,10,0.65) 100%)' }} />
+        {/* Subtle gold radial */}
+        <div style={{ position:'absolute', inset:0, backgroundImage:'radial-gradient(circle at 20% 50%, rgba(201,168,76,0.07) 0%, transparent 60%)' }} />
+        {/* Left gold line */}
+        <div style={{ position:'absolute', left:0, top:0, bottom:0, width:'4px', background:'linear-gradient(to bottom, transparent, #C9A84C 20%, #C9A84C 80%, transparent)' }} />
 
-        <div className="container" style={{ position:'relative', zIndex:2 }}>
-          <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'100px', alignItems:'center' }} className="why-grid">
-            <div>
-              <p className="eyebrow" style={{ marginBottom:'20px' }}>Why Choose CPP</p>
-              <h2 style={{ fontSize:'clamp(36px,4vw,56px)', color:'#fff', lineHeight:1.1, marginBottom:'32px' }}>
-                More care.<br />
-                <span style={{ color:'#C9A84C', fontStyle:'italic' }}>Less hype.</span>
-              </h2>
-              <p style={{ fontSize:'16px', color:'rgba(255,255,255,0.55)', lineHeight:1.85, marginBottom:'48px' }}>
-                We believe owning a rental property should be a rewarding experience — not just financially, but the process itself. Our world-class technology handles the administration so our team can focus entirely on you: advocating, mediating and negotiating the most carefree and profitable pathway forward.
-              </p>
+        <div className="container" style={{ position:'relative', zIndex:2, maxWidth:'800px' }}>
+          <p className="eyebrow" style={{ marginBottom:'20px' }}>Why Choose CPP</p>
+          <h2 style={{ fontSize:'clamp(36px,4vw,56px)', color:'#fff', lineHeight:1.1, marginBottom:'32px' }}>
+            More care.<br />
+            <span style={{ color:'#C9A84C', fontStyle:'italic' }}>Less hype.</span>
+          </h2>
+          <p style={{ fontSize:'16px', color:'rgba(255,255,255,0.55)', lineHeight:1.85, marginBottom:'48px', maxWidth:'600px' }}>
+            We believe owning a rental property should be a rewarding experience — not just financially, but the process itself. Our world-class technology handles the administration so our team can focus entirely on you: advocating, mediating and negotiating the most carefree and profitable pathway forward.
+          </p>
 
-              <div style={{ display:'flex', flexDirection:'column', gap:'0' }}>
-                {[
-                  { n:'01', title:'World-first technology', desc:'Award-winning digital tools built in-house. Automation that frees us to focus on you.' },
-                  { n:'02', title:'Full-circle approach', desc:'We manage and sell. Nobody knows your property better when it comes time to sell.' },
-                  { n:'03', title:'Personal service always', desc:'You speak to the person who knows your property. No call centres, no runaround.' },
-                ].map((item, i) => (
-                  <div key={i} style={{
-                    display:'flex', gap:'28px',
-                    padding:'28px 0',
-                    borderBottom: i < 2 ? '1px solid rgba(255,255,255,0.07)' : 'none',
-                    transition:'all 0.3s',
-                  }}
-                    onMouseEnter={e => e.currentTarget.style.paddingLeft='8px'}
-                    onMouseLeave={e => e.currentTarget.style.paddingLeft='0'}
-                  >
-                    <span style={{ fontSize:'12px', fontWeight:600, color:'#C9A84C', letterSpacing:'0.08em', minWidth:'28px', paddingTop:'4px' }}>{item.n}</span>
-                    <div>
-                      <h4 style={{ fontSize:'18px', color:'#fff', fontFamily:'Playfair Display, serif', marginBottom:'8px' }}>{item.title}</h4>
-                      <p style={{ fontSize:'14px', color:'rgba(255,255,255,0.45)', lineHeight:1.7 }}>{item.desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              <div style={{ display:'flex', gap:'16px', marginTop:'48px', flexWrap:'wrap' }}>
-                <Link href="/rental" className="btn-primary">Rental Process →</Link>
-                <Link href="/sales" className="btn-ghost-white">Sales Process</Link>
-              </div>
-            </div>
-
-            {/* Right: big number + image stack */}
-            <div style={{ position:'relative' }}>
-              <div style={{ position:'relative', borderRadius:'8px', overflow:'hidden' }}>
-                <img src="/images/prop.jpeg" alt="CPP service"
-                  style={{ width:'100%', aspectRatio:'4/5', objectFit:'cover' }} />
-                {/* Overlay card */}
-                <div style={{
-                  position:'absolute', bottom:'32px', left:'-40px',
-                  background:'#C9A84C',
-                  padding:'28px 32px',
-                  minWidth:'200px',
-                }}>
-                  <div style={{ fontSize:'52px', fontFamily:'Playfair Display, serif', color:'#0A0A0A', lineHeight:1 }}>15+</div>
-                  <div style={{ fontSize:'12px', fontWeight:600, letterSpacing:'0.1em', color:'rgba(10,10,10,0.6)', marginTop:'6px' }}>YEARS IN CANBERRA</div>
+          <div style={{ display:'flex', flexDirection:'column', gap:'0', maxWidth:'600px' }}>
+            {[
+              { n:'01', title:'World-first technology', desc:'Award-winning digital tools built in-house. Automation that frees us to focus on you.' },
+              { n:'02', title:'Full-circle approach', desc:'We manage and sell. Nobody knows your property better when it comes time to sell.' },
+              { n:'03', title:'Personal service always', desc:'You speak to the person who knows your property. No call centres, no runaround.' },
+            ].map((item, i) => (
+              <div key={i} style={{
+                display:'flex', gap:'28px',
+                padding:'28px 0',
+                borderBottom: i < 2 ? '1px solid rgba(255,255,255,0.07)' : 'none',
+                transition:'all 0.3s',
+              }}
+                onMouseEnter={e => e.currentTarget.style.paddingLeft='8px'}
+                onMouseLeave={e => e.currentTarget.style.paddingLeft='0'}
+              >
+                <span style={{ fontSize:'12px', fontWeight:600, color:'#C9A84C', letterSpacing:'0.08em', minWidth:'28px', paddingTop:'4px' }}>{item.n}</span>
+                <div>
+                  <h4 style={{ fontSize:'18px', color:'#fff', fontFamily:'Playfair Display, serif', marginBottom:'8px' }}>{item.title}</h4>
+                  <p style={{ fontSize:'14px', color:'rgba(255,255,255,0.45)', lineHeight:1.7 }}>{item.desc}</p>
                 </div>
               </div>
-            </div>
+            ))}
+          </div>
+
+          <div style={{ display:'flex', gap:'16px', marginTop:'48px', flexWrap:'wrap' }}>
+            <Link href="/rental" className="btn-primary">Rental Process →</Link>
+            <Link href="/sales" className="btn-ghost-white">Sales Process</Link>
           </div>
         </div>
-        <style>{`@media(max-width:900px){.why-grid{grid-template-columns:1fr!important;}}`}</style>
       </section>
 
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━ TESTIMONIALS — CINEMATIC ━━━━━━━━ */}

@@ -16,7 +16,7 @@ export default function Rental() {
 
       {/* ── HERO ── */}
       <section style={{ paddingTop:'200px', paddingBottom:'120px', background:'#0A0A0A', position:'relative', overflow:'hidden' }}>
-        <div style={{ position:'absolute', inset:0, backgroundImage:'url(https://images.unsplash.com/photo-1560185893-a55cbc8c57e8?w=1600&q=70)', backgroundSize:'cover', backgroundPosition:'center', opacity:0.15 }} />
+        <div style={{ position:'absolute', inset:0, backgroundImage:'url(https://images.unsplash.com/photo-1560185893-a55cbc8c57e8?w=1600&q=70)', backgroundSize:'cover', backgroundPosition:'center', opacity:0.50 }} />
         <div style={{ position:'absolute', inset:0, background:'linear-gradient(135deg, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.5) 100%)' }} />
         <div style={{ position:'absolute', left:0, top:0, bottom:0, width:'4px', background:'linear-gradient(to bottom, transparent, #C9A84C 20%, #C9A84C 80%, transparent)' }} />
 
@@ -82,7 +82,7 @@ export default function Rental() {
           <div style={{ display:'grid', gridTemplateColumns:'1fr 2fr', gap:'100px', alignItems:'start' }} className="tech-grid">
 
             {/* Left: sticky label */}
-            <div style={{ position:'sticky', top:'120px' }}>
+            <div className="tech-grid-label" style={{ position:'sticky', top:'120px' }}>
               <p className="eyebrow" style={{ marginBottom:'16px' }}>Built for You</p>
               <h2 style={{ fontSize:'clamp(34px,4vw,52px)', lineHeight:1.1, marginBottom:'24px' }}>
                 Our<br />
@@ -149,7 +149,7 @@ export default function Rental() {
             </div>
           </div>
         </div>
-        <style>{`@media(max-width:900px){.tech-grid{grid-template-columns:1fr!important;} .tech-grid>div:first-child{position:static!important;}}`}</style>
+        <style>{`@media(max-width:900px){.tech-grid{grid-template-columns:1fr!important;} .tech-grid-label{position:static!important;}}`}</style>
       </section>
 
       {/* ── SERVICES GRID with real CPP icons ── */}
@@ -162,9 +162,18 @@ export default function Rental() {
                 Friction-Free<br />Service
               </h2>
             </div>
-            <p style={{ fontSize:'16px', color:'rgba(10,10,10,0.45)', maxWidth:'360px', lineHeight:1.75 }}>
-              Twelve distinct services working together to make your investment as effortless and profitable as possible.
-            </p>
+            <div style={{
+              background:'#0A0A0A',
+              borderRadius:'12px',
+              padding:'28px 32px',
+              maxWidth:'360px',
+              border:'1px solid rgba(201,168,76,0.25)',
+            }}>
+              <div style={{ fontSize:'22px', color:'#C9A84C', marginBottom:'12px', lineHeight:1 }}>…</div>
+              <p style={{ fontSize:'16px', color:'#C9A84C', lineHeight:1.75, margin:0 }}>
+                Twelve distinct services working together to make your investment as effortless and profitable as possible.
+              </p>
+            </div>
           </div>
 
           <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(280px,1fr))', gap:'16px' }}>

@@ -16,23 +16,45 @@ export default function Sales() {
 
       {/* ── HERO ── */}
       <section style={{ paddingTop:'200px', paddingBottom:'120px', background:'#0A0A0A', position:'relative', overflow:'hidden' }}>
-        <div style={{ position:'absolute', inset:0, backgroundImage:'url(https://images.unsplash.com/photo-1582407947304-fd86f28f886e?w=1600&q=70)', backgroundSize:'cover', backgroundPosition:'center', opacity:0.18 }} />
+        <div style={{ position:'absolute', inset:0, backgroundImage:'url(https://images.unsplash.com/photo-1560185893-a55cbc8c57e8?w=1600&q=70)', backgroundSize:'cover', backgroundPosition:'center', opacity:0.50 }} />
         <div style={{ position:'absolute', inset:0, background:'linear-gradient(135deg, rgba(10,10,10,0.96) 0%, rgba(10,10,10,0.5) 100%)' }} />
         <div style={{ position:'absolute', left:0, top:0, bottom:0, width:'4px', background:'linear-gradient(to bottom, transparent, #C9A84C 20%, #C9A84C 80%, transparent)' }} />
-        <div className="container" style={{ position:'relative', zIndex:2 }}>
-          <p className="eyebrow" style={{ marginBottom:'20px' }}>Our Services</p>
-          <h1 style={{ fontSize:'clamp(48px,6vw,88px)', fontFamily:'Playfair Display,serif', color:'#fff', lineHeight:1.0, fontWeight:400, marginBottom:'28px', maxWidth:'700px' }}>
-            Your property.<br />
-            <em style={{ color:'#C9A84C', fontStyle:'italic' }}>Sold right.</em>
-          </h1>
-          <p style={{ fontSize:'18px', fontWeight:300, color:'rgba(255,255,255,0.55)', lineHeight:1.8, maxWidth:'520px', marginBottom:'52px' }}>
-            At CPP, your property portfolio requires careful balancing. Our sales division is perfectly placed to make the process smooth — whether selling tenanted or vacant, you'll never be just a number.
-          </p>
-          <div style={{ display:'flex', gap:'16px', flexWrap:'wrap' }}>
-            <Link href="/contact" className="btn-primary">Enquire Now →</Link>
-            <Link href="/rental" className="btn-ghost-white">Rental Services</Link>
+        <div className="container sales-hero-grid" style={{ position:'relative', zIndex:2, display:'grid', gridTemplateColumns:'1fr 1fr', gap:'80px', alignItems:'center' }}>
+          <div>
+            <p className="eyebrow" style={{ marginBottom:'20px' }}>Our Services</p>
+            <h1 style={{ fontSize:'clamp(48px,6vw,88px)', fontFamily:'Playfair Display,serif', color:'#fff', lineHeight:1.0, fontWeight:400, marginBottom:'28px', maxWidth:'700px' }}>
+              Your property.<br />
+              <em style={{ color:'#C9A84C', fontStyle:'italic' }}>Sold right.</em>
+            </h1>
+            <p style={{ fontSize:'18px', fontWeight:300, color:'rgba(255,255,255,0.55)', lineHeight:1.8, maxWidth:'520px', marginBottom:'52px' }}>
+              At CPP, your property portfolio requires careful balancing. Our sales division is perfectly placed to make the process smooth — whether selling tenanted or vacant, you'll never be just a number.
+            </p>
+            <div style={{ display:'flex', gap:'16px', flexWrap:'wrap' }}>
+              <Link href="/contact" className="btn-primary">Enquire Now →</Link>
+              <Link href="/rental" className="btn-ghost-white">Rental Services</Link>
+            </div>
+          </div>
+
+          {/* Stats grid */}
+          <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'2px' }}>
+            {[
+              { v:'50+',   l:'Properties Sold' },
+              { v:'$32M+', l:'Total Sales Volume' },
+              { v:'$643K', l:'Average Sale Price' },
+              { v:'$603K', l:'Median Sale Price' },
+            ].map((s, i) => (
+              <div key={i} style={{
+                padding:'36px 28px',
+                background: i % 2 === 0 ? 'rgba(255,255,255,0.04)' : 'rgba(201,168,76,0.07)',
+                border:'1px solid rgba(255,255,255,0.06)',
+              }}>
+                <div style={{ fontSize:'36px', fontFamily:'Playfair Display,serif', color:'#C9A84C', lineHeight:1, marginBottom:'8px' }}>{s.v}</div>
+                <div style={{ fontSize:'12px', color:'rgba(255,255,255,0.4)', letterSpacing:'0.08em', lineHeight:1.5 }}>{s.l.toUpperCase()}</div>
+              </div>
+            ))}
           </div>
         </div>
+        <style>{`@media(max-width:900px){.sales-hero-grid{grid-template-columns:1fr!important;}}`}</style>
       </section>
 
       {/* ── TAILORED SUPPORT ── */}

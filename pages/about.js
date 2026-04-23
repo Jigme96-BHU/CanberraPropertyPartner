@@ -40,15 +40,42 @@ export default function About() {
       <Navbar />
 
       {/* ── HERO ── */}
-      <section style={{ paddingTop: '180px', paddingBottom: '120px', background: '#0A0A0A', position: 'relative', overflow: 'hidden' }}>
-        <div style={{ position: 'absolute', inset: 0, backgroundImage: 'radial-gradient(ellipse at 30% 60%, rgba(201,168,76,0.08) 0%, transparent 60%)' }} />
+      <section style={{ paddingTop: '200px', paddingBottom: '120px', background: '#0A0A0A', position: 'relative', overflow: 'hidden' }}>
+        <div style={{ position: 'absolute', inset: 0, backgroundImage: 'url(/images/office.jpeg)', backgroundSize: 'cover', backgroundPosition: 'center', opacity: 0.38 }} />
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, rgba(10,10,10,0.82) 0%, rgba(10,10,10,0.35) 100%)' }} />
         <div style={{ position: 'absolute', left: 0, top: 0, bottom: 0, width: '4px', background: 'linear-gradient(to bottom, transparent, #C9A84C 20%, #C9A84C 80%, transparent)' }} />
-        <div className="container" style={{ position: 'relative', zIndex: 2 }}>
-          <p className="eyebrow" style={{ marginBottom: '20px' }}>About Canberra Property Partners</p>
-          <h1 style={{ fontSize: 'clamp(48px,7vw,88px)', fontFamily: 'Playfair Display,serif', color: '#fff', lineHeight: 1.05, fontWeight: 400, maxWidth: '760px' }}>
-            Where your property is<br /><em style={{ color: '#C9A84C', fontStyle: 'italic' }}>our priority</em>
-          </h1>
+
+        <div className="container about-hero-grid" style={{ position: 'relative', zIndex: 2, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '80px', alignItems: 'center' }}>
+          <div>
+            <p className="eyebrow" style={{ marginBottom: '20px' }}>About Canberra Property Partners</p>
+            <h1 style={{ fontSize: 'clamp(48px,6vw,80px)', fontFamily: 'Playfair Display,serif', color: '#fff', lineHeight: 1.05, fontWeight: 400, marginBottom: '28px' }}>
+              Where your property is<br /><em style={{ color: '#C9A84C', fontStyle: 'italic' }}>our priority</em>
+            </h1>
+            <p style={{ fontSize: '18px', fontWeight: 300, color: 'rgba(255,255,255,0.6)', lineHeight: 1.8, maxWidth: '480px' }}>
+              Canberra's award-winning property management agency — built on personal service, world-first technology, and a genuine commitment to your investment.
+            </p>
+          </div>
+
+          {/* Stats grid */}
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '2px' }}>
+            {[
+              { v: '2017', l: 'Est. in Canberra' },
+              { v: '4×',   l: 'REIA Award Winner' },
+              { v: '98%',  l: 'Occupancy Rate' },
+              { v: '71',   l: 'Suburbs Covered' },
+            ].map((s, i) => (
+              <div key={i} style={{
+                padding: '36px 28px',
+                background: i % 2 === 0 ? 'rgba(255,255,255,0.04)' : 'rgba(201,168,76,0.07)',
+                border: '1px solid rgba(255,255,255,0.06)',
+              }}>
+                <div style={{ fontSize: '40px', fontFamily: 'Playfair Display,serif', color: '#C9A84C', lineHeight: 1, marginBottom: '8px' }}>{s.v}</div>
+                <div style={{ fontSize: '12px', color: 'rgba(255,255,255,0.4)', letterSpacing: '0.08em', lineHeight: 1.5 }}>{s.l.toUpperCase()}</div>
+              </div>
+            ))}
+          </div>
         </div>
+        <style>{`@media(max-width:900px){.about-hero-grid{grid-template-columns:1fr!important;}}`}</style>
       </section>
 
       {/* ── BRETT'S BIO ── */}
