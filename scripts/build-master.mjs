@@ -88,6 +88,17 @@ function parseListing(item, status) {
   };
 }
 
+const THREE_MONTHS_AGO = new Date();
+THREE_MONTHS_AGO.setMonth(THREE_MONTHS_AGO.getMonth() - 3);
+
+const MAX_SOLD = 6;
+
+function parseDate(str) {
+  if (!str) return null;
+  const d = new Date(str);
+  return isNaN(d.getTime()) ? null : d;
+}
+
 async function main() {
   console.log('Reading XML files from:', XML_FOLDER);
 
@@ -102,7 +113,9 @@ async function main() {
 
   console.log('Found', files.length, 'XML files\n');
 
-  const master = {};
+  const master  = {};   // current rent + sale (keyed by ireID)
+  const leased  = {};   // leased rentals within 3 months
+  const soldAll = [];   // all sold residential (will trim to MAX_SOLD)
 
   for (const file of files) {
     console.log('Processing:', file);
@@ -111,26 +124,60 @@ async function main() {
     const pl     = parsed?.propertyList;
     if (!pl) { console.log('  Skipped — no propertyList'); continue; }
 
-    let count = 0;
-
+    // ── Rentals ──────────────────────────────────────────────
     normalise(pl.rental).forEach(item => {
-      if (item.status !== 'current') return;
-      const l = parseListing(item, 'rent');
-      if (l?.ireID) { master[l.ireID] = l; count++; }
+      if (item.status === 'current') {
+        const l = parseListing(item, 'rent');
+        if (l?.ireID) master[l.ireID] = l;
+
+      } else if (item.status === 'leased') {
+        const date = parseDate(item.dateAvailable);
+        if (date && date >= THREE_MONTHS_AGO) {
+          const l = parseListing(item, 'leased');
+          if (l?.ireID) leased[l.ireID] = l;
+        }
+      }
     });
 
+    // ── Residential ──────────────────────────────────────────
     normalise(pl.residential).forEach(item => {
-      if (item.status !== 'current') return;
-      const l = parseListing(item, 'sale');
-      if (l?.ireID) { master[l.ireID] = l; count++; }
-    });
+      if (item.status === 'current') {
+        const l = parseListing(item, 'sale');
+        if (l?.ireID) master[l.ireID] = l;
 
-    console.log(' ', count, 'current listings added/updated');
+      } else if (item.status === 'sold') {
+        const soldDate = parseDate(item.soldDetails?.date);
+        const l = parseListing(item, 'sold');
+        if (l?.ireID) {
+          soldAll.push({ ...l, soldDate: soldDate || new Date(0) });
+        }
+      }
+    });
   }
 
-  const result = Object.values(master);
+  // ── Keep only the MAX_SOLD most recent sold listings ──────
+  const soldDeduped = Object.values(
+    soldAll.reduce((acc, l) => {
+      if (!acc[l.ireID] || l.soldDate > acc[l.ireID].soldDate) acc[l.ireID] = l;
+      return acc;
+    }, {})
+  );
+  soldDeduped.sort((a, b) => b.soldDate - a.soldDate);
+  const topSold = soldDeduped.slice(0, MAX_SOLD).map(({ soldDate, ...l }) => l);
+
+  const result = [
+    ...Object.values(master),
+    ...Object.values(leased),
+    ...topSold,
+  ];
+
   writeFileSync(OUTPUT, JSON.stringify(result, null, 2));
-  console.log('\n✅ master-listings.json created with', result.length, 'listings');
+
+  console.log('\n✅ master-listings.json created:');
+  console.log('   Current (rent/sale):', Object.keys(master).length);
+  console.log('   Leased (last 3 months):', Object.keys(leased).length);
+  console.log('   Sold (most recent ' + MAX_SOLD + '):', topSold.length);
+  console.log('   Total:', result.length);
   console.log('\nNext steps:');
   console.log('1. Open FileZilla');
   console.log('2. Connect to Hetzner');

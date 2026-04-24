@@ -8,7 +8,7 @@ import SEO from '../../components/SEO';
 import { getListings } from '../../lib/hetzner';
 import { properties as mockProperties } from '../../data';
 
-const STATUS_LABEL = { rent: 'For Rent', sale: 'For Sale', leased: 'Leased' };
+const STATUS_LABEL = { rent: 'For Rent', sale: 'For Sale', leased: 'Leased', sold: 'Sold' };
 const AGENT_ID = 'CanberraPP';
 
 function buildBookingURL(p) {
