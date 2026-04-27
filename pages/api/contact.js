@@ -36,8 +36,8 @@ export default async function handler(req, res) {
   try {
     // ── Email to CPP team ──────────────────────────────────────
     await resend.emails.send({
-      from:    'CPP Website <onboarding@resend.dev>',
-      to:      'gmetharchen96@gmail.com',
+      from: 'CPP Website <noreply@mail.canberrapropertypartners.com.au>',
+      to:      'brett@canberrapropertypartners.com.au',
       replyTo: email,
       subject: `New Enquiry from ${name} — ${serviceLabel}`,
       html: `
@@ -75,7 +75,7 @@ export default async function handler(req, res) {
 
     // ── Confirmation email to enquirer ─────────────────────────
     await resend.emails.send({
-      from:    'Canberra Property Partners <onboarding@resend.dev>',
+      from: 'Canberra Property Partners <noreply@mail.canberrapropertypartners.com.au>',
       to:      email,
       subject: 'Thanks for your enquiry — Canberra Property Partners',
       html: `
