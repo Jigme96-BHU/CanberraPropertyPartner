@@ -1,10 +1,11 @@
 import Client from 'ssh2-sftp-client';
 import { parseREAXML } from '../../../lib/parseListings';
 
-const FILE_PREFIX  = 'inspectre_IRE-CANBERRAPP';
-const MASTER_FILE  = '/master-listings.json';
-const LAST_SYNC    = '/last-sync.txt';
-const SIX_MONTHS   = 6 * 30 * 24 * 60 * 60 * 1000;
+const FILE_PREFIX   = 'inspectre_IRE-CANBERRAPP';
+const MASTER_FILE   = '/master-listings.json';
+const LAST_SYNC     = '/last-sync.txt';
+const MAX_LEASED    = 20;
+const MAX_SOLD      = 20;
 
 const SFTP_CONFIG = {
   host:         process.env.HETZNER_HOST,
@@ -90,23 +91,28 @@ export default async function handler(req, res) {
       }
     }
 
-    // Remove leased/sold entries older than 6 months; keep rent/sale always
-    const cutoff = Date.now() - SIX_MONTHS;
-    let removed  = 0;
+    // Keep only the most recent MAX_LEASED leased and MAX_SOLD sold — trim the rest
+    let removed = 0;
 
-    for (const ireID of Object.keys(master)) {
-      const l = master[ireID];
-      if (l.status !== 'sold' && l.status !== 'leased') continue;
+    const sortByDate = l => {
+      const d = Math.max(
+        l.lastUpdated ? new Date(l.lastUpdated).getTime() : 0,
+        l.soldDate    ? new Date(l.soldDate).getTime()    : 0,
+        l.available   ? new Date(l.available).getTime()   : 0,
+      );
+      return d;
+    };
 
-      const lastUpdated = l.lastUpdated ? new Date(l.lastUpdated).getTime() : 0;
-      const soldDate    = l.soldDate    ? new Date(l.soldDate).getTime()    : 0;
-      const available   = l.available   ? new Date(l.available).getTime()   : 0;
-      const age         = Math.max(lastUpdated, soldDate, available);
+    for (const status of ['leased', 'sold']) {
+      const max    = status === 'leased' ? MAX_LEASED : MAX_SOLD;
+      const bucket = Object.values(master)
+        .filter(l => l.status === status)
+        .sort((a, b) => sortByDate(b) - sortByDate(a));
 
-      if (age > 0 && age < cutoff) {
-        delete master[ireID];
+      bucket.slice(max).forEach(l => {
+        delete master[l.ireID];
         removed++;
-      }
+      });
     }
 
     // ── Step 4: Save back to Hetzner ─────────────────────────
