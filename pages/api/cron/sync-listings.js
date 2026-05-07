@@ -70,11 +70,18 @@ export default async function handler(req, res) {
       return res.status(500).json({ error: 'Could not read master-listings.json — sync aborted to prevent data loss' });
     }
 
-    let added   = 0;
-    let updated = 0;
+    let added     = 0;
+    let updated   = 0;
+    let withdrawn = 0;
 
     for (const listing of parsed) {
-      if (master[listing.ireID]) {
+      if (listing.status === 'withdrawn') {
+        // Remove from master immediately — no longer active
+        if (master[listing.ireID]) {
+          delete master[listing.ireID];
+          withdrawn++;
+        }
+      } else if (master[listing.ireID]) {
         master[listing.ireID] = { ...listing, lastUpdated: new Date().toISOString() };
         updated++;
       } else {
@@ -83,7 +90,7 @@ export default async function handler(req, res) {
       }
     }
 
-    // Remove sold/leased entries older than 6 months; keep rent/sale always
+    // Remove leased/sold entries older than 6 months; keep rent/sale always
     const cutoff = Date.now() - SIX_MONTHS;
     let removed  = 0;
 
@@ -92,8 +99,9 @@ export default async function handler(req, res) {
       if (l.status !== 'sold' && l.status !== 'leased') continue;
 
       const lastUpdated = l.lastUpdated ? new Date(l.lastUpdated).getTime() : 0;
-      const available   = l.available  ? new Date(l.available).getTime()   : 0;
-      const age         = Math.max(lastUpdated, available);
+      const soldDate    = l.soldDate    ? new Date(l.soldDate).getTime()    : 0;
+      const available   = l.available   ? new Date(l.available).getTime()   : 0;
+      const age         = Math.max(lastUpdated, soldDate, available);
 
       if (age > 0 && age < cutoff) {
         delete master[ireID];
@@ -107,13 +115,14 @@ export default async function handler(req, res) {
 
     await sftp.put(Buffer.from(String(Date.now())), LAST_SYNC);
 
-    console.log(`Sync complete — added:${added} updated:${updated} removed:${removed} total:${Object.keys(master).length}`);
+    console.log(`Sync complete — added:${added} updated:${updated} withdrawn:${withdrawn} aged-out:${removed} total:${Object.keys(master).length}`);
 
     // ── Step 5: Return result ─────────────────────────────────
     return res.status(200).json({
       added,
       updated,
-      removed,
+      withdrawn,
+      agedOut: removed,
       total: Object.keys(master).length,
     });
 
