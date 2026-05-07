@@ -64,8 +64,10 @@ export default async function handler(req, res) {
     try {
       const buf = await sftp.get(MASTER_FILE);
       JSON.parse(buf.toString('utf8')).forEach(l => { master[l.ireID] = l; });
-    } catch {
-      // no master yet — start fresh
+      console.log(`Master loaded: ${Object.keys(master).length} existing listings`);
+    } catch (e) {
+      console.error('CRITICAL: Failed to read master-listings.json:', e.message);
+      return res.status(500).json({ error: 'Could not read master-listings.json — sync aborted to prevent data loss' });
     }
 
     let added   = 0;
