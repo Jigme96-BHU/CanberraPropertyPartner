@@ -11,6 +11,11 @@
       ]
     }
   ],
+  "redirects": [
+    { "source": "/recent-rental-properties",  "destination": "/rental", "permanent": true },
+    { "source": "/awards-and-testimonials",   "destination": "/awards", "permanent": true },
+    { "source": "/testimonials-1",            "destination": "/awards", "permanent": true }
+  ],
   "crons": [
     {
       "path": "/api/cron/sync-listings",
