@@ -483,7 +483,7 @@ export default function PropertyDetail({ properties }) {
                   {isRental ? 'WEEKLY RENT' : 'ASKING PRICE'}
                 </p>
                 <p style={{ fontFamily:'Playfair Display,serif', fontSize:'40px', color:'#C9A84C', lineHeight:1, marginBottom:'8px' }}>
-                  {p.price}
+                  {p.price}{p.price?.startsWith('$') ? '+' : ''}
                 </p>
                 {p.priceView && p.priceView !== p.price && (
                   <p style={{ fontSize:'13px', color:'rgba(255,255,255,0.3)', marginBottom:'28px' }}>{p.priceView}</p>

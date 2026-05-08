@@ -20,21 +20,49 @@ export default function Footer() {
             </p>
             <div style={{ display:'flex', gap:'12px', marginTop:'28px' }}>
               {[
-                { label:'Facebook',  href:'https://www.facebook.com/CanberraPropertyPartners' },
-                { label:'Instagram', href:'https://www.instagram.com/canberra_property_partners' },
-                { label:'LinkedIn',  href:'https://www.linkedin.com/company/canberra-property-partners' },
+                {
+                  label: 'Facebook',
+                  href: 'https://www.facebook.com/CanberraPropertyPartners',
+                  icon: (
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                    </svg>
+                  ),
+                },
+                {
+                  label: 'Instagram',
+                  href: 'https://www.instagram.com/canberra_property_partners',
+                  icon: (
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                      <circle cx="12" cy="12" r="4"/>
+                      <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+                    </svg>
+                  ),
+                },
+                {
+                  label: 'LinkedIn',
+                  href: 'https://www.linkedin.com/company/canberra-property-partners',
+                  icon: (
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                      <rect x="2" y="9" width="4" height="12"/>
+                      <circle cx="4" cy="4" r="2"/>
+                    </svg>
+                  ),
+                },
               ].map(s => (
                 <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" aria-label={s.label} style={{
                   width:'36px', height:'36px',
                   border:'1px solid rgba(255,255,255,0.15)',
                   borderRadius:'50%',
                   display:'flex', alignItems:'center', justifyContent:'center',
-                  fontSize:'11px', color:'rgba(255,255,255,0.5)',
+                  color:'rgba(255,255,255,0.5)',
                   transition:'all 0.2s',
                 }}
                   onMouseEnter={e => { e.currentTarget.style.borderColor='#C9A84C'; e.currentTarget.style.color='#C9A84C'; }}
                   onMouseLeave={e => { e.currentTarget.style.borderColor='rgba(255,255,255,0.15)'; e.currentTarget.style.color='rgba(255,255,255,0.5)'; }}
-                >{s.label[0]}</a>
+                >{s.icon}</a>
               ))}
             </div>
           </div>
