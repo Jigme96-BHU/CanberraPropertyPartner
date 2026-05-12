@@ -67,10 +67,10 @@ export default function Sales() {
                 Tailored Support.<br />
                 <em style={{ fontStyle:'italic', fontFamily:'Playfair Display,serif', color:'rgba(10,10,10,0.4)' }}>Always.</em>
               </h2>
-              <p style={{ fontSize:'16px', color:'rgba(10,10,10,0.6)', lineHeight:1.9, marginBottom:'24px' }}>
+              <p style={{ fontSize:'17px', color:'rgba(10,10,10,0.6)', lineHeight:1.9, marginBottom:'24px' }}>
                 Unlike agencies that take a volumetric approach to property sales, with us you'll never be a number. Our personalised service takes your particular situation into account and we work closely with you to secure the best result.
               </p>
-              <p style={{ fontSize:'16px', color:'rgba(10,10,10,0.6)', lineHeight:1.9, marginBottom:'40px' }}>
+              <p style={{ fontSize:'17px', color:'rgba(10,10,10,0.6)', lineHeight:1.9, marginBottom:'40px' }}>
                 It makes financial sense to have the agency that manages your property also sell it. We already know your asset inside and out — your campaign starts with a head start no other agency can match.
               </p>
               <div style={{ padding:'28px 32px', background:'#F8F5F0', borderLeft:'4px solid #C9A84C', borderRadius:'0 8px 8px 0', marginBottom:'40px' }}>
@@ -113,7 +113,7 @@ export default function Sales() {
                   <div style={{ fontSize:'24px', color: i === 0 ? '#C9A84C' : '#C9A84C', marginTop:'2px', minWidth:'28px' }}>{item.icon}</div>
                   <div>
                     <h4 style={{ fontFamily:'Playfair Display,serif', fontSize:'20px', color: i === 0 ? '#fff' : '#0A0A0A', marginBottom:'10px' }}>{item.label}</h4>
-                    <p style={{ fontSize:'14px', color: i === 0 ? 'rgba(255,255,255,0.55)' : 'rgba(10,10,10,0.55)', lineHeight:1.75 }}>{item.desc}</p>
+                    <p style={{ fontSize:'16px', color: i === 0 ? 'rgba(255,255,255,0.55)' : 'rgba(10,10,10,0.55)', lineHeight:1.75 }}>{item.desc}</p>
                   </div>
                 </div>
               ))}
@@ -166,7 +166,7 @@ export default function Sales() {
                 <div className="step-num" style={{ fontFamily:'Playfair Display,serif', fontSize:'72px', fontWeight:700, color:'rgba(10,10,10,0.12)', lineHeight:1, transition:'color 0.3s' }}>{step.num}</div>
                 <div>
                   <h3 className="step-title" style={{ fontFamily:'Playfair Display,serif', fontSize:'28px', color:'#0A0A0A', marginBottom:'12px', transition:'color 0.3s' }}>{step.title}</h3>
-                  <p className="step-desc" style={{ fontSize:'15px', color:'rgba(10,10,10,0.5)', lineHeight:1.8, transition:'color 0.3s' }}>{step.desc}</p>
+                  <p className="step-desc" style={{ fontSize:'16px', color:'rgba(10,10,10,0.5)', lineHeight:1.8, transition:'color 0.3s' }}>{step.desc}</p>
                 </div>
                 <div style={{ display:'flex', alignItems:'center', justifyContent:'center' }}>
                   <img src={ASSETS.icons[step.icon]} alt={step.title} style={{ width:'56px', height:'56px', objectFit:'contain', opacity:0.7 }} />
@@ -186,7 +186,7 @@ export default function Sales() {
           <h2 style={{ fontSize:'clamp(34px,4vw,52px)', color:'#fff', textAlign:'center', lineHeight:1.1, marginBottom:'16px' }}>
             Choose Your <em style={{ color:'#C9A84C', fontStyle:'italic', fontFamily:'Playfair Display,serif' }}>Sales Method</em>
           </h2>
-          <p style={{ fontSize:'16px', color:'rgba(255,255,255,0.45)', textAlign:'center', maxWidth:'560px', margin:'0 auto 72px', lineHeight:1.8 }}>
+          <p style={{ fontSize:'17px', color:'rgba(255,255,255,0.45)', textAlign:'center', maxWidth:'560px', margin:'0 auto 72px', lineHeight:1.8 }}>
             We'll advise the right approach for your property and the current market — then execute it flawlessly.
           </p>
 
@@ -197,7 +197,7 @@ export default function Sales() {
                 <div style={{ width:'48px', height:'48px', borderRadius:'50%', background:'rgba(201,168,76,0.12)', display:'flex', alignItems:'center', justifyContent:'center', fontSize:'20px' }}>◈</div>
                 <h3 style={{ fontFamily:'Playfair Display,serif', fontSize:'26px', color:'#fff', fontWeight:400 }}>Private Treaty</h3>
               </div>
-              <p style={{ fontSize:'15px', color:'rgba(255,255,255,0.5)', lineHeight:1.85, marginBottom:'36px' }}>
+              <p style={{ fontSize:'16px', color:'rgba(255,255,255,0.5)', lineHeight:1.85, marginBottom:'36px' }}>
                 Offers flexibility in negotiations, allowing you to set favourable terms and maintain control over the sale. Ideal in a steady market, giving buyers time to consider offers without auction pressure.
               </p>
               <div style={{ display:'flex', flexDirection:'column', gap:'16px' }}>
@@ -211,8 +211,8 @@ export default function Sales() {
                   <div key={i} style={{ display:'flex', gap:'14px', alignItems:'flex-start' }}>
                     <div style={{ width:'6px', height:'6px', borderRadius:'50%', background:'#C9A84C', marginTop:'8px', flexShrink:0 }} />
                     <div>
-                      <p style={{ fontSize:'14px', fontWeight:600, color:'#fff', marginBottom:'3px' }}>{b.t}</p>
-                      <p style={{ fontSize:'13px', color:'rgba(255,255,255,0.4)', lineHeight:1.65 }}>{b.d}</p>
+                      <p style={{ fontSize:'15px', fontWeight:600, color:'#fff', marginBottom:'3px' }}>{b.t}</p>
+                      <p style={{ fontSize:'14px', color:'rgba(255,255,255,0.4)', lineHeight:1.65 }}>{b.d}</p>
                     </div>
                   </div>
                 ))}
@@ -225,7 +225,7 @@ export default function Sales() {
                 <div style={{ width:'48px', height:'48px', borderRadius:'50%', background:'rgba(201,168,76,0.15)', display:'flex', alignItems:'center', justifyContent:'center', fontSize:'20px' }}>◉</div>
                 <h3 style={{ fontFamily:'Playfair Display,serif', fontSize:'26px', color:'#fff', fontWeight:400 }}>Auction</h3>
               </div>
-              <p style={{ fontSize:'15px', color:'rgba(255,255,255,0.5)', lineHeight:1.85, marginBottom:'36px' }}>
+              <p style={{ fontSize:'16px', color:'rgba(255,255,255,0.5)', lineHeight:1.85, marginBottom:'36px' }}>
                 Creates a competitive environment that can drive up the sale price. Ideal in a hot market with strong buyer interest — the urgency of auction day often results in bids exceeding expectations.
               </p>
               <div style={{ display:'flex', flexDirection:'column', gap:'16px' }}>
@@ -239,8 +239,8 @@ export default function Sales() {
                   <div key={i} style={{ display:'flex', gap:'14px', alignItems:'flex-start' }}>
                     <div style={{ width:'6px', height:'6px', borderRadius:'50%', background:'#C9A84C', marginTop:'8px', flexShrink:0 }} />
                     <div>
-                      <p style={{ fontSize:'14px', fontWeight:600, color:'#fff', marginBottom:'3px' }}>{b.t}</p>
-                      <p style={{ fontSize:'13px', color:'rgba(255,255,255,0.4)', lineHeight:1.65 }}>{b.d}</p>
+                      <p style={{ fontSize:'15px', fontWeight:600, color:'#fff', marginBottom:'3px' }}>{b.t}</p>
+                      <p style={{ fontSize:'14px', color:'rgba(255,255,255,0.4)', lineHeight:1.65 }}>{b.d}</p>
                     </div>
                   </div>
                 ))}
@@ -261,7 +261,7 @@ export default function Sales() {
                 Property<br />
                 <em style={{ fontStyle:'italic', fontFamily:'Playfair Display,serif', color:'rgba(10,10,10,0.4)' }}>Staging</em>
               </h2>
-              <p style={{ fontSize:'16px', color:'rgba(10,10,10,0.6)', lineHeight:1.9, marginBottom:'40px' }}>
+              <p style={{ fontSize:'17px', color:'rgba(10,10,10,0.6)', lineHeight:1.9, marginBottom:'40px' }}>
                 First impressions are everything. Staging highlights your home's strengths, creates an emotional connection with buyers, and consistently results in quicker sales at higher prices. In a competitive market, a well-staged home doesn't just stand out — it commands attention.
               </p>
               <Link href="/contact" className="btn-primary">Discuss Your Campaign →</Link>
@@ -281,8 +281,8 @@ export default function Sales() {
                 }}>
                   <span style={{ fontSize:'11px', fontWeight:700, color:'#C9A84C', letterSpacing:'0.1em', minWidth:'24px', paddingTop:'3px' }}>{item.n}</span>
                   <div>
-                    <p style={{ fontSize:'15px', fontWeight:600, color:'#0A0A0A', marginBottom:'4px' }}>{item.t}</p>
-                    <p style={{ fontSize:'13px', color:'rgba(10,10,10,0.5)', lineHeight:1.7 }}>{item.d}</p>
+                    <p style={{ fontSize:'16px', fontWeight:600, color:'#0A0A0A', marginBottom:'4px' }}>{item.t}</p>
+                    <p style={{ fontSize:'15px', color:'rgba(10,10,10,0.5)', lineHeight:1.7 }}>{item.d}</p>
                   </div>
                 </div>
               ))}

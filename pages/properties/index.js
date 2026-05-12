@@ -11,10 +11,11 @@ export default function Properties({ properties }) {
   const [search,    setSearch]    = useState('');
 
   const filtered = properties.filter(p => {
-    const matchTab    =
-      (activeTab === 'all'    ? (p.status === 'rent' || p.status === 'sale') :
-       activeTab === 'leased' ? (p.status === 'leased' || p.status === 'sold') :
-       p.status === activeTab);
+    const matchTab =
+      activeTab === 'all'    ? (p.status === 'rent' || p.status === 'sale') :
+      activeTab === 'leased' ? p.status === 'leased' :
+      activeTab === 'sold'   ? p.status === 'sold'   :
+      p.status === activeTab;
     const matchSearch = !search ||
       p.address.toLowerCase().includes(search.toLowerCase()) ||
       p.suburb.toLowerCase().includes(search.toLowerCase());
@@ -25,7 +26,8 @@ export default function Properties({ properties }) {
     { id: 'all',    label: 'All Properties' },
     { id: 'rent',   label: 'For Rent' },
     { id: 'sale',   label: 'For Sale' },
-    { id: 'leased', label: 'Sold & Leased' },
+    { id: 'leased', label: 'Leased' },
+    { id: 'sold',   label: 'Sold' },
   ];
 
   return (
@@ -110,8 +112,15 @@ export default function Properties({ properties }) {
  */
 export async function getStaticProps() {
   const liveListings = await getListings();
+  const source = liveListings.length > 0 ? liveListings : mockProperties;
+
+  // Strip to only fields needed by PropertyCard — keeps page data well under 128 kB
+  const properties = source.map(({ id, ireID, status, address, suburb, price, beds, baths, cars, image, featured }) => ({
+    id, ireID, status, address, suburb, price, beds, baths, cars, image, featured,
+  }));
+
   return {
-    props: { properties: liveListings.length > 0 ? liveListings : mockProperties },
+    props: { properties },
     revalidate: 300,
   };
 }

@@ -81,7 +81,7 @@ export default function Rental() {
             ].map((p, i) => (
               <div key={i} style={{ padding:'52px 44px', borderRight: i < 2 ? '1px solid rgba(10,10,10,0.12)' : 'none' }}>
                 <h3 style={{ fontFamily:'Playfair Display,serif', fontSize:'24px', color:'#0A0A0A', marginBottom:'14px' }}>{p.title}</h3>
-                <p style={{ fontSize:'14px', color:'rgba(10,10,10,0.65)', lineHeight:1.8 }}>{p.desc}</p>
+                <p style={{ fontSize:'15px', color:'rgba(10,10,10,0.65)', lineHeight:1.8 }}>{p.desc}</p>
               </div>
             ))}
           </div>
@@ -155,7 +155,7 @@ export default function Rental() {
                     onMouseLeave={e => { e.currentTarget.style.transform='none'; e.currentTarget.style.boxShadow='none'; }}
                   >
                     <h3 style={{ fontFamily:'Playfair Display,serif', fontSize:'22px', color:'#0A0A0A', marginBottom:'12px', fontWeight:400 }}>{item.title}</h3>
-                    <p style={{ fontSize:'14px', color:'rgba(10,10,10,0.55)', lineHeight:1.85 }}>{item.desc}</p>
+                    <p style={{ fontSize:'16px', color:'rgba(10,10,10,0.55)', lineHeight:1.85 }}>{item.desc}</p>
                   </div>
                 </div>
               ))}

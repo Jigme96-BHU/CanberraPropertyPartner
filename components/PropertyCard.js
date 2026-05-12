@@ -66,7 +66,7 @@ export default function PropertyCard({ p }) {
           </div>
 
           <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', paddingTop:'16px', borderTop:'1px solid rgba(10,10,10,0.07)' }}>
-            <p style={{ fontSize:'20px', fontFamily:'Playfair Display, serif', fontWeight:500 }}>{p.price}{p.price?.startsWith('$') ? '+' : ''}</p>
+            <p style={{ fontSize:'20px', fontFamily:'Playfair Display, serif', fontWeight:500 }}>{p.price}{(p.status === 'sale' || p.status === 'sold') && p.price?.startsWith('$') ? '+' : ''}</p>
             <div style={{
               width:'36px', height:'36px', borderRadius:'50%',
               background:'#0A0A0A',

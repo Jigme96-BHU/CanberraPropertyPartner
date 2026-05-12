@@ -71,7 +71,8 @@ export default function Footer() {
             { title:'Properties', links:[
               {href:'/properties?status=rent', label:'For Rent'},
               {href:'/properties?status=sale', label:'For Sale'},
-              {href:'/properties?status=leased', label:'Sold & Leased'},
+              {href:'/properties?status=leased', label:'Leased'},
+              {href:'/properties?status=sold',   label:'Sold'},
             ]},
             { title:'Services', links:[
               {href:'/rental', label:'Rental Management'},

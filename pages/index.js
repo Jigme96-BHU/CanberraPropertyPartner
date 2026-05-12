@@ -165,7 +165,7 @@ export default function Home({ properties }) {
             More care.<br />
             <span style={{ color:'#C9A84C', fontStyle:'italic' }}>Less hype.</span>
           </h2>
-          <p style={{ fontSize:'16px', color:'rgba(255,255,255,0.55)', lineHeight:1.85, marginBottom:'48px', maxWidth:'600px' }}>
+          <p style={{ fontSize:'21px', color:'rgba(255,255,255,0.55)', lineHeight:1.85, marginBottom:'48px', maxWidth:'600px' }}>
             We believe owning a rental property should be a rewarding experience — not just financially, but the process itself. Our world-class technology handles the administration so our team can focus entirely on you: advocating, mediating and negotiating the most carefree and profitable pathway forward.
           </p>
 
@@ -184,10 +184,10 @@ export default function Home({ properties }) {
                 onMouseEnter={e => e.currentTarget.style.paddingLeft='8px'}
                 onMouseLeave={e => e.currentTarget.style.paddingLeft='0'}
               >
-                <span style={{ fontSize:'12px', fontWeight:600, color:'#C9A84C', letterSpacing:'0.08em', minWidth:'28px', paddingTop:'4px' }}>{item.n}</span>
+                <span style={{ fontSize:'15px', fontWeight:600, color:'#C9A84C', letterSpacing:'0.08em', minWidth:'28px', paddingTop:'4px' }}>{item.n}</span>
                 <div>
-                  <h4 style={{ fontSize:'18px', color:'#fff', fontFamily:'Playfair Display, serif', marginBottom:'8px' }}>{item.title}</h4>
-                  <p style={{ fontSize:'14px', color:'rgba(255,255,255,0.45)', lineHeight:1.7 }}>{item.desc}</p>
+                  <h4 style={{ fontSize:'24px', color:'#fff', fontFamily:'Playfair Display, serif', marginBottom:'8px' }}>{item.title}</h4>
+                  <p style={{ fontSize:'18px', color:'rgba(255,255,255,0.45)', lineHeight:1.7 }}>{item.desc}</p>
                 </div>
               </div>
             ))}
