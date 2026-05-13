@@ -74,7 +74,12 @@ export default function Properties({ properties }) {
       <section style={{ padding:'60px 0 100px', background:'#F8F5F0' }}>
         <div className="container">
           <p style={{ fontSize:'13px', color:'rgba(10,10,10,0.4)', marginBottom:'32px' }}>
-            {filtered.length} {filtered.length === 1 ? 'property' : 'properties'} available
+            {filtered.length}{' '}
+            {activeTab === 'leased' ? 'recently leased' :
+             activeTab === 'sold'   ? 'recently sold'   :
+             null}
+            {' '}{filtered.length === 1 ? 'property' : 'properties'}
+            {activeTab !== 'leased' && activeTab !== 'sold' ? ' available' : ''}
           </p>
 
           {filtered.length === 0 ? (

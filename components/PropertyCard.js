@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import Image from 'next/image';
 
-const STATUS = { rent:'For Rent', sale:'For Sale', leased:'Leased' };
-const STATUS_COLOR = { rent:'#C9A84C', sale:'#0A0A0A', leased:'#7A8C7E' };
+const STATUS = { rent:'For Rent', sale:'For Sale', leased:'Leased', sold:'Sold' };
+const STATUS_COLOR = { rent:'#C9A84C', sale:'#0A0A0A', leased:'#7A8C7E', sold:'#8B3A3A' };
 
 export default function PropertyCard({ p }) {
   return (
@@ -29,7 +29,7 @@ export default function PropertyCard({ p }) {
             position:'absolute', top:'16px', left:'16px',
             padding:'5px 14px',
             background: STATUS_COLOR[p.status],
-            color: p.status==='sale'?'#fff':'#0A0A0A',
+            color: (p.status==='sale' || p.status==='sold') ? '#fff' : '#0A0A0A',
             fontSize:'10px', fontWeight:600, letterSpacing:'0.1em',
             borderRadius:'100px',
           }}>{STATUS[p.status]}</div>
