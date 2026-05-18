@@ -17,6 +17,9 @@
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+/* Prevent global styles from breaking third-party chat widgets */
+[id^="rh"], [id^="rh"] *, [class^="rh-"], [class^="rh-"] * { all: revert; }
+
 html { scroll-behavior: smooth; font-size: 19px; }
 
 body {
