@@ -5,6 +5,7 @@ const STATUS = { rent:'For Rent', sale:'For Sale', leased:'Leased', sold:'Sold' 
 const STATUS_COLOR = { rent:'#C9A84C', sale:'#0A0A0A', leased:'#7A8C7E', sold:'#8B3A3A' };
 
 export default function PropertyCard({ p }) {
+  if (!p || !p.id) return null;
   return (
     <Link href={`/properties/${p.id}`} style={{ display:'block', textDecoration:'none', color:'inherit' }}>
       <div style={{
@@ -20,7 +21,7 @@ export default function PropertyCard({ p }) {
       >
         {/* Image */}
         <div style={{ position:'relative', paddingTop:'62%', overflow:'hidden', background:'#E8E4DF' }}>
-          <Image className="card-img" src={p.image} alt={p.address} fill loading="lazy"
+          <Image className="card-img" src={p.image || '/images/prop.jpeg'} alt={p.address || ''} fill loading="lazy"
             sizes="(max-width: 768px) 100vw, 33vw"
             style={{ objectFit:'cover', transition:'transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94)' }} />
 
@@ -48,8 +49,8 @@ export default function PropertyCard({ p }) {
 
         {/* Content */}
         <div style={{ padding:'24px' }}>
-          <p style={{ fontSize:'22px', fontFamily:'Playfair Display, serif', marginBottom:'4px', lineHeight:1.2 }}>{p.address}</p>
-          <p style={{ fontSize:'13px', color:'#7A8C7E', marginBottom:'16px' }}>{p.suburb}</p>
+          <p style={{ fontSize:'22px', fontFamily:'Playfair Display, serif', marginBottom:'4px', lineHeight:1.2 }}>{p.address || '—'}</p>
+          <p style={{ fontSize:'13px', color:'#7A8C7E', marginBottom:'16px' }}>{p.suburb || ''}</p>
 
           <div style={{ display:'flex', gap:'20px', marginBottom:'20px' }}>
             {[

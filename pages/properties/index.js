@@ -23,8 +23,8 @@ export default function Properties({ properties }) {
       activeTab === 'sold'   ? p.status === 'sold'   :
       p.status === activeTab;
     const matchSearch = !search ||
-      p.address.toLowerCase().includes(search.toLowerCase()) ||
-      p.suburb.toLowerCase().includes(search.toLowerCase());
+      (p.address || '').toLowerCase().includes(search.toLowerCase()) ||
+      (p.suburb || '').toLowerCase().includes(search.toLowerCase());
     return matchTab && matchSearch;
   });
 
