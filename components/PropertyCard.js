@@ -20,7 +20,7 @@ export default function PropertyCard({ p }) {
       >
         {/* Image */}
         <div style={{ position:'relative', paddingTop:'62%', overflow:'hidden', background:'#E8E4DF' }}>
-          <Image className="card-img" src={p.image} alt={p.address} fill
+          <Image className="card-img" src={p.image} alt={p.address} fill loading="lazy"
             sizes="(max-width: 768px) 100vw, 33vw"
             style={{ objectFit:'cover', transition:'transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94)' }} />
 
@@ -38,11 +38,10 @@ export default function PropertyCard({ p }) {
             <div style={{
               position:'absolute', top:'16px', right:'16px',
               padding:'5px 14px',
-              background:'rgba(10,10,10,0.75)',
+              background:'rgba(10,10,10,0.82)',
               color:'#C9A84C',
               fontSize:'10px', fontWeight:600, letterSpacing:'0.1em',
               borderRadius:'100px',
-              backdropFilter:'blur(8px)',
             }}>Featured</div>
           )}
         </div>

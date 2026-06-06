@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+
+const PAGE_SIZE = 12;
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import SEO from '../../components/SEO';
@@ -9,6 +11,9 @@ import { properties as mockProperties } from '../../data';
 export default function Properties({ properties }) {
   const [activeTab, setActiveTab] = useState('all');
   const [search,    setSearch]    = useState('');
+  const [page,      setPage]      = useState(1);
+
+  useEffect(() => { setPage(1); }, [activeTab, search]);
 
   const filtered = properties.filter(p => {
     const matchTab =
@@ -88,9 +93,24 @@ export default function Properties({ properties }) {
               <p style={{ fontSize:'15px', color:'rgba(10,10,10,0.4)' }}>Try adjusting your search or filter.</p>
             </div>
           ) : (
-            <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(320px,1fr))', gap:'24px' }}>
-              {filtered.map(p => <PropertyCard key={p.id} p={p} />)}
-            </div>
+            <>
+              <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(320px,1fr))', gap:'24px' }}>
+                {filtered.slice(0, page * PAGE_SIZE).map(p => <PropertyCard key={p.id} p={p} />)}
+              </div>
+              {page * PAGE_SIZE < filtered.length && (
+                <div style={{ textAlign:'center', marginTop:'48px' }}>
+                  <button onClick={() => setPage(pg => pg + 1)} style={{
+                    padding:'14px 40px',
+                    background:'#0A0A0A', color:'#fff',
+                    border:'none', borderRadius:'100px',
+                    fontFamily:'Outfit,sans-serif', fontSize:'14px', fontWeight:500,
+                    cursor:'pointer',
+                  }}>
+                    Load More ({filtered.length - page * PAGE_SIZE} remaining)
+                  </button>
+                </div>
+              )}
+            </>
           )}
         </div>
       </section>
