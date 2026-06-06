@@ -7,7 +7,7 @@ const STATUS_COLOR = { rent:'#C9A84C', sale:'#0A0A0A', leased:'#7A8C7E', sold:'#
 export default function PropertyCard({ p }) {
   if (!p || !p.id) return null;
   return (
-    <Link href={`/properties/${p.id}`} style={{ display:'block', textDecoration:'none', color:'inherit' }}>
+    <Link href={`/properties/${p.id}`} prefetch={false} style={{ display:'block', textDecoration:'none', color:'inherit' }}>
       <div style={{
         position:'relative', overflow:'hidden',
         borderRadius:'8px',
