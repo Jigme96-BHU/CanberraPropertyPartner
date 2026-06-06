@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 
 const PAGE_SIZE = 12;
+
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import SEO from '../../components/SEO';
