@@ -20,5 +20,8 @@
     "sharp": "^0.34.5",
     "ssh2-sftp-client": "^12.1.1",
     "xml2js": "^0.6.2"
+  },
+  "optionalDependencies": {
+    "@img/sharp-linux-x64": "^0.34.5"
   }
 }
