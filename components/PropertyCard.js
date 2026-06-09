@@ -44,12 +44,12 @@ function PropertyCard({ p, index = 0 }) {
         <div style={{ position:'relative', paddingTop:'62%', overflow:'hidden', background:'#E8E4DF' }}>
           <Image
             className="card-img"
-            src={p.image || '/images/prop.jpeg'}
+            src={p.blobUrl || p.image || '/images/prop.jpeg'}
             alt={p.address || ''}
             fill
             priority={index < 3}
             placeholder="blur"
-            blurDataURL={BLUR_PLACEHOLDER}
+            blurDataURL={p.blurDataURL || BLUR_PLACEHOLDER}
             sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
             style={{ objectFit:'cover', transition:'transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94)' }}
           />

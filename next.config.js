@@ -7,6 +7,7 @@ const nextConfig = {
     remotePatterns: [
       { protocol: 'https', hostname: 'images.unsplash.com' },
       { protocol: 'https', hostname: 'inspectre.blob.core.windows.net' },
+      { protocol: 'https', hostname: '*.public.blob.vercel-storage.com' },
     ],
     deviceSizes: [640, 750, 828, 1080, 1200],
     imageSizes: [64, 128, 256, 384],
