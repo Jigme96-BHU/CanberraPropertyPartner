@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
-import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
@@ -178,13 +177,7 @@ function PropertyDescription({ text }) {
   );
 }
 
-export default function PropertyDetail({ properties }) {
-  const router = useRouter();
-  const { id } = router.query;
-  const p = properties?.find(x =>
-    String(x.id) === String(id) ||
-    String(x.ireID) === String(id)
-  );
+export default function PropertyDetail({ property: p }) {
 
   // All images — use images array if available, fall back to single image
   const allImages = (p?.images?.length > 0 ? p.images : [p?.image]).filter(Boolean);
@@ -261,31 +254,7 @@ export default function PropertyDetail({ properties }) {
     setBusy(false);
   };
 
-  if (!p && router.isReady) {
-    return (
-      <>
-        <Navbar />
-        <div style={{ minHeight:'100vh', background:'#0A0A0A', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', gap:'16px' }}>
-          <p style={{ fontFamily:'Playfair Display,serif', fontSize:'32px', color:'#fff' }}>Property not found</p>
-          <p style={{ color:'rgba(255,255,255,0.4)', fontSize:'15px' }}>This listing may have been removed or is no longer available.</p>
-          <Link href="/properties" style={{ color:'#C9A84C', fontSize:'14px', marginTop:'8px' }}>← Back to all properties</Link>
-        </div>
-        <Footer />
-      </>
-    );
-  }
-
-  if (!p) {
-    return (
-      <>
-        <Navbar />
-        <div style={{ minHeight:'100vh', background:'#0A0A0A', display:'flex', alignItems:'center', justifyContent:'center' }}>
-          <p style={{ color:'rgba(255,255,255,0.4)', fontFamily:'Outfit,sans-serif' }}>Loading...</p>
-        </div>
-        <Footer />
-      </>
-    );
-  }
+  if (!p) return null;
 
   const isRental = p.status === 'rent';
 
@@ -340,7 +309,8 @@ export default function PropertyDetail({ properties }) {
                     alt={`${p.address} — photo ${i + 1}`}
                     fill
                     sizes="(max-width: 768px) 100vw, 33vw"
-                    priority={i <= CLONES + 2}
+                    priority={i === CLONES}
+                    loading={i === CLONES ? 'eager' : 'lazy'}
                     style={{ objectFit:'cover' }}
                   />
                 </div>
@@ -350,7 +320,7 @@ export default function PropertyDetail({ properties }) {
             {/* Image counter */}
             <div style={{
               position:'absolute', bottom:'12px', right:'12px',
-              background:'rgba(0,0,0,0.6)', backdropFilter:'blur(8px)',
+              background:'rgba(0,0,0,0.75)',
               color:'#fff', fontSize:'12px', fontWeight:500,
               padding:'5px 12px', borderRadius:'100px', letterSpacing:'0.06em',
               pointerEvents:'none',
@@ -364,7 +334,7 @@ export default function PropertyDetail({ properties }) {
               disabled={busy}
               style={{
                 position:'absolute', left:'12px', top:'50%', transform:'translateY(-50%)',
-                background:'rgba(10,10,10,0.55)', backdropFilter:'blur(8px)',
+                background:'rgba(10,10,10,0.75)',
                 border:'none', color:'#fff', width:'48px', height:'48px',
                 borderRadius:'50%', fontSize:'22px', cursor: busy ? 'default' : 'pointer',
                 display:'flex', alignItems:'center', justifyContent:'center',
@@ -381,7 +351,7 @@ export default function PropertyDetail({ properties }) {
               disabled={busy}
               style={{
                 position:'absolute', right:'12px', top:'50%', transform:'translateY(-50%)',
-                background:'rgba(10,10,10,0.55)', backdropFilter:'blur(8px)',
+                background:'rgba(10,10,10,0.75)',
                 border:'none', color:'#fff', width:'48px', height:'48px',
                 borderRadius:'50%', fontSize:'22px', cursor: busy ? 'default' : 'pointer',
                 display:'flex', alignItems:'center', justifyContent:'center',
@@ -599,7 +569,7 @@ export async function getStaticProps({ params }) {
   const property = listings.find(p => String(p.id) === String(params.id)) || null;
   if (!property) return { notFound: true };
   return {
-    props: { properties: listings },
+    props: { property },
     revalidate: 300,
   };
 }

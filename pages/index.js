@@ -87,9 +87,8 @@ export default function Home({ properties }) {
             {stats.map((s, i) => (
               <div key={i} style={{
                 padding:'36px 32px',
-                background: i % 2 === 0 ? 'rgba(255,255,255,0.04)' : 'rgba(201,168,76,0.08)',
+                background: i % 2 === 0 ? 'rgba(255,255,255,0.06)' : 'rgba(201,168,76,0.10)',
                 border:'1px solid rgba(255,255,255,0.06)',
-                backdropFilter:'blur(8px)',
               }}>
                 <div style={{ fontSize:'48px', fontFamily:'Playfair Display, serif', color:'#C9A84C', lineHeight:1, marginBottom:'8px' }}>{s.value}</div>
                 <div style={{ fontSize:'12px', color:'rgba(255,255,255,0.45)', letterSpacing:'0.08em', lineHeight:1.5 }}>{s.label.toUpperCase()}</div>
@@ -299,8 +298,17 @@ export default function Home({ properties }) {
 
 export async function getStaticProps() {
   const liveListings = await getListings();
+  const all = liveListings.length > 0 ? liveListings : mockProperties;
+
+  // Homepage only needs the active listings for featured cards — strip to essentials
+  const active = all
+    .filter(p => p.status === 'rent' || p.status === 'sale')
+    .map(({ id, ireID, status, address, suburb, price, beds, baths, cars, image, featured }) => ({
+      id, ireID, status, address, suburb, price, beds, baths, cars, image, featured,
+    }));
+
   return {
-    props: { properties: liveListings.length > 0 ? liveListings : mockProperties },
+    props: { properties: active },
     revalidate: 300,
   };
 }

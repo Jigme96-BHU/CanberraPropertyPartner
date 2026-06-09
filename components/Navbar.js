@@ -27,8 +27,7 @@ export default function Navbar() {
       <nav style={{
         position: 'fixed', top: 0, left: 0, right: 0, zIndex: 200,
         padding: scrolled ? '10px 0' : '20px 0',
-        background: scrolled ? 'rgba(10,10,10,0.96)' : 'transparent',
-        backdropFilter: scrolled ? 'blur(20px)' : 'none',
+        background: scrolled ? 'rgba(10,10,10,0.98)' : 'transparent',
         borderBottom: scrolled ? '1px solid rgba(255,255,255,0.06)' : 'none',
         transition: 'all 0.4s cubic-bezier(0.25,0.46,0.45,0.94)',
       }}>
@@ -89,8 +88,7 @@ export default function Navbar() {
       {open && (
         <div style={{
           position:'fixed', inset:0, zIndex:190,
-          background:'rgba(10,10,10,0.98)',
-          backdropFilter:'blur(24px)',
+          background:'rgba(10,10,10,0.99)',
           display:'flex', flexDirection:'column',
           alignItems:'center', justifyContent:'center',
           gap:'8px',
