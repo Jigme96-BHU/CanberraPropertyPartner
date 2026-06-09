@@ -3,11 +3,12 @@ import { put } from '@vercel/blob';
 import sharp from 'sharp';
 import { parseREAXML } from '../../../lib/parseListings';
 
-const FILE_PREFIX = 'inspectre_IRE-CANBERRAPP';
-const MASTER_FILE = '/master-listings.json';
-const LAST_SYNC   = '/last-sync.txt';
-const MAX_LEASED  = 20;
-const MAX_SOLD    = 20;
+const FILE_PREFIX      = 'inspectre_IRE-CANBERRAPP';
+const MASTER_FILE      = '/master-listings.json';
+const LAST_SYNC        = '/last-sync.txt';
+const MAX_LEASED       = 20;
+const MAX_SOLD         = 20;
+const MAX_IMAGES_PER_RUN = 5; // process 5 images per cron tick to avoid timeout
 
 const SFTP_CONFIG = {
   host:         process.env.HETZNER_HOST,
@@ -154,9 +155,9 @@ export default async function handler(req, res) {
       if (!l.blobUrl) return true;                            // never processed before
       if (l.sourceImageUrl !== l.image) return true;          // image changed
       return false;                                            // already up to date
-    });
+    }).slice(0, MAX_IMAGES_PER_RUN);                          // max 5 per run
 
-    console.log(`Images to process: ${toProcess.length}`);
+    console.log(`Images to process this run: ${toProcess.length}`);
 
     for (const listing of toProcess) {
       const result = await processImage(listing.image, listing.ireID);
