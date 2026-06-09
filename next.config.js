@@ -3,6 +3,7 @@ const nextConfig = {
   reactStrictMode: true,
   images: {
     formats: ['image/avif', 'image/webp'],
+    minimumCacheTTL: 2592000,
     remotePatterns: [
       { protocol: 'https', hostname: 'images.unsplash.com' },
       { protocol: 'https', hostname: 'inspectre.blob.core.windows.net' },

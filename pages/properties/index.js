@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 
 const PAGE_SIZE = 12;
 
@@ -16,7 +16,7 @@ export default function Properties({ properties }) {
 
   useEffect(() => { setPage(1); }, [activeTab, search]);
 
-  const filtered = properties.filter(p => {
+  const filtered = useMemo(() => properties.filter(p => {
     const matchTab =
       activeTab === 'all'    ? (p.status === 'rent' || p.status === 'sale') :
       activeTab === 'leased' ? p.status === 'leased' :
@@ -26,7 +26,7 @@ export default function Properties({ properties }) {
       (p.address || '').toLowerCase().includes(search.toLowerCase()) ||
       (p.suburb || '').toLowerCase().includes(search.toLowerCase());
     return matchTab && matchSearch;
-  });
+  }), [properties, activeTab, search]);
 
   const tabs = [
     { id: 'all',    label: 'All Properties' },
@@ -95,8 +95,8 @@ export default function Properties({ properties }) {
             </div>
           ) : (
             <>
-              <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(320px,1fr))', gap:'24px' }}>
-                {filtered.slice(0, page * PAGE_SIZE).map(p => <PropertyCard key={p.id} p={p} />)}
+              <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(320px,1fr))', gap:'24px', contain:'layout' }}>
+                {filtered.slice(0, page * PAGE_SIZE).map((p, i) => <PropertyCard key={p.id} p={p} index={i} />)}
               </div>
               {page * PAGE_SIZE < filtered.length && (
                 <div style={{ textAlign:'center', marginTop:'48px' }}>

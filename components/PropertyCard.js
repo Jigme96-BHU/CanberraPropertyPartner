@@ -1,29 +1,58 @@
+import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
 const STATUS = { rent:'For Rent', sale:'For Sale', leased:'Leased', sold:'Sold' };
 const STATUS_COLOR = { rent:'#C9A84C', sale:'#0A0A0A', leased:'#7A8C7E', sold:'#8B3A3A' };
 
-export default function PropertyCard({ p }) {
+const BLUR_PLACEHOLDER = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/wAARCAAIAAoDASIAAhEBAxEB/8QAFgABAQEAAAAAAAAAAAAAAAAABgUE/8QAIhAAAQQCAgMBAAAAAAAAAAAAAQIDBBEFEiExQVH/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8Aly7bYq6FmNXQxpKQ4FJdUCQD3Gc4HtTlxp1bi1uLUpalEqUo5JPuaUqkPJH/2Q==";
+
+function PropertyCard({ p, index = 0 }) {
   if (!p || !p.id) return null;
+
+  const isHoverDevice = () =>
+    typeof window !== 'undefined' && window.matchMedia('(hover: hover)').matches;
+
   return (
     <Link href={`/properties/${p.id}`} prefetch={false} style={{ display:'block', textDecoration:'none', color:'inherit' }}>
       <div style={{
         position:'relative', overflow:'hidden',
         borderRadius:'8px',
         background:'#fff',
-        boxShadow:'0 2px 16px rgba(0,0,0,0.06)',
-        transition:'transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94), box-shadow 0.4s',
+        filter:'drop-shadow(0 2px 16px rgba(0,0,0,0.06))',
+        willChange:'transform',
+        contain:'layout',
+        transition:'transform 0.4s cubic-bezier(0.25,0.46,0.45,0.94), filter 0.4s',
         cursor:'pointer',
       }}
-        onMouseEnter={e => { e.currentTarget.style.transform='translateY(-6px)'; e.currentTarget.style.boxShadow='0 20px 48px rgba(0,0,0,0.13)'; e.currentTarget.querySelector('.card-img').style.transform='scale(1.06)'; }}
-        onMouseLeave={e => { e.currentTarget.style.transform='none'; e.currentTarget.style.boxShadow='0 2px 16px rgba(0,0,0,0.06)'; e.currentTarget.querySelector('.card-img').style.transform='scale(1)'; }}
+        onMouseEnter={e => {
+          if (!isHoverDevice()) return;
+          e.currentTarget.style.transform = 'translateY(-6px)';
+          e.currentTarget.style.filter    = 'drop-shadow(0 20px 48px rgba(0,0,0,0.13))';
+          const img = e.currentTarget.querySelector('.card-img');
+          if (img) img.style.transform = 'scale(1.06)';
+        }}
+        onMouseLeave={e => {
+          if (!isHoverDevice()) return;
+          e.currentTarget.style.transform = 'none';
+          e.currentTarget.style.filter    = 'drop-shadow(0 2px 16px rgba(0,0,0,0.06))';
+          const img = e.currentTarget.querySelector('.card-img');
+          if (img) img.style.transform = 'scale(1)';
+        }}
       >
         {/* Image */}
         <div style={{ position:'relative', paddingTop:'62%', overflow:'hidden', background:'#E8E4DF' }}>
-          <Image className="card-img" src={p.image || '/images/prop.jpeg'} alt={p.address || ''} fill loading="lazy"
-            sizes="(max-width: 768px) 100vw, 33vw"
-            style={{ objectFit:'cover', transition:'transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94)' }} />
+          <Image
+            className="card-img"
+            src={p.image || '/images/prop.jpeg'}
+            alt={p.address || ''}
+            fill
+            priority={index < 3}
+            placeholder="blur"
+            blurDataURL={BLUR_PLACEHOLDER}
+            sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
+            style={{ objectFit:'cover', transition:'transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94)' }}
+          />
 
           {/* Status pill */}
           <div style={{
@@ -80,3 +109,5 @@ export default function PropertyCard({ p }) {
     </Link>
   );
 }
+
+export default React.memo(PropertyCard);
