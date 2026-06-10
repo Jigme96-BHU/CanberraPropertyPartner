@@ -141,8 +141,8 @@ export async function getStaticProps() {
   const source = liveListings.length > 0 ? liveListings : mockProperties;
 
   // Strip to only fields needed by PropertyCard — keeps page data well under 128 kB
-  const properties = source.map(({ id, ireID, status, address, suburb, price, beds, baths, cars, image, featured }) => ({
-    id, ireID, status, address, suburb, price, beds, baths, cars, image, featured,
+  const properties = source.map(({ id, ireID, status, address, suburb, price, beds, baths, cars, image, featured, blobUrl, blurDataURL }) => ({
+    id, ireID, status, address, suburb, price, beds, baths, cars, image, featured, blobUrl, blurDataURL,
   }));
 
   return {

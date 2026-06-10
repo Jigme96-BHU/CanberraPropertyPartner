@@ -304,8 +304,8 @@ export async function getStaticProps() {
   // Homepage only needs the active listings for featured cards — strip to essentials
   const active = all
     .filter(p => p.status === 'rent' || p.status === 'sale')
-    .map(({ id, ireID, status, address, suburb, price, beds, baths, cars, image, featured }) => ({
-      id, ireID, status, address, suburb, price, beds, baths, cars, image, featured,
+    .map(({ id, ireID, status, address, suburb, price, beds, baths, cars, image, featured, blobUrl, blurDataURL }) => ({
+      id, ireID, status, address, suburb, price, beds, baths, cars, image, featured, blobUrl, blurDataURL,
     }));
 
   return {
