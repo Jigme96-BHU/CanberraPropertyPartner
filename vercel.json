@@ -16,6 +16,11 @@
     { "source": "/awards-and-testimonials",   "destination": "/awards", "permanent": true },
     { "source": "/testimonials-1",            "destination": "/awards", "permanent": true }
   ],
+  "functions": {
+    "pages/api/cron/sync-listings.js": {
+      "maxDuration": 300
+    }
+  },
   "crons": [
     {
       "path": "/api/cron/sync-listings",

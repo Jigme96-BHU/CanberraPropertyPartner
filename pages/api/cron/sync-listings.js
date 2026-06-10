@@ -23,38 +23,48 @@ const SFTP_CONFIG = {
 // a 10x10 base64 blur placeholder, uploads WebP to Vercel Blob.
 // Returns { blobUrl, blurDataURL } or null on failure.
 async function processImage(sourceUrl, propertyId) {
+  const steps = [];
   try {
+    // Step 1: Download
+    steps.push('fetch');
     const res = await fetch(sourceUrl, { signal: AbortSignal.timeout(15000) });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const arrayBuffer = await res.arrayBuffer();
     const inputBuffer = Buffer.from(arrayBuffer);
+    steps.push(`downloaded ${inputBuffer.length} bytes`);
 
-    // Resize to max 800px wide, convert to WebP quality 75
+    // Step 2: Resize to max 800px wide, convert to WebP quality 75
+    steps.push('sharp-resize');
     const webpBuffer = await sharp(inputBuffer)
       .resize({ width: 800, withoutEnlargement: true })
       .webp({ quality: 75 })
       .toBuffer();
+    steps.push(`webp ${webpBuffer.length} bytes`);
 
-    // Generate 10x10 blur placeholder as base64
+    // Step 3: Generate 10x10 blur placeholder as base64
+    steps.push('sharp-blur');
     const blurBuffer = await sharp(inputBuffer)
       .resize(10, 10, { fit: 'cover' })
       .webp({ quality: 20 })
       .toBuffer();
     const blurDataURL = `data:image/webp;base64,${blurBuffer.toString('base64')}`;
 
-    // Upload WebP to Vercel Blob
+    // Step 4: Upload WebP to Vercel Blob
+    steps.push('blob-upload');
     const { url: blobUrl } = await put(
       `properties/${propertyId}.webp`,
       webpBuffer,
       { access: 'public', contentType: 'image/webp', addRandomSuffix: false }
     );
+    steps.push(`uploaded ${blobUrl}`);
 
     console.log(`  Image processed: ${propertyId} → ${blobUrl}`);
-    return { blobUrl, blurDataURL };
+    return { blobUrl, blurDataURL, steps };
 
   } catch (e) {
-    console.error(`  Image processing failed for ${propertyId}:`, e.message);
-    return null;
+    const msg = `failed at [${steps[steps.length - 1]}]: ${e.message}`;
+    console.error(`  Image processing failed for ${propertyId}:`, msg);
+    return { error: msg };
   }
 }
 
@@ -149,6 +159,7 @@ export default async function handler(req, res) {
     let imagesProcessed = 0;
     let imagesSkipped   = 0;
     let imagesFailed    = 0;
+    const imageErrors   = [];
 
     const toProcess = Object.values(master).filter(l => {
       if (!l.image) return false;                              // no image to process
@@ -161,13 +172,14 @@ export default async function handler(req, res) {
 
     for (const listing of toProcess) {
       const result = await processImage(listing.image, listing.ireID);
-      if (result) {
-        master[listing.ireID].blobUrl       = result.blobUrl;
-        master[listing.ireID].blurDataURL   = result.blurDataURL;
-        master[listing.ireID].sourceImageUrl = listing.image;   // track what we processed
+      if (result && result.blobUrl) {
+        master[listing.ireID].blobUrl        = result.blobUrl;
+        master[listing.ireID].blurDataURL    = result.blurDataURL;
+        master[listing.ireID].sourceImageUrl = listing.image;
         imagesProcessed++;
       } else {
         imagesFailed++;
+        imageErrors.push({ id: listing.ireID, error: result?.error || 'unknown' });
       }
     }
 
@@ -208,7 +220,7 @@ export default async function handler(req, res) {
       withdrawn,
       agedOut: removed,
       total: Object.keys(master).length,
-      images: { processed: imagesProcessed, skipped: imagesSkipped, failed: imagesFailed },
+      images: { processed: imagesProcessed, skipped: imagesSkipped, failed: imagesFailed, errors: imageErrors },
     });
 
   } catch (error) {
