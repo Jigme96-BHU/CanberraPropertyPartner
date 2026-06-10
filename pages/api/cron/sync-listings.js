@@ -97,8 +97,47 @@ export default async function handler(req, res) {
     ).sort((a, b) => a.modifyTime - b.modifyTime);
 
     if (newXml.length === 0) {
+      // No new XML — but still process any pending images
+      let master = {};
+      try {
+        const buf = await sftp.get(MASTER_FILE);
+        JSON.parse(buf.toString('utf8')).forEach(l => { master[l.ireID] = l; });
+      } catch (e) {
+        await sftp.end();
+        return res.status(200).json({ message: 'No new files, no master to process' });
+      }
+
+      const toProcess = Object.values(master).filter(l => {
+        if (!l.image) return false;
+        if (!l.blobUrl) return true;
+        if (l.sourceImageUrl !== l.image) return true;
+        return false;
+      }).slice(0, MAX_IMAGES_PER_RUN);
+
+      if (toProcess.length === 0) {
+        await sftp.end();
+        return res.status(200).json({ message: 'No new files, all images already processed' });
+      }
+
+      let processed = 0, failed = 0;
+      const errors = [];
+      for (const listing of toProcess) {
+        const result = await processImage(listing.image, listing.ireID);
+        if (result && result.blobUrl) {
+          master[listing.ireID].blobUrl        = result.blobUrl;
+          master[listing.ireID].blurDataURL    = result.blurDataURL;
+          master[listing.ireID].sourceImageUrl = listing.image;
+          processed++;
+        } else {
+          failed++;
+          errors.push({ id: listing.ireID, error: result?.error || 'unknown' });
+        }
+      }
+
+      const masterJson = JSON.stringify(Object.values(master), null, 2);
+      await sftp.put(Buffer.from(masterJson), MASTER_FILE);
       await sftp.end();
-      return res.status(200).json({ message: 'No new files' });
+      return res.status(200).json({ message: 'No new files', images: { processed, failed, errors } });
     }
 
     // ── Step 2: Parse new XML files ───────────────────────────
