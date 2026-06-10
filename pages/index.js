@@ -188,6 +188,7 @@ export default function Home({ properties }) {
                   <h4 style={{ fontSize:'24px', color:'#fff', fontFamily:'Playfair Display, serif', marginBottom:'8px' }}>{item.title}</h4>
                   <p style={{ fontSize:'18px', color:'rgba(255,255,255,0.45)', lineHeight:1.7 }}>{item.desc}</p>
                 </div>
+                
               </div>
             ))}
           </div>
