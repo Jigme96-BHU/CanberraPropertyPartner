@@ -8,7 +8,7 @@ const MASTER_FILE      = '/master-listings.json';
 const LAST_SYNC        = '/last-sync.txt';
 const MAX_LEASED       = 20;
 const MAX_SOLD         = 20;
-const MAX_IMAGES_PER_RUN = 5; // process 5 images per cron tick to avoid timeout
+const MAX_IMAGES_PER_RUN = 5; // process 5 individual images per cron tick to avoid timeout
 
 const SFTP_CONFIG = {
   host:         process.env.HETZNER_HOST,
@@ -107,12 +107,19 @@ export default async function handler(req, res) {
         return res.status(200).json({ message: 'No new files, no master to process' });
       }
 
-      const toProcess = Object.values(master).filter(l => {
-        if (!l.image) return false;
-        if (!l.blobUrl) return true;
-        if (l.sourceImageUrl !== l.image) return true;
-        return false;
-      }).slice(0, MAX_IMAGES_PER_RUN);
+      // Build flat queue across all listings and all their images
+      const queue = [];
+      for (const l of Object.values(master)) {
+        const allSrcs = l.images?.length > 0 ? l.images : (l.image ? [l.image] : []);
+        allSrcs.forEach((url, idx) => {
+          const alreadyDone = idx === 0
+            ? (l.blobUrl && l.sourceImageUrl === url)
+            : (l.blobImages?.[idx] && l.sourceImages?.[idx] === url);
+          if (!alreadyDone) queue.push({ ireID: l.ireID, index: idx, url });
+        });
+      }
+
+      const toProcess = queue.slice(0, MAX_IMAGES_PER_RUN);
 
       if (toProcess.length === 0) {
         await sftp.end();
@@ -121,16 +128,25 @@ export default async function handler(req, res) {
 
       let processed = 0, failed = 0;
       const errors = [];
-      for (const listing of toProcess) {
-        const result = await processImage(listing.image, listing.ireID);
+      for (const { ireID, index, url } of toProcess) {
+        const blobKey = index === 0 ? `properties/${ireID}.webp` : `properties/${ireID}-${index}.webp`;
+        const result  = await processImage(url, blobKey.replace('properties/','').replace('.webp',''));
         if (result && result.blobUrl) {
-          master[listing.ireID].blobUrl        = result.blobUrl;
-          master[listing.ireID].blurDataURL    = result.blurDataURL;
-          master[listing.ireID].sourceImageUrl = listing.image;
+          const l = master[ireID];
+          if (index === 0) {
+            l.blobUrl        = result.blobUrl;
+            l.blurDataURL    = result.blurDataURL;
+            l.sourceImageUrl = url;
+          } else {
+            l.blobImages          = l.blobImages || [];
+            l.sourceImages        = l.sourceImages || [];
+            l.blobImages[index]   = result.blobUrl;
+            l.sourceImages[index] = url;
+          }
           processed++;
         } else {
           failed++;
-          errors.push({ id: listing.ireID, error: result?.error || 'unknown' });
+          errors.push({ id: ireID, index, error: result?.error || 'unknown' });
         }
       }
 
@@ -192,37 +208,51 @@ export default async function handler(req, res) {
     }
 
     // ── Step 3.5: Process images → Vercel Blob ────────────────
-    // Only process listings where:
-    //   - blobUrl is missing, OR
-    //   - source image URL has changed since last sync
+    // Build a flat queue of ALL individual images needing processing
+    // across all listings. Each entry = { ireID, index, url }
+    // index 0 = main image (blobUrl), index 1+ = gallery (blobImages)
     let imagesProcessed = 0;
     let imagesSkipped   = 0;
     let imagesFailed    = 0;
     const imageErrors   = [];
 
-    const toProcess = Object.values(master).filter(l => {
-      if (!l.image) return false;                              // no image to process
-      if (!l.blobUrl) return true;                            // never processed before
-      if (l.sourceImageUrl !== l.image) return true;          // image changed
-      return false;                                            // already up to date
-    }).slice(0, MAX_IMAGES_PER_RUN);                          // max 5 per run
+    const queue = [];
+    for (const l of Object.values(master)) {
+      const allSrcs = l.images?.length > 0 ? l.images : (l.image ? [l.image] : []);
+      allSrcs.forEach((url, idx) => {
+        const alreadyDone = idx === 0
+          ? (l.blobUrl && l.sourceImageUrl === url)
+          : (l.blobImages?.[idx] && l.sourceImages?.[idx] === url);
+        if (!alreadyDone) queue.push({ ireID: l.ireID, index: idx, url });
+      });
+    }
 
-    console.log(`Images to process this run: ${toProcess.length}`);
+    const toProcess = queue.slice(0, MAX_IMAGES_PER_RUN);
+    imagesSkipped   = queue.length - toProcess.length;
+    console.log(`Image queue: ${queue.length} pending, processing ${toProcess.length} this run`);
 
-    for (const listing of toProcess) {
-      const result = await processImage(listing.image, listing.ireID);
+    for (const { ireID, index, url } of toProcess) {
+      const blobKey = index === 0 ? `properties/${ireID}.webp` : `properties/${ireID}-${index}.webp`;
+      const result  = await processImage(url, blobKey.replace('properties/','').replace('.webp',''));
+
       if (result && result.blobUrl) {
-        master[listing.ireID].blobUrl        = result.blobUrl;
-        master[listing.ireID].blurDataURL    = result.blurDataURL;
-        master[listing.ireID].sourceImageUrl = listing.image;
+        const l = master[ireID];
+        if (index === 0) {
+          l.blobUrl        = result.blobUrl;
+          l.blurDataURL    = result.blurDataURL;
+          l.sourceImageUrl = url;
+        } else {
+          l.blobImages           = l.blobImages || [];
+          l.sourceImages         = l.sourceImages || [];
+          l.blobImages[index]    = result.blobUrl;
+          l.sourceImages[index]  = url;
+        }
         imagesProcessed++;
       } else {
         imagesFailed++;
-        imageErrors.push({ id: listing.ireID, error: result?.error || 'unknown' });
+        imageErrors.push({ id: ireID, index, error: result?.error || 'unknown' });
       }
     }
-
-    imagesSkipped = Object.values(master).filter(l => l.image && l.blobUrl && l.sourceImageUrl === l.image).length - imagesProcessed;
 
     // ── Step 4: Trim old leased/sold ──────────────────────────
     let removed = 0;

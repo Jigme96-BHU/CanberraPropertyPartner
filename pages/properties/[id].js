@@ -179,8 +179,9 @@ function PropertyDescription({ text }) {
 
 export default function PropertyDetail({ property: p }) {
 
-  // All images — use images array if available, fall back to single image
-  const allImages = (p?.images?.length > 0 ? p.images : [p?.image]).filter(Boolean);
+  // All images — prefer blobImages (Vercel Blob WebP), fall back to Azure URLs
+  const rawImages = (p?.images?.length > 0 ? p.images : (p?.image ? [p.image] : []));
+  const allImages = rawImages.map((src, i) => p?.blobImages?.[i] || (i === 0 && p?.blobUrl) || src).filter(Boolean);
   // ── infinite scroll carousel ─────────────────────────────────
   const CLONES = 3;
   const n      = allImages.length;
@@ -311,6 +312,8 @@ export default function PropertyDetail({ property: p }) {
                     sizes="(max-width: 768px) 100vw, 33vw"
                     priority={i === CLONES}
                     loading={i === CLONES ? 'eager' : 'lazy'}
+                    placeholder={p.blurDataURL ? 'blur' : 'empty'}
+                    blurDataURL={p.blurDataURL || undefined}
                     style={{ objectFit:'cover' }}
                   />
                 </div>
