@@ -54,7 +54,7 @@ async function processImage(sourceUrl, propertyId) {
     const { url: blobUrl } = await put(
       `properties/${propertyId}.webp`,
       webpBuffer,
-      { access: 'public', contentType: 'image/webp', addRandomSuffix: false }
+      { access: 'public', contentType: 'image/webp', addRandomSuffix: false, allowOverwrite: true }
     );
     steps.push(`uploaded ${blobUrl}`);
 
