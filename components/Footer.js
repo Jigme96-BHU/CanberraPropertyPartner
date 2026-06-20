@@ -98,6 +98,18 @@ export default function Footer() {
           ))}
         </div>
 
+        <div style={{ marginTop:'48px', borderRadius:'8px', overflow:'hidden', border:'1px solid rgba(255,255,255,0.08)' }}>
+          <iframe
+            title="Office Location"
+            src="https://www.google.com/maps?q=10%2F12+Cheney+Place%2C+Mitchell+ACT+2911&output=embed"
+            width="100%"
+            height="240"
+            style={{ display:'block', border:'none', filter:'grayscale(1) invert(0.9) contrast(0.9)' }}
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          />
+        </div>
+
         <div style={{ paddingTop:'32px', display:'flex', justifyContent:'space-between', flexWrap:'wrap', gap:'12px' }}>
           <p style={{ fontSize:'12px', color:'rgba(255,255,255,0.25)' }}>
             © {new Date().getFullYear()} Canberra Property Partners · Licensed Real Estate Agent ACT

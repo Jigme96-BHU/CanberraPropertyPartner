@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "bedurya",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["/Users/jigmelhaden/Desktop/bedurya-nextjs-project/node_modules/.bin/next", "dev", "--port", "3005"],
+      "port": 3005
+    }
+  ]
+}
